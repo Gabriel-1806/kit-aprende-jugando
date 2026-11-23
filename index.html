@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit Digital Aprende Jugando</title>
+<style>
+:root{
+  --bg:#FFF9F0; --card:#FFFFFF; --ink:#1F2A44; --muted:#5B6478; --line:#E7DFD2;
+  --kids:#F2994A; --kids2:#FFE7D1; --adult:#2F6FDE; --adult2:#DCE8FF; --both:#27AE60; --both2:#D9F5E4;
+  --tutor:#8E44AD; --tutor2:#EFE0F7; --ok:#1E8E4E; --bad:#C0392B; --star:#F2C94C;
+  --fs:17px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14161C; --card:#1F2330; --ink:#F2F3F7; --muted:#B3B9C8; --line:#343A4C;
+    --kids2:#4A3220; --adult2:#1E2F55; --both2:#173B28; --tutor2:#36204A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14161C; --card:#1F2330; --ink:#F2F3F7; --muted:#B3B9C8; --line:#343A4C;
+  --kids2:#4A3220; --adult2:#1E2F55; --both2:#173B28; --tutor2:#36204A;
+}
+*{box-sizing:border-box}
+html{font-size:var(--fs)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Roboto,Arial,sans-serif;line-height:1.5}
+body.grande{--fs:22px}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+header h1{font-size:1.15rem;margin:0;flex:1;min-width:180px}
+header h1 span{color:var(--kids)}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px}
+button:focus-visible{outline:3px solid var(--adult);outline-offset:2px}
+main{max-width:1000px;margin:0 auto;padding:16px}
+.hero{text-align:center;padding:12px 0 4px}
+.hero h2{font-size:1.6rem;margin:.2em 0}
+.hero p{color:var(--muted);margin:.2em 0 1em}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.big{border:none;border-radius:20px;padding:22px 16px;text-align:left;font-size:1.1rem;min-height:150px;display:flex;flex-direction:column;gap:6px}
+.big .e{font-size:2.6rem;line-height:1}
+.big b{font-size:1.25rem}
+.big small{color:var(--ink);opacity:.8;font-size:.9rem}
+.k{background:var(--kids2)} .a{background:var(--adult2)} .j{background:var(--both2)} .t{background:var(--tutor2)}
+.sec{display:none}.sec.on{display:block}
+.back{margin-bottom:12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}
+.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.prof{display:flex;flex-direction:column;gap:6px}
+.prof .e{font-size:2.2rem}
+.prof h3{margin:0;font-size:1.1rem}
+.prof p{margin:0;font-size:.95rem}
+.lab{font-weight:700;color:var(--kids)}
+.tag{display:inline-block;font-size:.75rem;background:var(--kids2);border-radius:99px;padding:2px 10px;margin-top:4px}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filter button.on{background:var(--kids);border-color:var(--kids);color:#fff}
+.q h3{margin-top:0}
+.opts{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.opts button{text-align:left;padding:14px;min-height:56px}
+.opts button.ok{background:#D4F4E1;border-color:var(--ok);color:#0b3d22}
+.opts button.no{background:#F9D6D2;border-color:var(--bad);color:#5a120b}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 14px}
+.bar i{display:block;height:100%;background:var(--kids)}
+.board{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;max-width:330px;margin:10px 0}
+.cell{aspect-ratio:1;border-radius:8px;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.prog{display:flex;flex-wrap:wrap;gap:6px;min-height:44px;padding:8px;border:2px dashed var(--line);border-radius:12px;margin:8px 0}
+.prog span{background:var(--kids2);border-radius:8px;padding:4px 10px;font-size:1.2rem}
+.arrows button{font-size:1.4rem;min-width:56px}
+.mem{display:grid;gap:10px;grid-template-columns:repeat(4,1fr);max-width:520px}
+.mem.adult{grid-template-columns:repeat(3,1fr);max-width:480px}
+.mem button{aspect-ratio:1;font-size:2.2rem;border-radius:14px;background:var(--adult);color:#fff;border:none}
+.mem.kid button{background:var(--kids)}
+.mem button.up{background:var(--card);color:var(--ink);border:2px solid var(--line)}
+.mem button.done{background:var(--both2);border:2px solid var(--both)}
+.msg{font-weight:700;margin:10px 0;min-height:1.5em}
+.steps{margin:0;padding-left:1.4em}.steps li{margin:6px 0}
+.adultmode .card{font-size:1.15rem}
+a{color:var(--adult)}
+.note{font-size:.85rem;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;padding:24px 16px}
+@media (max-width:520px){.mem{grid-template-columns:repeat(4,1fr)}.big{min-height:120px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎲 Aprende <span>Jugando</span> · Kit digital</h1>
+  <div class="tools">
+    <button id="bt-size" aria-pressed="false">🔠 Letra grande</button>
+    <button id="bt-theme">🌗 Claro/oscuro</button>
+    <button onclick="go('home')">🏠 Inicio</button>
+  </div>
+</header>
+<main>
+
+<section id="home" class="sec on">
+  <div class="hero">
+    <h2>¡Hola! ¿Quién va a usar el kit hoy?</h2>
+    <p>Albergue «Mi Nuevo Hogar Jesús y Josué» · Proyecto «Aprende Jugando» · Universidad de Lima</p>
+  </div>
+  <div class="grid">
+    <button class="big k" onclick="go('ninos')"><span class="e">🧒</span><b>Niños y adolescentes</b><small>Profesiones, «¿Qué me gusta?», juegos y recursos para seguir aprendiendo.</small></button>
+    <button class="big a" onclick="go('mayores',true)"><span class="e">👵</span><b>Adultos mayores</b><small>Letra grande, guía del celular, juegos de memoria y refranes.</small></button>
+    <button class="big j" onclick="go('juntos')"><span class="e">🤝</span><b>Juntos</b><small>Actividades para que niños y adultos mayores aprendan unos de otros.</small></button>
+    <button class="big t" onclick="go('tutor')"><span class="e">📋</span><b>Para el tutor</b><small>Cómo usar el kit de forma segura.</small></button>
+  </div>
+</section>
+
+<!-- ===================== NIÑOS ===================== -->
+<section id="ninos" class="sec">
+  <h2>🧒 Niños y adolescentes</h2>
+  <div class="tabs" id="tabs-n">
+    <button data-t="n-cat" class="on">📚 Catálogo de profesiones</button>
+    <button data-t="n-test">💭 ¿Qué me gusta?</button>
+    <button data-t="n-robot">🤖 Programa al robot</button>
+    <button data-t="n-mem">🃏 Memoria</button>
+    <button data-t="n-triv">❓ Trivia STEAM</button>
+    <button data-t="n-rec">🌐 Sigue aprendiendo</button>
+  </div>
+  <div id="n-cat" class="pane">
+    <p>Toca un taller para ver sus profesiones, o mira todas.</p>
+    <div class="filter" id="filtro"></div>
+    <div class="grid" id="catalogo"></div>
+  </div>
+  <div id="n-test" class="pane" hidden><div class="card q" id="test"></div></div>
+  <div id="n-robot" class="pane" hidden>
+    <div class="card">
+      <h3>🤖 Programa al robot (como en el taller 2)</h3>
+      <p>Arma la lista de órdenes para que el robot 🤖 llegue a la estrella ⭐ sin chocar con las rocas 🪨. Luego toca ▶.</p>
+      <div class="msg" id="rb-lvl"></div>
+      <div class="board" id="rb-board"></div>
+      <div class="arrows"><button onclick="rbAdd('↑')">↑</button> <button onclick="rbAdd('↓')">↓</button> <button onclick="rbAdd('←')">←</button> <button onclick="rbAdd('→')">→</button></div>
+      <div class="prog" id="rb-prog"></div>
+      <button onclick="rbRun()">▶ Ejecutar</button> <button onclick="rbUndo()">↩ Borrar última</button> <button onclick="rbReset()">🧹 Empezar de nuevo</button>
+      <div class="msg" id="rb-msg"></div>
+    </div>
+  </div>
+  <div id="n-mem" class="pane" hidden>
+    <div class="card"><h3>🃏 Memoria de profesiones</h3><p>Encuentra las parejas. Cada vez que encuentres una, conocerás una profesión.</p>
+      <div class="mem kid" id="mem-k"></div><div class="msg" id="mem-k-msg"></div><button onclick="memInit('k')">🔄 Jugar otra vez</button></div>
+  </div>
+  <div id="n-triv" class="pane" hidden><div class="card q" id="trivia"></div></div>
+  <div id="n-rec" class="pane" hidden>
+    <p>Estas páginas son gratuitas. Necesitan internet y es mejor usarlas con el tutor.</p>
+    <div class="grid" id="rec-n"></div>
+  </div>
+</section>
+
+<!-- ===================== ADULTOS MAYORES ===================== -->
+<section id="mayores" class="sec adultmode">
+  <h2>👵 Adultos mayores</h2>
+  <div class="tabs" id="tabs-a">
+    <button data-t="a-cel" class="on">📱 Guía del celular</button>
+    <button data-t="a-mem">🃏 Memoria</button>
+    <button data-t="a-ref">💬 Completa el refrán</button>
+    <button data-t="a-ofi">🧑‍🌾 Mi oficio, mi historia</button>
+    <button data-t="a-rec">🌐 Para seguir aprendiendo</button>
+  </div>
+  <div id="a-cel" class="pane"><div class="grid" id="celular"></div></div>
+  <div id="a-mem" class="pane" hidden>
+    <div class="card"><h3>🃏 Juego de memoria</h3><p>Toque dos cartas. Si son iguales, se quedan descubiertas. Tómese su tiempo: no hay apuro.</p>
+      <div class="mem adult" id="mem-a"></div><div class="msg" id="mem-a-msg"></div><button onclick="memInit('a')">🔄 Jugar otra vez</button></div>
+  </div>
+  <div id="a-ref" class="pane" hidden><div class="card q" id="refranes"></div></div>
+  <div id="a-ofi" class="pane" hidden>
+    <p>Usted sabe mucho. Cuéntele a los niños su oficio con estas preguntas: ellos buscarán en el catálogo qué profesión de hoy se le parece.</p>
+    <div class="grid" id="oficios"></div>
+  </div>
+  <div id="a-rec" class="pane" hidden><div class="grid" id="rec-a"></div></div>
+</section>
+
+<!-- ===================== JUNTOS ===================== -->
+<section id="juntos" class="sec">
+  <h2>🤝 Juntos: niños y adultos mayores</h2>
+  <p>En el albergue conviven niños y adultos mayores. Estas actividades los juntan para aprender unos de otros.</p>
+  <div class="grid" id="juntos-g"></div>
+</section>
+
+<!-- ===================== TUTOR ===================== -->
+<section id="tutor" class="sec">
+  <h2>📋 Para el tutor del albergue</h2>
+  <div class="card"><ul class="steps" id="tutor-l"></ul></div>
+  <h3>Relación con los talleres</h3>
+  <div class="grid" id="talleres"></div>
+</section>
+</main>
+<footer>Kit digital del proyecto «Aprende Jugando» · Gestión de Proyectos 2026-2 · Universidad de Lima · ODS 4: Educación de calidad<br>No guarda datos personales. Revisado por la dirección y la psicóloga del albergue antes de su entrega.</footer>
+
+<script>
+const D = {"perfiles": [["videojuegos", "🎮", "Diseñador/a de videojuegos", "Inventa juegos: piensa la historia, los personajes, las reglas y cómo se gana. Prueba el juego muchas veces hasta que sea divertido.", "Diseño de videojuegos, Ingeniería de Software o Diseño Digital (4 a 5 años). También hay cursos técnicos cortos.", "Antes de programar un videojuego, muchos equipos lo prueban en papel, ¡como el juego de mesa que hicimos en el taller!", ["crear", "tecno"], "1"], ["grafico", "🎨", "Diseñador/a gráfico", "Crea afiches, logos, portadas de libros y dibujos para que un mensaje se entienda con imágenes y colores.", "Diseño Gráfico o Comunicación Visual (carrera técnica de 3 años o universitaria de 5 años).", "Las señales de tránsito y los íconos del celular los dibujó un diseñador para que todos los entiendan sin leer.", ["crear"], "1"], ["docente", "📚", "Docente", "Enseña a niños, jóvenes o adultos. Prepara clases, juegos y actividades para que todos aprendan.", "Educación (5 años) en una universidad o un instituto pedagógico. Se elige el nivel: inicial, primaria o secundaria.", "Los mejores profesores usan juegos para enseñar. ¡Aprender jugando funciona!", ["ayudar", "crear"], "1"], ["programador", "💻", "Programador/a", "Escribe instrucciones (código) para que las computadoras y los celulares hagan cosas: apps, páginas web y juegos.", "Computación e Informática (técnica, 3 años) o Ingeniería de Software (5 años).", "Un programa es como la lista de órdenes que le dimos al «robot» en el taller 2: si hay un error, se busca y se corrige.", ["logica", "tecno"], "2"], ["sistemas", "🖥️", "Ingeniero/a de sistemas", "Diseña sistemas para que una empresa, un hospital o un colegio trabaje mejor con tecnología.", "Ingeniería de Sistemas (5 años).", "El sistema que organiza las citas de un hospital lo diseñó un ingeniero de sistemas.", ["logica", "tecno", "liderar"], "2"], ["datos", "📊", "Analista de datos", "Ordena muchos números y los convierte en gráficos para descubrir cosas y ayudar a tomar decisiones.", "Estadística, Ingeniería de Sistemas o Economía (5 años).", "Gracias a los datos, las apps de música adivinan qué canción te puede gustar.", ["logica"], "2"], ["mecatronico", "🤖", "Ingeniero/a mecatrónico", "Junta mecánica, electrónica y computación para construir máquinas inteligentes, como brazos robóticos.", "Ingeniería Mecatrónica (5 años).", "Los robots usan sensores como nosotros usamos los sentidos: cámaras como ojos y micrófonos como oídos.", ["construir", "tecno"], "3"], ["biomedico", "🩺", "Ingeniero/a biomédico", "Crea y cuida los equipos que usan los médicos, como monitores, prótesis y máquinas de los hospitales.", "Ingeniería Biomédica (5 años).", "Muchas máquinas que ves en el hospital fueron diseñadas por ingenieros biomédicos junto con médicos.", ["construir", "ayudar", "ciencia"], "3"], ["robotica", "🔧", "Técnico/a en robótica", "Arma, prueba y repara robots y máquinas automáticas en fábricas y empresas.", "Carrera técnica de Electrónica o Mecatrónica (3 años) en un instituto.", "Hay robots que ayudan a armar autos y otros que limpian la casa solos.", ["construir", "tecno"], "3"], ["emprendedor", "💡", "Emprendedor/a", "Tiene una idea para resolver un problema, la convierte en negocio y la hace crecer con un equipo.", "Cualquier carrera sirve; ayuda estudiar Administración o Ingeniería. ¡Se puede empezar desde pequeño!", "Muchas empresas grandes empezaron en una casa o un garaje con una sola idea.", ["liderar", "crear"], "4"], ["industrial", "🏭", "Ingeniero/a industrial", "Mejora la forma de hacer las cosas: que una fábrica o un servicio sea más rápido, ordenado y gaste menos.", "Ingeniería Industrial (5 años).", "Un ingeniero industrial puede calcular la mejor forma de organizar una cocina para que la comida salga más rápido.", ["logica", "liderar"], "4"], ["administrador", "📋", "Administrador/a", "Organiza a las personas, el dinero y las tareas de una empresa para que todo funcione bien.", "Administración de Empresas (5 años) o una carrera técnica en Administración (3 años).", "Hasta un albergue, un hospital o un equipo de fútbol necesitan alguien que los administre.", ["liderar", "ayudar"], "4"], ["publicista", "📣", "Publicista", "Crea campañas y anuncios para que la gente conozca un producto o una buena causa.", "Publicidad o Comunicación (5 años).", "La campaña de libros de este proyecto usó ideas de publicidad para que más personas donaran.", ["crear", "liderar"], "4"], ["enfermero", "💉", "Enfermero/a", "Cuida a los pacientes todos los días, los acompaña, les da sus medicinas y está atento a cómo se sienten.", "Enfermería (5 años) o Técnico en Enfermería (3 años).", "Las enfermeras y enfermeros son quienes más tiempo pasan con los pacientes en el hospital.", ["ayudar", "ciencia"], ""], ["biologo", "🔬", "Biólogo/a", "Estudia los seres vivos: plantas, animales y microbios. Algunos investigan para encontrar nuevas medicinas.", "Biología (5 años).", "En una gota de agua de río puede haber miles de seres vivos que solo se ven con microscopio.", ["ciencia", "naturaleza"], ""], ["agronomo", "🌱", "Ingeniero/a agrónomo", "Ayuda a que los cultivos crezcan sanos y den más alimentos, cuidando la tierra y el agua.", "Agronomía (5 años) o una carrera técnica agropecuaria (3 años).", "El Perú tiene más de 3,000 variedades de papa. ¡Los agrónomos ayudan a conservarlas!", ["naturaleza", "ciencia", "construir"], ""]], "talleres": [["1", "Juegos sin pantalla", "Arte y Matemática", ["videojuegos", "grafico", "docente"]], ["2", "Lógica y algoritmos desenchufados", "Tecnología y Matemática", ["programador", "sistemas", "datos"]], ["3", "Robótica conceptual", "Ciencia, Ingeniería y Arte", ["mecatronico", "biomedico", "robotica"]], ["4", "Aprende a Empezar", "Ingeniería, Matemática y Arte", ["emprendedor", "industrial", "administrador", "publicista"]]], "intereses": {"crear": "Crear y dibujar", "logica": "Resolver acertijos y números", "construir": "Construir y armar cosas", "ayudar": "Ayudar y cuidar a las personas", "tecno": "La tecnología", "liderar": "Organizar y liderar", "ciencia": "Descubrir cómo funcionan las cosas", "naturaleza": "La naturaleza, plantas y animales"}, "test": [["En tu tiempo libre prefieres…", [["🖍️ Dibujar o pintar", "crear"], ["🧩 Armar rompecabezas", "logica"], ["🧱 Construir con bloques o cartón", "construir"], ["🤝 Conversar y ayudar a otros", "ayudar"]]], ["En el taller, lo que más te gustó fue…", [["🎲 Inventar las reglas del juego", "crear"], ["🤖 Dar órdenes al «robot»", "logica"], ["📦 Armar el robot de cartón", "construir"], ["💡 Crear una idea de negocio", "liderar"]]], ["Si tuvieras un superpoder, sería…", [["🔬 Ver cosas diminutas", "ciencia"], ["🌿 Hablar con plantas y animales", "naturaleza"], ["📱 Entender cualquier aparato", "tecno"], ["❤️ Curar a las personas", "ayudar"]]], ["En un trabajo en grupo, tú…", [["📣 Organizo al equipo", "liderar"], ["🎨 Hago el afiche bonito", "crear"], ["🧮 Hago las cuentas", "logica"], ["🔧 Armo las piezas", "construir"]]], ["¿Qué video verías primero?", [["🚀 Cómo funciona un cohete", "ciencia"], ["🎮 Cómo se hace un videojuego", "tecno"], ["🐢 Animales de la Amazonía", "naturaleza"], ["🧑‍🍳 Cómo empezar un negocio de postres", "liderar"]]], ["¿Qué regalo te gustaría más?", [["🖌️ Una caja de colores", "crear"], ["🔭 Un microscopio o una lupa", "ciencia"], ["🪴 Semillas para sembrar", "naturaleza"], ["🔌 Un kit de robótica", "construir"]]], ["¿Cuál de estas frases va más contigo?", [["«Me gusta que todo esté en orden»", "logica"], ["«Me gusta que todos estén bien»", "ayudar"], ["«Me gusta probar aparatos nuevos»", "tecno"], ["«Me gusta inventar cosas nuevas»", "crear"]]], ["Cuando sea grande quiero…", [["🏥 Cuidar a las personas", "ayudar"], ["🏗️ Construir cosas grandes", "construir"], ["🌎 Cuidar el planeta", "naturaleza"], ["👩‍💼 Tener mi propio proyecto", "liderar"]]]], "trivia": [["¿Qué parte de un robot funciona como nuestros ojos?", ["La batería", "La cámara (sensor)", "Las ruedas"], 1], ["Si al «robot» le das una orden equivocada, ¿qué hace un programador?", ["Se rinde", "Busca el error y lo corrige", "Apaga todo"], 1], ["¿Cuántas variedades de papa hay en el Perú, más o menos?", ["10", "300", "Más de 3,000"], 2], ["¿Qué letra de STEAM significa Arte?", ["S", "A", "M"], 1], ["¿Qué profesional cuida los equipos del hospital?", ["Ingeniero/a biomédico", "Publicista", "Agrónomo/a"], 0], ["Un dado tiene 6 caras. ¿Cuánto suman todas?", ["18", "21", "24"], 1], ["¿Quién crea campañas para que la gente done libros?", ["Publicista", "Biólogo/a", "Técnico/a en robótica"], 0], ["¿Qué necesita una planta para crecer?", ["Solo oscuridad", "Agua, luz y tierra", "Solo agua salada"], 1]], "rec_n": [["Khan Academy en español", "https://es.khanacademy.org", "Matemática y ciencias con videos y ejercicios, gratis."], ["Code.org – La Hora del Código", "https://code.org", "Aprende a programar con juegos de bloques."], ["Scratch", "https://scratch.mit.edu", "Crea tus propios juegos y animaciones."], ["Simulaciones PhET", "https://phet.colorado.edu/es/", "Experimentos de ciencia y matemática en el celular."], ["PerúEduca", "https://www.perueduca.pe", "Recursos educativos del Ministerio de Educación."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros y materiales gratis de la Biblioteca Nacional del Perú."]], "rec_a": [["GCFGlobal en español", "https://edu.gcfglobal.org/es/", "Cursos gratis y sencillos para aprender a usar el celular, WhatsApp e internet."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros, revistas y fotos antiguas del Perú, gratis."], ["Khan Academy en español", "https://es.khanacademy.org", "Para aprender o repasar matemática a su ritmo."]], "celular": [["📹", "Hacer una videollamada por WhatsApp", ["Abra WhatsApp (el ícono verde con un teléfono).", "Toque el nombre de su familiar en la lista de chats.", "Arriba a la derecha toque el ícono de la cámara 📹.", "Espere a que conteste. Para colgar, toque el botón rojo."]], ["🎙️", "Enviar un mensaje de voz", ["Abra el chat de la persona.", "Mantenga apretado el micrófono 🎙️ (abajo a la derecha) mientras habla.", "Suelte el dedo cuando termine: el audio se envía solo.", "Si se equivocó, deslice el dedo a la izquierda antes de soltar para cancelar."]], ["🔠", "Agrandar la letra del celular", ["Abra «Ajustes» o «Configuración» (el ícono de engranaje ⚙️).", "Busque «Pantalla» y luego «Tamaño de fuente» o «Tamaño del texto».", "Mueva la barra hacia la derecha hasta que lea cómodo.", "Pida ayuda al tutor si no encuentra la opción: cada celular es un poco distinto."]], ["📷", "Ver y enviar fotos", ["Abra la «Galería» o «Fotos».", "Toque la foto que quiere enviar.", "Toque «Compartir» y elija WhatsApp.", "Elija a la persona y toque el botón verde de enviar ➤."]], ["🛡️", "Cuidarse de estafas", ["Nunca comparta códigos que le lleguen por mensaje (aunque digan que es del banco o de un familiar).", "Si alguien le pide dinero por mensaje, llame primero a su familiar para confirmar.", "No abra enlaces de números que no conoce.", "Ante cualquier duda, pregunte al tutor o a un familiar."]]], "refranes": [["Al que madruga…", ["…Dios lo ayuda.", "…le da sueño.", "…se le enfría el café."], 0], ["Más vale tarde…", ["…que temprano.", "…que nunca.", "…que mañana."], 1], ["Camarón que se duerme…", ["…se lo lleva la corriente.", "…despierta tarde.", "…sueña bonito."], 0], ["En casa de herrero…", ["…martillo de oro.", "…cuchillo de palo.", "…mucho ruido."], 1], ["Dime con quién andas…", ["…y te diré quién eres.", "…y te diré a dónde vas.", "…y te invito un café."], 0], ["No hay mal…", ["…que dure cien años.", "…que por bien no venga.", "…sin remedio."], 1], ["Poco a poco…", ["…se hace tarde.", "…se llena la olla.", "…se llega lejos."], 2], ["Agua que no has de beber…", ["…déjala correr.", "…guárdala bien.", "…dásela al vecino."], 0]], "oficios": [["🌾", "Agricultor/a", "¿Qué sembraba? ¿En qué mes se siembra y se cosecha? ¿Qué secreto tiene para que la planta crezca bien?", "Ingeniero/a agrónomo, biólogo/a"], ["🧶", "Tejedor/a", "¿Quién le enseñó a tejer? ¿Qué dibujos o colores usa? ¿Cuánto demora una prenda?", "Diseñador/a gráfico, diseñador/a de modas"], ["🪚", "Carpintero/a o albañil", "¿Qué fue lo más difícil que construyó? ¿Cómo mide sin equivocarse?", "Ingeniero/a civil, ingeniero/a mecatrónico"], ["🍲", "Cocinero/a", "¿Cuál es su plato especial? ¿Cómo se calculan las cantidades para muchas personas?", "Chef, ingeniero/a de alimentos, emprendedor/a"], ["🐑", "Pastor/a o criador/a de animales", "¿Cómo sabe si un animal está sano? ¿Qué animales cuidaba?", "Veterinario/a, zootecnista, biólogo/a"], ["🛒", "Comerciante", "¿Qué vendía? ¿Cómo hacía las cuentas y atraía a sus clientes?", "Administrador/a, emprendedor/a, publicista"], ["🎻", "Músico/a o danzante", "¿Qué música o danza es típica de su pueblo? ¿Cómo la aprendió?", "Músico/a, docente de arte, productor/a cultural"], ["🧑‍🏫", "Otro oficio", "Cuéntenos cuál fue su trabajo y qué fue lo que más le gustó de él.", "Lo buscamos juntos en el catálogo"]], "juntos": [["👵👦", "Mi oficio, mi historia", "Un adulto mayor cuenta su oficio con la ficha de preguntas. Los niños buscan en el catálogo qué profesión de hoy se parece. 20 minutos."], ["🃏", "Memoria por parejas", "Un niño y un adulto mayor juegan juntos el juego de memoria: el niño toca, el adulto recuerda dónde estaba cada carta."], ["📖", "Lectura compartida", "Con los libros donados de la campaña, un niño lee en voz alta y el adulto mayor cuenta si conoce una historia parecida de su pueblo."], ["📹", "El nieto profesor", "Un niño le enseña a un adulto mayor a hacer una videollamada o enviar un audio con la guía del celular. ¡El niño es el docente!"]], "tutor": ["Use el kit en sesiones cortas de 15 a 20 minutos, siempre con un tutor del albergue presente.", "Limpie el celular o la computadora con alcohol antes y después de cada uso, y pida lavado de manos (protocolo de salud del proyecto).", "Todas las actividades se pueden hacer sentados o desde la cama.", "El kit no guarda nombres, fotos ni respuestas: al cerrarlo, todo se borra.", "Los juegos y el catálogo funcionan sin internet. Solo los «recursos gratuitos» necesitan internet.", "Si un niño o un adulto mayor está cansado, se detiene la actividad. No es una evaluación, es para disfrutar."]};
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+// ---------- navegación y accesibilidad
+function setBig(on){ document.body.classList.toggle('grande', on); $('bt-size').setAttribute('aria-pressed', on); }
+function go(id, big){ document.querySelectorAll('.sec').forEach(s => s.classList.toggle('on', s.id === id)); if (big) setBig(true); window.scrollTo(0,0); }
+$('bt-size').onclick = () => setBig(!document.body.classList.contains('grande'));
+$('bt-theme').onclick = () => { const r = document.documentElement; const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; r.dataset.theme = dark ? 'light' : 'dark'; };
+document.querySelectorAll('.tabs').forEach(tb => tb.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  tb.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+  tb.parentElement.querySelectorAll('.pane').forEach(p => p.hidden = p.id !== b.dataset.t);
+}));
+
+// ---------- catálogo
+const byId = Object.fromEntries(D.perfiles.map(p => [p[0], p]));
+function profCard(p){
+  const t = p[7] ? `<span class="tag">Taller ${p[7]}</span>` : '';
+  return `<div class="card prof"><span class="e">${p[1]}</span><h3>${esc(p[2])}</h3>
+  <p><span class="lab">¿Qué hace?</span> ${esc(p[3])}</p><p><span class="lab">¿Qué estudiar?</span> ${esc(p[4])}</p>
+  <p><span class="lab">¿Sabías que…?</span> ${esc(p[5])}</p><div>${t}</div></div>`;
+}
+function renderCat(f){
+  $('filtro').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.f === f));
+  const list = f === 'todos' ? D.perfiles : D.perfiles.filter(p => p[7] === f);
+  $('catalogo').innerHTML = list.map(profCard).join('');
+}
+$('filtro').innerHTML = `<button data-f="todos">Todas (${D.perfiles.length})</button>` + D.talleres.map(t => `<button data-f="${t[0]}">Taller ${t[0]}: ${esc(t[1])}</button>`).join('');
+$('filtro').onclick = e => { const b = e.target.closest('button'); if (b) renderCat(b.dataset.f); };
+renderCat('todos');
+
+// ---------- test ¿Qué me gusta?
+let tI = 0, tS = {};
+function renderTest(){
+  if (tI >= D.test.length) {
+    const top = Object.entries(tS).sort((a,b) => b[1]-a[1]).slice(0,2).map(x => x[0]);
+    const res = D.perfiles.map(p => [p, p[6].filter(t => top.includes(t)).length]).filter(x => x[1] > 0).sort((a,b) => b[1]-a[1]).slice(0,4).map(x => x[0]);
+    $('test').innerHTML = `<h3>🎉 ¡Listo!</h3><p>Te gusta mucho: <b>${top.map(t => esc(D.intereses[t])).join('</b> y <b>')}</b>.</p>
+      <p>Estas profesiones podrían gustarte:</p><div class="grid">${res.map(profCard).join('')}</div>
+      <p class="note">No hay respuestas buenas ni malas. Puedes cambiar de idea las veces que quieras. Tus respuestas no se guardan.</p>
+      <button onclick="tI=0;tS={};renderTest()">🔄 Hacerlo otra vez</button>`;
+    return;
+  }
+  const [q, ops] = D.test[tI];
+  $('test').innerHTML = `<div class="note">Pregunta ${tI+1} de ${D.test.length}</div><div class="bar"><i style="width:${tI/D.test.length*100}%"></i></div>
+    <h3>${esc(q)}</h3><div class="opts">${ops.map((o,i) => `<button onclick="tPick('${o[1]}')">${esc(o[0])}</button>`).join('')}</div>`;
+}
+function tPick(t){ tS[t] = (tS[t]||0) + 1; tI++; renderTest(); }
+renderTest();
+
+// ---------- quiz genérico (trivia y refranes)
+function quiz(el, data, fin){
+  let i = 0, ok = 0; const order = shuffle(data);
+  function show(){
+    if (i >= order.length){ $(el).innerHTML = `<h3>🏆 ¡Muy bien!</h3><p>Acertó ${ok} de ${order.length}. ${fin}</p><button id="${el}-r">🔄 Jugar otra vez</button>`; $(el+'-r').onclick = () => quiz(el, data, fin); return; }
+    const [q, ops, c] = order[i];
+    $(el).innerHTML = `<div class="note">${i+1} de ${order.length}</div><div class="bar"><i style="width:${i/order.length*100}%"></i></div><h3>${esc(q)}</h3>
+      <div class="opts">${ops.map((o,k) => `<button data-k="${k}">${esc(o)}</button>`).join('')}</div><div class="msg"></div>`;
+    $(el).querySelector('.opts').onclick = e => {
+      const b = e.target.closest('button'); if (!b || b.disabled) return;
+      const k = +b.dataset.k, bs = $(el).querySelectorAll('.opts button');
+      bs.forEach(x => x.disabled = true); bs[c].classList.add('ok');
+      if (k === c){ ok++; $(el).querySelector('.msg').textContent = '✅ ¡Correcto!'; } else { b.classList.add('no'); $(el).querySelector('.msg').textContent = '💡 Casi. La respuesta está en verde.'; }
+      setTimeout(() => { i++; show(); }, 1600);
+    };
+  }
+  show();
+}
+quiz('trivia', D.trivia, 'Cada respuesta te acerca a la ciencia y la tecnología.');
+quiz('refranes', D.refranes, '¿Conoce otro refrán de su tierra? Cuénteselo a los niños.');
+
+// ---------- robot
+const LV = [ {s:[0,0], g:[0,3], r:[]}, {s:[0,0], g:[3,2], r:[[1,0],[1,1]]}, {s:[4,0], g:[0,4], r:[[3,1],[2,1],[1,3],[2,3]]} ];
+let lv = 0, prog = [];
+const MV = {'↑':[-1,0],'↓':[1,0],'←':[0,-1],'→':[0,1]};
+function rbDraw(pos){
+  const L = LV[lv]; let h = '';
+  for (let y = 0; y < 5; y++) for (let x = 0; x < 5; x++){
+    let c = '';
+    if (L.r.some(o => o[0]===y && o[1]===x)) c = '🪨';
+    if (L.g[0]===y && L.g[1]===x) c = '⭐';
+    if (pos[0]===y && pos[1]===x) c = '🤖';
+    h += `<div class="cell">${c}</div>`;
+  }
+  $('rb-board').innerHTML = h; $('rb-prog').innerHTML = prog.map(p => `<span>${p}</span>`).join('') || '<span class="note" style="background:none">Toca las flechas para armar el programa</span>';
+  $('rb-lvl').textContent = `Nivel ${lv+1} de ${LV.length}`;
+}
+function rbAdd(a){ if (prog.length < 14){ prog.push(a); rbDraw(LV[lv].s); $('rb-msg').textContent=''; } }
+function rbUndo(){ prog.pop(); rbDraw(LV[lv].s); }
+function rbReset(){ prog = []; $('rb-msg').textContent=''; rbDraw(LV[lv].s); }
+function rbRun(){
+  const L = LV[lv]; let p = L.s.slice(), k = 0;
+  const step = () => {
+    if (k >= prog.length){
+      if (p[0]===L.g[0] && p[1]===L.g[1]){
+        $('rb-msg').textContent = lv < LV.length-1 ? '🎉 ¡Lo lograste! Pasas al siguiente nivel.' : '🏆 ¡Terminaste todos los niveles! Así trabaja un programador.';
+        if (lv < LV.length-1) setTimeout(() => { lv++; prog = []; rbDraw(LV[lv].s); $('rb-msg').textContent=''; }, 1800);
+      } else $('rb-msg').textContent = '🔍 El robot no llegó a la estrella. Busca el error en tu programa y corrígelo.';
+      return;
+    }
+    const m = MV[prog[k]], n = [p[0]+m[0], p[1]+m[1]];
+    if (n[0]<0||n[0]>4||n[1]<0||n[1]>4||L.r.some(o => o[0]===n[0]&&o[1]===n[1])){ $('rb-msg').textContent = `💥 ¡Choque en la orden ${k+1}! Busca el error y corrígelo.`; return; }
+    p = n; k++; rbDraw(p); setTimeout(step, 450);
+  };
+  rbDraw(p); setTimeout(step, 300);
+}
+rbDraw(LV[0].s);
+
+// ---------- memoria
+const MEMK = ['videojuegos','programador','mecatronico','biomedico','enfermero','agronomo','grafico','biologo'];
+const MEMA = [['🌽','Choclo'],['🥔','Papa'],['🦙','Llama'],['🌶️','Ají'],['🐟','Pescado'],['🌻','Girasol']];
+function memInit(t){
+  const base = t === 'k' ? MEMK.map(id => [byId[id][1], byId[id][2]]) : MEMA;
+  const cards = shuffle(base.concat(base)); let open = [], found = 0, tries = 0;
+  const el = $('mem-'+t), msg = $('mem-'+t+'-msg');
+  el.innerHTML = cards.map((c,i) => `<button data-i="${i}" aria-label="Carta ${i+1}">?</button>`).join(''); msg.textContent = '';
+  el.onclick = e => {
+    const b = e.target.closest('button'); if (!b || b.classList.contains('up') || b.classList.contains('done') || open.length === 2) return;
+    const c = cards[+b.dataset.i]; b.textContent = c[0]; b.classList.add('up'); open.push(b);
+    if (open.length === 2){
+      tries++;
+      const [x, y] = open;
+      if (cards[+x.dataset.i][0] === cards[+y.dataset.i][0]){
+        x.classList.add('done'); y.classList.add('done'); open = []; found++;
+        msg.textContent = (t === 'k' ? '✅ ¡Pareja! ' : '✅ ¡Muy bien! ') + c[1];
+        if (found === base.length) msg.textContent = `🏆 ¡Encontró todas las parejas en ${tries} intentos!`;
+      } else setTimeout(() => { open.forEach(z => { z.textContent = '?'; z.classList.remove('up'); }); open = []; }, t === 'k' ? 900 : 1600);
+    }
+  };
+}
+memInit('k'); memInit('a');
+
+// ---------- listas
+const linkCard = r => `<div class="card"><h3>${esc(r[0])}</h3><p>${esc(r[2])}</p><a href="${r[1]}" target="_blank" rel="noopener">Abrir ↗</a></div>`;
+$('rec-n').innerHTML = D.rec_n.map(linkCard).join('');
+$('rec-a').innerHTML = D.rec_a.map(linkCard).join('');
+$('celular').innerHTML = D.celular.map(c => `<div class="card"><h3>${c[0]} ${esc(c[1])}</h3><ol class="steps">${c[2].map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>`).join('');
+$('oficios').innerHTML = D.oficios.map(o => `<div class="card"><h3>${o[0]} ${esc(o[1])}</h3><p>${esc(o[2])}</p><p class="note">Profesiones de hoy que se parecen: <b>${esc(o[3])}</b></p></div>`).join('');
+$('juntos-g').innerHTML = D.juntos.map(j => `<div class="card"><h3>${j[0]} ${esc(j[1])}</h3><p>${esc(j[2])}</p></div>`).join('');
+$('tutor-l').innerHTML = D.tutor.map(t => `<li>${esc(t)}</li>`).join('');
+$('talleres').innerHTML = D.talleres.map(t => `<div class="card"><h3>Taller ${t[0]}: ${esc(t[1])}</h3><p class="note">${esc(t[2])}</p><p>${t[3].map(id => byId[id][1] + ' ' + esc(byId[id][2])).join('<br>')}</p></div>`).join('');
+</script>
+</body>
+</html>
