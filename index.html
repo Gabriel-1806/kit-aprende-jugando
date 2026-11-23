@@ -2,375 +2,702 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F2994A">
-<meta name="description" content="Kit digital del proyecto Aprende Jugando: profesiones, juegos y guía del celular para niños y adultos mayores.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F766E">
+<meta name="description" content="Kit digital Aprende Jugando: profesiones, juegos de lógica y memoria y guía del celular para niños, adolescentes y adultos mayores.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-512.png">
-<title>Kit Digital Aprende Jugando</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Aprende Jugando · Kit digital</title>
 <style>
 :root{
-  --bg:#FFF9F0; --card:#FFFFFF; --ink:#1F2A44; --muted:#5B6478; --line:#E7DFD2;
-  --kids:#F2994A; --kids2:#FFE7D1; --adult:#2F6FDE; --adult2:#DCE8FF; --both:#27AE60; --both2:#D9F5E4;
-  --tutor:#8E44AD; --tutor2:#EFE0F7; --ok:#1E8E4E; --bad:#C0392B;
-  --fs:17px;
+  --bg:#F6F4EF; --surface:#FFFFFF; --surface-2:#FBFAF7; --ink:#152033; --ink-2:#3B4558; --muted:#6A7283; --line:#E4E0D6; --line-2:#EEEBE4;
+  --brand:#0F766E; --brand-ink:#FFFFFF; --brand-soft:#E3F2EF;
+  --kids:#D9661F; --kids-soft:#FCEBDD; --adult:#2557D6; --adult-soft:#E4ECFC; --shared:#1E7F4F; --shared-soft:#E0F2E7; --tutor:#6D3FC0; --tutor-soft:#EEE6FA;
+  --ok:#1E7F4F; --ok-soft:#E0F2E7; --bad:#B42318; --bad-soft:#FDE8E6; --star:#E8A317;
+  --radius:16px; --shadow:0 1px 2px rgba(21,32,51,.06),0 4px 16px rgba(21,32,51,.06);
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --navh:68px;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){ --bg:#14161C; --card:#1F2330; --ink:#F2F3F7; --muted:#B3B9C8; --line:#343A4C; --kids2:#4A3220; --adult2:#1E2F55; --both2:#173B28; --tutor2:#36204A; }
+  :root:not([data-theme="light"]){
+    --bg:#0F141C; --surface:#18202B; --surface-2:#1D2632; --ink:#EEF1F6; --ink-2:#C9CFDA; --muted:#97A0B0; --line:#2B3543; --line-2:#232C38;
+    --brand:#2BB3A6; --brand-ink:#05201D; --brand-soft:#123430;
+    --kids:#F29256; --kids-soft:#3A2618; --adult:#7EA2FF; --adult-soft:#1B2747; --shared:#4CC38A; --shared-soft:#15301F; --tutor:#B595F5; --tutor-soft:#2A2040;
+    --ok:#4CC38A; --ok-soft:#15301F; --bad:#FF8A80; --bad-soft:#3A1A18; --shadow:none;
+  }
 }
-:root[data-theme="dark"]{ --bg:#14161C; --card:#1F2330; --ink:#F2F3F7; --muted:#B3B9C8; --line:#343A4C; --kids2:#4A3220; --adult2:#1E2F55; --both2:#173B28; --tutor2:#36204A; }
+:root[data-theme="dark"]{
+  --bg:#0F141C; --surface:#18202B; --surface-2:#1D2632; --ink:#EEF1F6; --ink-2:#C9CFDA; --muted:#97A0B0; --line:#2B3543; --line-2:#232C38;
+  --brand:#2BB3A6; --brand-ink:#05201D; --brand-soft:#123430;
+  --kids:#F29256; --kids-soft:#3A2618; --adult:#7EA2FF; --adult-soft:#1B2747; --shared:#4CC38A; --shared-soft:#15301F; --tutor:#B595F5; --tutor-soft:#2A2040;
+  --ok:#4CC38A; --ok-soft:#15301F; --bad:#FF8A80; --bad-soft:#3A1A18; --shadow:none;
+}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+html[data-scale="1"]{font-size:18.5px} html[data-scale="2"]{font-size:21.5px}
 *{box-sizing:border-box}
-html{font-size:var(--fs)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Roboto,Arial,sans-serif;line-height:1.5}
-body.grande{--fs:22px}
-header{background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:5}
-header h1{font-size:1.1rem;margin:0;flex:1;min-width:170px;cursor:pointer}
-header h1 span{color:var(--kids)}
-.tools{display:flex;gap:6px;flex-wrap:wrap}
-button,input{font:inherit}
-button{cursor:pointer;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;min-height:44px}
-button:focus-visible,input:focus-visible{outline:3px solid var(--adult);outline-offset:2px}
-button:disabled{opacity:.6;cursor:default}
-main{max-width:1000px;margin:0 auto;padding:16px}
-.hero{text-align:center;padding:8px 0 4px}
-.hero h2{font-size:1.6rem;margin:.2em 0}
-.hero p{color:var(--muted);margin:.2em 0 1em}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
-.big{border:none;border-radius:20px;padding:22px 16px;text-align:left;font-size:1.1rem;min-height:150px;display:flex;flex-direction:column;gap:6px}
-.big .e{font-size:2.6rem;line-height:1}
-.big b{font-size:1.25rem}
-.big small{color:var(--ink);opacity:.85;font-size:.9rem}
-.k{background:var(--kids2)} .a{background:var(--adult2)} .j{background:var(--both2)} .t{background:var(--tutor2)}
-.sec{display:none}.sec.on{display:block}
-.sec h2{margin:.2em 0 .4em}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}
-.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-.card h3{margin:0 0 6px;font-size:1.1rem}
-.prof{display:flex;flex-direction:column;gap:6px}
-.prof .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-.prof .e{font-size:2.2rem}
-.prof p{margin:0;font-size:.95rem}
-.lab{font-weight:700;color:var(--kids)}
-.tag{display:inline-block;font-size:.75rem;background:var(--kids2);border-radius:99px;padding:2px 10px;margin-top:4px}
-.say{border:none;background:var(--adult2);border-radius:99px;padding:6px 12px;min-height:40px;font-size:.9rem;white-space:nowrap}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.55;padding-bottom:calc(var(--navh) + env(safe-area-inset-bottom))}
+@media (min-width:880px){ body{padding-bottom:0} }
+@media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important} }
+svg.i{width:1.25em;height:1.25em;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+h1,h2,h3,h4{line-height:1.2;letter-spacing:-.01em;margin:0}
+p{margin:0}
+a{color:var(--brand)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+.appbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+@supports (backdrop-filter:blur(8px)){ .appbar{background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(10px)} }
+.appbar .in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;background:none;border:0;padding:4px;text-align:left}
+.logo .mk{width:38px;height:38px;border-radius:11px;background:var(--brand);display:grid;place-items:center}
+.logo b{display:block;font-size:1rem;font-weight:800}
+.logo small{display:block;font-size:.7rem;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.topnav{display:none;gap:4px;margin-left:12px}
+.topnav button{background:none;border:0;padding:8px 14px;border-radius:999px;font-weight:600;color:var(--ink-2);font-size:.92rem}
+.topnav button[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.actions{margin-left:auto;display:flex;gap:6px}
+.iconbtn{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--ink-2)}
+.iconbtn[aria-pressed="true"]{background:var(--brand-soft);color:var(--brand);border-color:transparent}
+@media (min-width:880px){ .topnav{display:flex} }
+
+.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.bottomnav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.68rem;font-weight:700;color:var(--muted);padding:6px 2px;border-radius:12px;min-height:52px}
+.bottomnav button svg{width:22px;height:22px}
+.bottomnav button[aria-current="page"]{color:var(--brand);background:var(--brand-soft)}
+@media (min-width:880px){ .bottomnav{display:none} }
+
+main{max-width:1120px;margin:0 auto;padding:20px 16px 40px}
+.view{display:none}
+.view.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.hero{display:grid;gap:24px;align-items:center;padding:12px 0 28px}
+@media (min-width:880px){ .hero{grid-template-columns:1.15fr .85fr;padding:32px 0 40px} }
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);background:var(--brand-soft);padding:6px 12px;border-radius:999px}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:800;margin:14px 0 12px}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.lead{font-size:1.06rem;color:var(--ink-2);max-width:38em}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.art{width:100%;max-width:400px;justify-self:center}
+@media (max-width:640px){ .art{display:none} }
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.stat{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-size:.85rem;color:var(--ink-2)}
+.stat b{color:var(--ink);font-size:1rem;display:inline-flex}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:700;color:var(--ink)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.ghost{background:transparent}
+.btn.sm{min-height:40px;padding:0 14px;font-size:.88rem}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+
+.sectitle{margin:8px 0 14px}
+.sectitle h2{font-size:1.25rem;font-weight:800}
+.sectitle p{color:var(--muted);font-size:.92rem}
+
+.aud{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.audcard{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;transition:transform .15s,border-color .15s}
+.audcard:hover{transform:translateY(-2px);border-color:var(--c)}
+.audcard .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--cs);color:var(--c)}
+.audcard .ic svg{width:26px;height:26px}
+.audcard h3{font-size:1.08rem;font-weight:800}
+.audcard p{color:var(--ink-2);font-size:.92rem}
+.audcard .go{margin-top:auto;display:flex;align-items:center;gap:4px;color:var(--c);font-weight:700;font-size:.9rem}
+.c-kids{--c:var(--kids);--cs:var(--kids-soft)} .c-adult{--c:var(--adult);--cs:var(--adult-soft)} .c-shared{--c:var(--shared);--cs:var(--shared-soft)} .c-tutor{--c:var(--tutor);--cs:var(--tutor-soft)}
+
+.vhead{display:flex;align-items:center;gap:14px;margin:4px 0 16px}
+.vhead .ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--cs);color:var(--c);flex:none}
+.vhead .ic svg{width:28px;height:28px}
+.vhead h2{font-size:clamp(1.35rem,3vw,1.75rem);font-weight:800}
+.vhead p{color:var(--muted);font-size:.92rem}
+
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:18px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;display:flex;align-items:center;gap:8px;border:0;background:none;padding:10px 14px;border-radius:10px;font-weight:700;font-size:.9rem;color:var(--muted);white-space:nowrap;min-height:44px}
+.tabs button svg{width:18px;height:18px}
+.tabs button[aria-selected="true"]{background:var(--cs);color:var(--c)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.panel + .panel,.two + .panel{margin-top:14px}
+.panel h3{font-size:1.08rem;font-weight:800}
+.sub{color:var(--muted);font-size:.92rem;margin-top:4px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 14px;min-height:48px;color:var(--muted)}
+.search:focus-within{border-color:var(--c,var(--brand))}
+.search input{flex:1;border:0;background:none;outline:none;min-height:46px;color:var(--ink);min-width:0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:.85rem;font-weight:700;color:var(--ink-2);min-height:38px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.count{font-size:.85rem;color:var(--muted);margin:0 0 10px}
+.pcard{display:flex;gap:14px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);transition:border-color .15s,transform .15s;width:100%}
+.pcard:hover{border-color:var(--pc);transform:translateY(-1px)}
+.ptile{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--ps);color:var(--pc);flex:none}
+.ptile svg{width:24px;height:24px}
+.pcard h4{margin:0 0 2px;font-size:1rem;font-weight:800}
+.pcard p{font-size:.88rem;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--ps);color:var(--pc)}
+.a1{--pc:#C2571A;--ps:#FCEBDD} .a2{--pc:#2557D6;--ps:#E4ECFC} .a3{--pc:#6D3FC0;--ps:#EEE6FA} .a4{--pc:#0F766E;--ps:#E3F2EF} .a0{--pc:#1E7F4F;--ps:#E0F2E7}
+:root[data-theme="dark"] :is(.a1,.a2,.a3,.a4,.a0){--ps:var(--surface-2);--pc:var(--ink)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) :is(.a1,.a2,.a3,.a4,.a0){--ps:var(--surface-2);--pc:var(--ink)} }
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius);grid-column:1/-1}
+
+dialog{border:0;padding:0;border-radius:20px;max-width:560px;width:calc(100% - 24px);background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(10,15,25,.5)}
+.dlg-h{display:flex;gap:14px;align-items:center;padding:22px 22px 0}
+.dlg-h h3{font-size:1.25rem;font-weight:800;margin-bottom:4px}
+.dlg-b{padding:16px 22px;display:grid;gap:14px;margin:0}
+.dlg-b dt{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.dlg-b dd{margin:0;color:var(--ink-2)}
+.dlg-f{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:0 22px 22px;flex-wrap:wrap}
+
+.qwrap{max-width:760px}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:600}
+.progress{height:8px;background:var(--line-2);border-radius:999px;overflow:hidden;margin:10px 0 18px}
+.progress i{display:block;height:100%;background:var(--c,var(--brand));border-radius:999px;transition:width .35s ease}
+.qtitle{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.qtitle h3{font-size:1.22rem;font-weight:800;flex:1 1 280px}
+.opts{display:grid;gap:10px;margin-top:16px}
+@media (min-width:640px){ .opts.two{grid-template-columns:1fr 1fr} }
+.opt{display:flex;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--line);background:var(--surface-2);border-radius:14px;padding:14px 16px;min-height:58px;font-weight:600;transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--c,var(--brand))}
+.opt .k{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line);font-size:.8rem;font-weight:800;flex:none;color:var(--muted)}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)} .opt.ok .k{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.no{border-color:var(--bad);background:var(--bad-soft)} .opt.no .k{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt:disabled{cursor:default;color:var(--ink)}
+.feedback{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 14px;border-radius:12px;font-weight:700}
+.feedback.ok{background:var(--ok-soft);color:var(--ok)} .feedback.no{background:var(--bad-soft);color:var(--bad)}
+.qnav{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+.result{display:grid;gap:18px}
+.ibar{display:grid;grid-template-columns:minmax(110px,1fr) 2fr 24px;gap:10px;align-items:center;font-size:.9rem;margin-bottom:8px}
+.ibar .t{height:10px;background:var(--line-2);border-radius:999px;overflow:hidden}
+.ibar .t i{display:block;height:100%;background:var(--c);border-radius:999px}
+.score{display:flex;align-items:center;gap:16px}
+.score .n{font-size:2.4rem;font-weight:800;color:var(--c,var(--brand))}
+
+.robot{display:grid;gap:22px;margin-top:16px}
+@media (min-width:820px){ .robot{grid-template-columns:340px 1fr;align-items:start;gap:32px} }
+.levels{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.lvl{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font-weight:800;position:relative}
+.lvl[aria-current="true"]{border-color:var(--kids);background:var(--kids-soft);color:var(--kids)}
+.lvl.done::after{content:"";position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/11px no-repeat}
+.board{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;width:100%;max-width:340px;padding:10px;background:var(--surface-2);border:1px solid var(--line);border-radius:18px}
+.cell{aspect-ratio:1;border-radius:10px;background:var(--surface);border:1px solid var(--line-2);display:grid;place-items:center;transition:background .2s}
+.cell svg{width:62%;height:62%}
+.cell.trail{background:var(--kids-soft)}
+.cell.rock{background:repeating-linear-gradient(135deg,var(--line) 0 6px,var(--line-2) 6px 12px);border-color:var(--line)}
+.cell.goal svg{color:var(--star);fill:var(--star)}
+.cell.bot svg{color:var(--kids)}
+.cell.crash{background:var(--bad-soft);border-color:var(--bad)}
+.label{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.pad{display:grid;grid-template-columns:repeat(3,58px);grid-template-rows:repeat(2,58px);gap:8px;margin-bottom:16px}
+.pad button{border:1.5px solid var(--line);background:var(--surface);border-radius:14px;display:grid;place-items:center;color:var(--ink)}
+.pad button:active{background:var(--kids-soft);border-color:var(--kids)}
+.pad .up{grid-column:2} .pad .lf{grid-column:1;grid-row:2} .pad .dn{grid-column:2;grid-row:2} .pad .rt{grid-column:3;grid-row:2}
+.prog{display:flex;flex-wrap:wrap;gap:6px;min-height:58px;padding:10px;border:1.5px dashed var(--line);border-radius:14px;align-items:center;background:var(--surface-2)}
+.stepc{width:36px;height:36px;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center}
+.stepc.cur{background:var(--kids);border-color:var(--kids);color:#fff}
+.ph{color:var(--muted);font-size:.88rem}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.status{margin-top:12px;min-height:1.6em;font-weight:700}
+.status.ok{color:var(--ok)} .status.no{color:var(--bad)}
+
+.mem{display:grid;gap:10px;grid-template-columns:repeat(4,1fr);max-width:560px;margin-top:14px}
+.mem.c3{grid-template-columns:repeat(3,1fr);max-width:520px}
+.mcard{aspect-ratio:1;border-radius:14px;border:0;padding:6px;display:grid;place-items:center;align-content:center;gap:6px;background:var(--c);color:#fff;font-weight:700;font-size:.76rem;text-align:center;line-height:1.2;transition:transform .2s,background .2s}
+.mcard .back{width:34%;height:34%;opacity:.5}
+.mcard.up,.mcard.done{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.mcard.done{border-color:var(--ok);background:var(--ok-soft)}
+.mcard.up{transform:scale(1.03)}
+.mcard .face{width:40%;height:40%;color:var(--c)}
+.mem.words .mcard{font-size:1.12rem}
+.mstat{display:flex;gap:16px;margin-top:12px;font-weight:700;color:var(--ink-2);font-size:.92rem}
+
+.acc{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.acc + .acc{margin-top:10px}
+.acc summary{list-style:none;display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;font-weight:800;font-size:1.05rem;min-height:68px}
+.acc summary::-webkit-details-marker{display:none}
+.acc .chev{margin-left:auto;transition:transform .2s;color:var(--muted)}
+.acc[open] .chev{transform:rotate(90deg)}
+.acc .body{padding:0 18px 18px 76px}
+@media (max-width:520px){ .acc .body{padding:0 18px 18px} }
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{display:flex;gap:12px;align-items:flex-start;counter-increment:s;color:var(--ink-2)}
+.steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--cs);color:var(--c);font-weight:800;display:grid;place-items:center;flex:none;font-size:.9rem}
+.ibox{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--cs);color:var(--c);flex:none}
+.ibox svg{width:22px;height:22px}
+.card{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+.card .hd{display:flex;align-items:center;gap:12px}
+.card h4{font-size:1.02rem;font-weight:800}
+.card p{color:var(--ink-2);font-size:.93rem}
+.card .foot{font-size:.86rem;color:var(--muted)}
+.card .foot b{color:var(--ink-2)}
+.card .end{margin-top:auto}
+.link{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none}
+.say{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:0 12px;min-height:36px;font-size:.8rem;font-weight:700;color:var(--ink-2);flex:none}
+.say svg{width:16px;height:16px}
+.say.on{background:var(--brand-soft);color:var(--brand);border-color:transparent}
 .nosay .say{display:none!important}
-.filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.filter button.on{background:var(--kids);border-color:var(--kids);color:#fff}
-.search{width:100%;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);margin-bottom:10px}
-.qhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.q h3{margin-top:0}
-.opts{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
-.opts button{text-align:left;padding:14px;min-height:56px}
-.opts button.ok{background:#D4F4E1;border-color:var(--ok);color:#0b3d22}
-.opts button.no{background:#F9D6D2;border-color:var(--bad);color:#5a120b}
-.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 14px}
-.bar i{display:block;height:100%;background:var(--kids);transition:width .3s}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
-.row button.on{background:var(--kids);border-color:var(--kids);color:#fff}
-.board{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;max-width:330px;margin:10px 0}
-.cell{aspect-ratio:1;border-radius:8px;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
-.cell.path{background:var(--kids2)}
-.prog{display:flex;flex-wrap:wrap;gap:6px;min-height:52px;padding:8px;border:2px dashed var(--line);border-radius:12px;margin:8px 0}
-.prog span{background:var(--kids2);border-radius:8px;padding:4px 10px;font-size:1.2rem}
-.prog span.cur{background:var(--kids);color:#fff}
-.arrows button{font-size:1.5rem;min-width:60px}
-.mem{display:grid;gap:10px;grid-template-columns:repeat(4,1fr);max-width:520px;margin:10px 0}
-.mem.c3{grid-template-columns:repeat(3,1fr);max-width:460px}
-.mem button{aspect-ratio:1;font-size:2.2rem;border-radius:14px;background:var(--adult);color:#fff;border:none;padding:0}
-.mem.kid button{background:var(--kids)}
-.mem button.up{background:var(--card);color:var(--ink);border:2px solid var(--line)}
-.mem button.done{background:var(--both2);border:2px solid var(--both)}
-.msg{font-weight:700;margin:10px 0;min-height:1.5em}
-.steps{margin:0;padding-left:1.4em}.steps li{margin:6px 0}
-.adultmode .card{font-size:1.1rem}
-.timer{font-size:3rem;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;margin:6px 0}
-.timer.end{color:var(--bad)}
-a{color:var(--adult)}
-.note{font-size:.85rem;color:var(--muted)}
-.install{display:none}
-footer{text-align:center;color:var(--muted);font-size:.8rem;padding:24px 16px}
-.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;display:none;z-index:9;max-width:90%;text-align:center}
-@media (max-width:520px){ header h1{font-size:1rem} .big{min-height:120px} .tools button{padding:6px 10px} }
-@media print{ header,.tabs,.tools,.say,footer{display:none!important} .sec{display:block!important} }
+
+.ring{position:relative;width:200px;height:200px;margin:14px auto}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:12}
+.ring .bgc{stroke:var(--line-2)} .ring .fgc{stroke:var(--tutor);stroke-linecap:round;transition:stroke-dashoffset .5s linear}
+.ring .t{position:absolute;inset:0;display:grid;place-items:center;align-content:center;text-align:center}
+.ring .t b{font-size:2.4rem;font-weight:800;font-variant-numeric:tabular-nums}
+.ring .t span{font-size:.8rem;color:var(--muted);font-weight:600}
+.ring.end .fgc{stroke:var(--bad)}
+.checks{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+.checks li{display:flex;gap:10px;align-items:flex-start;color:var(--ink-2)}
+.checks li svg{color:var(--shared);margin-top:3px}
+table.map{width:100%;border-collapse:collapse;font-size:.92rem}
+table.map th,table.map td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-2);vertical-align:top}
+table.map th{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.two{display:grid;gap:14px}
+@media (min-width:820px){ .two{grid-template-columns:1fr 1fr} }
+
+footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);font-size:.8rem;display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
+.toast{position:fixed;left:50%;bottom:calc(var(--navh) + 18px);transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;z-index:40;transition:.25s;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+@media (min-width:880px){ .toast{bottom:24px} }
+@media print{ .appbar,.bottomnav,.tabs,.say,footer{display:none!important} .view{display:block!important} }
 </style>
 </head>
 <body>
-<header>
-  <h1 onclick="go('home')">🎲 Aprende <span>Jugando</span> · Kit digital</h1>
-  <div class="tools">
-    <button id="bt-size" aria-pressed="false" title="Agrandar o achicar la letra">🔠 Letra</button>
-    <button id="bt-voice" aria-pressed="true" title="Activar o quitar los botones para escuchar">🔊 Voz</button>
-    <button id="bt-theme" title="Modo claro u oscuro">🌗</button>
-    <button id="bt-install" class="install">📲 Instalar</button>
-    <button onclick="go('home')">🏠 Inicio</button>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-vol" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-voloff" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></symbol>
+    <symbol id="i-text" viewBox="0 0 24 24"><path d="M3 7V5h11v2M8.5 5v14M6 19h5M14 13v-1h7v1M17.5 12v7M16 19h3"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M2 21v-1a6 6 0 0 1 12 0v1M16 3.1a4 4 0 0 1 0 7.8M22 21v-1a6 6 0 0 0-4-5.7"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3z"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 4h6M9 13v2M15 13v2M2 14h2M20 14h2"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-dn" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+    <symbol id="i-lf" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+    <symbol id="i-rt" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="5"/><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 10-10c0 2.2-1.8 3.5-4 3.5h-2a2 2 0 0 0-1.4 3.4A1.8 1.8 0 0 1 12 22z"/><path d="M7.5 11h.01M10 7h.01M15 7.5h.01"/></symbol>
+    <symbol id="i-grad" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M8 17v-6M13 17V7M18 17v-4"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20V9l6 4V9l6 4V4h8v16zM2 20h20M17 8h2"/></symbol>
+    <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1zM17 8a5 5 0 0 1 0 8M20 5a9 9 0 0 1 0 14"/></symbol>
+    <symbol id="i-care" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/><path d="M3.5 12h5l1.5-3 3 6 1.5-3h6"/></symbol>
+    <symbol id="i-micro" viewBox="0 0 24 24"><path d="M6 18h8M3 22h18M14 22a7 7 0 1 0 0-14h-1M9 14h2M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2zM12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M12 20v-9M12 11c0-3-2-6-7-6 0 4 3 6 7 6zM12 11c0-3 2-5 6-5 0 3-2 5-6 5z"/></symbol>
+    <symbol id="i-hammer" viewBox="0 0 24 24"><path d="m15 12-8.5 8.5a2.1 2.1 0 0 1-3-3L12 9M17.6 6.4 20 9l-3 3-2.6-2.6M9.5 5.5 13 2l4.6 4.4"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M3 2v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3v7"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="m3 9 1-5h16l1 5M4 9v11h16V9M3 9h18M9 20v-6h6v6"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-yarn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5 8c5 1 10 5 12 11M3.5 13c4 0 8 3 9 8M9 3.5c4 3 7 8 7 14M14 3.2c3 2 5 5 6 9"/></symbol>
+    <symbol id="i-paw" viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.8 1.2l-.5-1.4a2.5 2.5 0 0 0-1.9-1.6l-1.6-.3A2.6 2.6 0 0 1 5 10z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 20h.01"/></symbol>
+  </defs>
+</svg>
+
+<header class="appbar">
+  <div class="in">
+    <button class="logo" data-go="home" aria-label="Ir al inicio">
+      <span class="mk"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" fill="#fff"/><circle cx="8.5" cy="8.5" r="1.6" fill="#0F766E"/><circle cx="15.5" cy="8.5" r="1.6" fill="#0F766E"/><circle cx="12" cy="12" r="1.6" fill="#D9661F"/><circle cx="8.5" cy="15.5" r="1.6" fill="#0F766E"/><circle cx="15.5" cy="15.5" r="1.6" fill="#0F766E"/></svg></span>
+      <span><b>Aprende Jugando</b><small>Kit digital</small></span>
+    </button>
+    <nav class="topnav" aria-label="Secciones"></nav>
+    <div class="actions">
+      <button class="iconbtn" id="bt-scale" title="Tamaño de letra" aria-label="Cambiar tamaño de letra"><svg class="i"><use href="#i-text"/></svg></button>
+      <button class="iconbtn" id="bt-voice" title="Lectura en voz alta" aria-label="Lectura en voz alta" aria-pressed="true"><svg class="i"><use href="#i-vol"/></svg></button>
+      <button class="iconbtn" id="bt-theme" title="Modo claro u oscuro" aria-label="Cambiar entre modo claro y oscuro"><svg class="i"><use href="#i-moon"/></svg></button>
+      <button class="iconbtn" id="bt-install" title="Instalar en este dispositivo" aria-label="Instalar en este dispositivo" hidden><svg class="i"><use href="#i-down"/></svg></button>
+    </div>
   </div>
 </header>
-<main>
 
-<section id="home" class="sec on">
-  <div class="hero">
-    <h2>¡Hola! ¿Quién va a usar el kit hoy?</h2>
-    <p>Albergue «Mi Nuevo Hogar Jesús y Josué» · Proyecto «Aprende Jugando»</p>
-  </div>
-  <div class="grid">
-    <button class="big k" onclick="go('ninos')"><span class="e">🧒</span><b>Niños y adolescentes</b><small>Profesiones, «¿Qué me gusta?», juegos y páginas para seguir aprendiendo.</small></button>
-    <button class="big a" onclick="go('mayores')"><span class="e">👵</span><b>Adultos mayores</b><small>Letra grande, guía del celular, memoria, refranes y cuentas del mercado.</small></button>
-    <button class="big j" onclick="go('juntos')"><span class="e">🤝</span><b>Juntos</b><small>Actividades para que niños y adultos mayores aprendan unos de otros.</small></button>
-    <button class="big t" onclick="go('tutor')"><span class="e">📋</span><b>Para el tutor</b><small>Temporizador de sesión, uso seguro e instalación sin internet.</small></button>
-  </div>
-  <p class="note" style="text-align:center;margin-top:16px">Toca 🔊 en cualquier tarjeta para escuchar el texto en voz alta.</p>
-</section>
-
-<!-- ===================== NIÑOS ===================== -->
-<section id="ninos" class="sec">
-  <h2>🧒 Niños y adolescentes</h2>
-  <div class="tabs" data-sec="ninos">
-    <button data-t="n-cat" class="on">📚 Profesiones</button>
-    <button data-t="n-test">💭 ¿Qué me gusta?</button>
-    <button data-t="n-robot">🤖 Robot</button>
-    <button data-t="n-mem">🃏 Memoria</button>
-    <button data-t="n-triv">❓ Trivia</button>
-    <button data-t="n-rec">🌐 Sigue aprendiendo</button>
-  </div>
-  <div id="n-cat" class="pane">
-    <input id="buscar" class="search" type="search" placeholder="🔍 Busca una profesión (ej.: robot, dibujar, hospital)" aria-label="Buscar profesión">
-    <div class="filter" id="filtro"></div>
-    <div class="note" id="cat-count"></div>
-    <div class="grid" id="catalogo"></div>
-  </div>
-  <div id="n-test" class="pane" hidden><div class="card q" id="test"></div></div>
-  <div id="n-robot" class="pane" hidden>
-    <div class="card">
-      <h3>🤖 Programa al robot (como en el taller 2)</h3>
-      <p>Arma la lista de órdenes para que el robot 🤖 llegue a la estrella ⭐ sin chocar con las rocas 🪨. Luego toca ▶.</p>
-      <div class="row" id="rb-levels"></div>
-      <div class="board" id="rb-board"></div>
-      <div class="row arrows"><button onclick="rbAdd('↑')" aria-label="Arriba">↑</button><button onclick="rbAdd('↓')" aria-label="Abajo">↓</button><button onclick="rbAdd('←')" aria-label="Izquierda">←</button><button onclick="rbAdd('→')" aria-label="Derecha">→</button></div>
-      <div class="prog" id="rb-prog"></div>
-      <div class="row"><button id="rb-run" onclick="rbRun()">▶ Ejecutar</button><button onclick="rbUndo()">↩ Borrar última</button><button onclick="rbReset()">🧹 Limpiar</button></div>
-      <div class="msg" id="rb-msg" aria-live="polite"></div>
+<main id="main">
+  <section class="view" id="v-home" aria-labelledby="h-home">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">Albergue Mi Nuevo Hogar Jesús y Josué</span>
+        <h1 id="h-home">Aprender y jugar, <em>a cualquier edad</em></h1>
+        <p class="lead">Profesiones para descubrir, juegos de lógica y memoria, y una guía sencilla para usar el celular. Hecho para los niños, adolescentes y adultos mayores del albergue.</p>
+        <div class="cta">
+          <button class="btn primary" data-go="ninos"><svg class="i"><use href="#i-smile"/></svg>Niños y adolescentes</button>
+          <button class="btn" data-go="mayores"><svg class="i"><use href="#i-heart"/></svg>Adultos mayores</button>
+        </div>
+        <div class="stats" id="stats"></div>
+      </div>
+      <svg class="art" viewBox="0 0 400 320" role="img" aria-label="Ilustración de bloques de juego">
+        <rect x="20" y="150" width="120" height="120" rx="26" fill="var(--kids-soft)"/>
+        <rect x="150" y="60" width="120" height="120" rx="26" fill="var(--adult-soft)"/>
+        <rect x="150" y="190" width="120" height="80" rx="26" fill="var(--brand-soft)"/>
+        <rect x="280" y="120" width="100" height="150" rx="26" fill="var(--tutor-soft)"/>
+        <rect x="40" y="40" width="90" height="90" rx="22" fill="var(--shared-soft)"/>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="var(--kids)" stroke-width="2.2" transform="translate(44 174) scale(3)"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 4h6M9 13v2M15 13v2"/></g>
+          <g stroke="var(--adult)" stroke-width="2.2" transform="translate(174 84) scale(3)"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></g>
+          <g stroke="var(--brand)" stroke-width="2.6" transform="translate(186 206) scale(2)"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></g>
+          <g stroke="var(--tutor)" stroke-width="2.2" transform="translate(294 159) scale(3)"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></g>
+          <g stroke="var(--shared)" stroke-width="2.4" transform="translate(55 55) scale(2.5)"><path d="M7 20h10M12 20v-9M12 11c0-3-2-6-7-6 0 4 3 6 7 6zM12 11c0-3 2-5 6-5 0 3-2 5-6 5z"/></g>
+        </g>
+      </svg>
     </div>
-  </div>
-  <div id="n-mem" class="pane" hidden>
-    <div class="card"><h3>🃏 Memoria de profesiones</h3><p>Encuentra las parejas. Cada pareja te presenta una profesión.</p>
-      <div class="row" id="mem-k-lv"></div>
-      <div class="mem kid" id="mem-k"></div><div class="msg" id="mem-k-msg" aria-live="polite"></div></div>
-  </div>
-  <div id="n-triv" class="pane" hidden><div class="card q" id="trivia"></div></div>
-  <div id="n-rec" class="pane" hidden>
-    <p>Estas páginas son gratuitas. Necesitan internet y es mejor usarlas con el tutor.</p>
-    <div class="grid" id="rec-n"></div>
-  </div>
-</section>
+    <div class="sectitle"><h2>¿Quién lo va a usar?</h2><p>Elige un espacio. Cada uno tiene sus propias actividades.</p></div>
+    <div class="aud" id="aud"></div>
+  </section>
 
-<!-- ===================== ADULTOS MAYORES ===================== -->
-<section id="mayores" class="sec adultmode">
-  <h2>👵 Adultos mayores</h2>
-  <div class="tabs" data-sec="mayores">
-    <button data-t="a-cel" class="on">📱 Guía del celular</button>
-    <button data-t="a-mem">🃏 Memoria</button>
-    <button data-t="a-ref">💬 Refranes</button>
-    <button data-t="a-cue">🧮 Cuentas del mercado</button>
-    <button data-t="a-ofi">🧑‍🌾 Mi oficio</button>
-    <button data-t="a-rec">🌐 Aprender más</button>
-  </div>
-  <div id="a-cel" class="pane"><div class="grid" id="celular"></div></div>
-  <div id="a-mem" class="pane" hidden>
-    <div class="card"><h3>🃏 Juego de memoria</h3><p>Toque dos cartas. Si son iguales, se quedan descubiertas. Tómese su tiempo: no hay apuro.</p>
-      <div class="row" id="mem-a-lv"></div>
-      <div class="mem c3" id="mem-a"></div><div class="msg" id="mem-a-msg" aria-live="polite"></div></div>
-  </div>
-  <div id="a-ref" class="pane" hidden><div class="card q" id="refranes"></div></div>
-  <div id="a-cue" class="pane" hidden><div class="card q" id="cuentas"></div></div>
-  <div id="a-ofi" class="pane" hidden>
-    <p>Usted sabe mucho. Cuéntele a los niños su oficio con estas preguntas: ellos buscarán qué profesión de hoy se le parece.</p>
-    <div class="grid" id="oficios"></div>
-  </div>
-  <div id="a-rec" class="pane" hidden><div class="grid" id="rec-a"></div></div>
-</section>
-
-<!-- ===================== JUNTOS ===================== -->
-<section id="juntos" class="sec">
-  <h2>🤝 Juntos: niños y adultos mayores</h2>
-  <p>En el albergue conviven niños y adultos mayores. Estas actividades los juntan para aprender unos de otros.</p>
-  <div class="grid" id="juntos-g"></div>
-</section>
-
-<!-- ===================== TUTOR ===================== -->
-<section id="tutor" class="sec">
-  <h2>📋 Para el tutor del albergue</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>⏱️ Temporizador de sesión</h3>
-      <p class="note">Las sesiones recomendadas son de 15 a 20 minutos. Al terminar, suena un aviso suave.</p>
-      <div class="timer" id="tm" aria-live="polite">20:00</div>
-      <div class="row" style="justify-content:center"><button onclick="tmStart(15)">15 min</button><button onclick="tmStart(20)">20 min</button><button onclick="tmStop()">⏹ Detener</button></div>
+  <section class="view c-kids" id="v-ninos" aria-labelledby="h-ninos">
+    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-smile"/></svg></span><div><h2 id="h-ninos">Niños y adolescentes</h2><p>Descubre profesiones y pon a prueba tu lógica.</p></div></div>
+    <div class="tabs" role="tablist" data-view="ninos">
+      <button role="tab" data-tab="profesiones"><svg class="i"><use href="#i-book"/></svg>Profesiones</button>
+      <button role="tab" data-tab="test"><svg class="i"><use href="#i-compass"/></svg>¿Qué me gusta?</button>
+      <button role="tab" data-tab="robot"><svg class="i"><use href="#i-bot"/></svg>Programa al robot</button>
+      <button role="tab" data-tab="memoria"><svg class="i"><use href="#i-grid"/></svg>Memoria</button>
+      <button role="tab" data-tab="trivia"><svg class="i"><use href="#i-help"/></svg>Trivia STEAM</button>
+      <button role="tab" data-tab="recursos"><svg class="i"><use href="#i-globe"/></svg>Sigue aprendiendo</button>
     </div>
-    <div class="card">
-      <h3>📲 Usarlo sin internet</h3>
-      <p>Abra el kit una vez con internet y toque <b>📲 Instalar</b> (arriba). En iPhone: botón «Compartir» → «Agregar a inicio».</p>
-      <p>Después se abre desde la pantalla del celular como una app, incluso sin internet (salvo las páginas de «Sigue aprendiendo»).</p>
-      <p class="note" id="sw-state"></p>
+    <div class="pane" data-pane="profesiones">
+      <div class="toolbar">
+        <label class="search"><svg class="i"><use href="#i-search"/></svg><span class="sr">Buscar profesión</span><input id="q" type="search" placeholder="Busca por nombre o tema: robots, dibujo, salud…" autocomplete="off"></label>
+        <div class="chips" id="chips"></div>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div class="grid" id="cat"></div>
     </div>
-  </div>
-  <h3>Uso seguro</h3>
-  <div class="card"><ul class="steps" id="tutor-l"></ul></div>
-  <h3>Relación con los talleres</h3>
-  <div class="grid" id="talleres"></div>
-</section>
+    <div class="pane" data-pane="test" hidden><div class="panel qwrap" id="test"></div></div>
+    <div class="pane" data-pane="robot" hidden>
+      <div class="panel">
+        <h3>Programa al robot</h3>
+        <p class="sub">Arma una secuencia de movimientos para llevar al robot hasta la estrella sin pasar por las rocas. Es lo mismo que hicimos en el taller de lógica.</p>
+        <div class="robot">
+          <div>
+            <p class="label">Nivel</p>
+            <div class="levels" id="levels"></div>
+            <div class="board" id="board" aria-label="Tablero del robot"></div>
+          </div>
+          <div>
+            <p class="label">Agrega movimientos</p>
+            <div class="pad">
+              <button class="up" data-mv="U" aria-label="Arriba"><svg class="i"><use href="#i-up"/></svg></button>
+              <button class="lf" data-mv="L" aria-label="Izquierda"><svg class="i"><use href="#i-lf"/></svg></button>
+              <button class="dn" data-mv="D" aria-label="Abajo"><svg class="i"><use href="#i-dn"/></svg></button>
+              <button class="rt" data-mv="R" aria-label="Derecha"><svg class="i"><use href="#i-rt"/></svg></button>
+            </div>
+            <p class="label">Tu programa</p>
+            <div class="prog" id="prog" aria-live="polite"></div>
+            <div class="row" style="margin-top:12px">
+              <button class="btn primary" id="rb-run"><svg class="i"><use href="#i-play"/></svg>Ejecutar</button>
+              <button class="btn" id="rb-undo"><svg class="i"><use href="#i-undo"/></svg>Deshacer</button>
+              <button class="btn ghost" id="rb-clear"><svg class="i"><use href="#i-trash"/></svg>Limpiar</button>
+            </div>
+            <p class="status" id="rb-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pane" data-pane="memoria" hidden>
+      <div class="panel">
+        <h3>Memoria de profesiones</h3><p class="sub">Voltea dos cartas. Si son iguales, conoces una profesión.</p>
+        <div class="row" style="margin-top:14px" id="mk-ctl"></div>
+        <div class="mem" id="mk"></div>
+        <div class="mstat" id="mk-stat" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="pane" data-pane="trivia" hidden><div class="panel qwrap" id="trivia"></div></div>
+    <div class="pane" data-pane="recursos" hidden>
+      <p class="sub" style="margin:0 0 12px">Páginas gratuitas para seguir practicando. Necesitan internet; úsalas con el tutor.</p>
+      <div class="grid" id="rec-n"></div>
+    </div>
+  </section>
+
+  <section class="view c-adult" id="v-mayores" aria-labelledby="h-mayores">
+    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-heart"/></svg></span><div><h2 id="h-mayores">Adultos mayores</h2><p>Letra grande, pasos claros y juegos para mantener la mente activa.</p></div></div>
+    <div class="tabs" role="tablist" data-view="mayores">
+      <button role="tab" data-tab="celular"><svg class="i"><use href="#i-phone"/></svg>Guía del celular</button>
+      <button role="tab" data-tab="memoria"><svg class="i"><use href="#i-grid"/></svg>Memoria</button>
+      <button role="tab" data-tab="refranes"><svg class="i"><use href="#i-msg"/></svg>Refranes</button>
+      <button role="tab" data-tab="cuentas"><svg class="i"><use href="#i-calc"/></svg>Cuentas del mercado</button>
+      <button role="tab" data-tab="oficio"><svg class="i"><use href="#i-brief"/></svg>Mi oficio</button>
+      <button role="tab" data-tab="recursos"><svg class="i"><use href="#i-globe"/></svg>Aprender más</button>
+    </div>
+    <div class="pane" data-pane="celular"><div id="cel"></div></div>
+    <div class="pane" data-pane="memoria" hidden>
+      <div class="panel">
+        <h3>Juego de memoria</h3><p class="sub">Toque dos cartas. Si dicen lo mismo, quedan descubiertas. No hay límite de tiempo.</p>
+        <div class="row" style="margin-top:14px" id="ma-ctl"></div>
+        <div class="mem c3 words" id="ma"></div>
+        <div class="mstat" id="ma-stat" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="pane" data-pane="refranes" hidden><div class="panel qwrap" id="refranes"></div></div>
+    <div class="pane" data-pane="cuentas" hidden><div class="panel qwrap" id="cuentas"></div></div>
+    <div class="pane" data-pane="oficio" hidden>
+      <p class="sub" style="margin:0 0 12px">Su experiencia también enseña. Elija su oficio y cuénteselo a los niños con estas preguntas; ellos buscarán en el catálogo la profesión de hoy que más se parece.</p>
+      <div class="grid" id="ofi"></div>
+    </div>
+    <div class="pane" data-pane="recursos" hidden><div class="grid" id="rec-a"></div></div>
+  </section>
+
+  <section class="view c-shared" id="v-juntos" aria-labelledby="h-juntos">
+    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-users"/></svg></span><div><h2 id="h-juntos">Actividades compartidas</h2><p>En el albergue conviven niños y adultos mayores. Estas propuestas los juntan para aprender unos de otros.</p></div></div>
+    <div class="grid" id="jun"></div>
+  </section>
+
+  <section class="view c-tutor" id="v-tutor" aria-labelledby="h-tutor">
+    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-clip"/></svg></span><div><h2 id="h-tutor">Para el tutor</h2><p>Herramientas para organizar sesiones cortas y seguras.</p></div></div>
+    <div class="two">
+      <div class="panel">
+        <h3>Temporizador de sesión</h3>
+        <p class="sub">Se recomiendan sesiones de 15 a 20 minutos. Al terminar suena un aviso suave.</p>
+        <div class="ring" id="ring"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="bgc" cx="100" cy="100" r="88"/><circle class="fgc" id="ring-fg" cx="100" cy="100" r="88" stroke-dasharray="553" stroke-dashoffset="0"/></svg><div class="t"><b id="tm">20:00</b><span id="tm-l">Listo para empezar</span></div></div>
+        <div class="row" style="justify-content:center">
+          <button class="btn" data-tm="10">10 min</button><button class="btn" data-tm="15">15 min</button><button class="btn primary" data-tm="20">20 min</button><button class="btn ghost" id="tm-stop">Detener</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Uso sin internet</h3>
+        <p class="sub">Abra el kit una vez con conexión y luego instálelo:</p>
+        <ul class="checks">
+          <li><svg class="i"><use href="#i-check"/></svg><span><b>Android:</b> botón de instalar (arriba) o menú ⋮ del navegador → «Agregar a la pantalla principal».</span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span><b>iPhone:</b> botón Compartir → «Agregar a inicio».</span></li>
+          <li><svg class="i"><use href="#i-check"/></svg><span>Se abre como una aplicación y funciona sin conexión, salvo las páginas externas de «Sigue aprendiendo».</span></li>
+        </ul>
+        <p class="sub" id="sw" style="margin-top:12px"></p>
+      </div>
+    </div>
+    <div class="panel"><h3>Uso seguro</h3><ul class="checks" id="safe"></ul></div>
+    <div class="panel"><h3>Relación con los talleres</h3><p class="sub">Cada taller del proyecto se conecta con profesiones del catálogo.</p><div style="overflow-x:auto;margin-top:10px"><table class="map" id="map"></table></div></div>
+  </section>
 </main>
-<footer>Kit digital del proyecto «Aprende Jugando» · Gestión de Proyectos 2026-2 · Universidad de Lima · ODS 4: Educación de calidad</footer>
-<div class="toast" id="toast" role="status"></div>
+
+<footer><span>Aprende Jugando · Gestión de Proyectos 2026-2 · Universidad de Lima</span><span>ODS 4 · Educación de calidad</span></footer>
+<nav class="bottomnav" aria-label="Secciones"></nav>
+<dialog id="dlg" aria-labelledby="dlg-t"><div id="dlg-c"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const D = {"perfiles": [["videojuegos", "🎮", "Diseñador/a de videojuegos", "Inventa juegos: piensa la historia, los personajes, las reglas y cómo se gana. Prueba el juego muchas veces hasta que sea divertido.", "Diseño de videojuegos, Ingeniería de Software o Diseño Digital (4 a 5 años). También hay cursos técnicos cortos.", "Antes de programar un videojuego, muchos equipos lo prueban en papel, ¡como el juego de mesa que hicimos en el taller!", ["crear", "tecno"], "1"], ["grafico", "🎨", "Diseñador/a gráfico", "Crea afiches, logos, portadas de libros y dibujos para que un mensaje se entienda con imágenes y colores.", "Diseño Gráfico o Comunicación Visual (carrera técnica de 3 años o universitaria de 5 años).", "Las señales de tránsito y los íconos del celular los dibujó un diseñador para que todos los entiendan sin leer.", ["crear"], "1"], ["docente", "📚", "Docente", "Enseña a niños, jóvenes o adultos. Prepara clases, juegos y actividades para que todos aprendan.", "Educación (5 años) en una universidad o un instituto pedagógico. Se elige el nivel: inicial, primaria o secundaria.", "Los mejores profesores usan juegos para enseñar. ¡Aprender jugando funciona!", ["ayudar", "crear"], "1"], ["programador", "💻", "Programador/a", "Escribe instrucciones (código) para que las computadoras y los celulares hagan cosas: apps, páginas web y juegos.", "Computación e Informática (técnica, 3 años) o Ingeniería de Software (5 años).", "Un programa es como la lista de órdenes que le dimos al «robot» en el taller 2: si hay un error, se busca y se corrige.", ["logica", "tecno"], "2"], ["sistemas", "🖥️", "Ingeniero/a de sistemas", "Diseña sistemas para que una empresa, un hospital o un colegio trabaje mejor con tecnología.", "Ingeniería de Sistemas (5 años).", "El sistema que organiza las citas de un hospital lo diseñó un ingeniero de sistemas.", ["logica", "tecno", "liderar"], "2"], ["datos", "📊", "Analista de datos", "Ordena muchos números y los convierte en gráficos para descubrir cosas y ayudar a tomar decisiones.", "Estadística, Ingeniería de Sistemas o Economía (5 años).", "Gracias a los datos, las apps de música adivinan qué canción te puede gustar.", ["logica"], "2"], ["mecatronico", "🤖", "Ingeniero/a mecatrónico", "Junta mecánica, electrónica y computación para construir máquinas inteligentes, como brazos robóticos.", "Ingeniería Mecatrónica (5 años).", "Los robots usan sensores como nosotros usamos los sentidos: cámaras como ojos y micrófonos como oídos.", ["construir", "tecno"], "3"], ["biomedico", "🩺", "Ingeniero/a biomédico", "Crea y cuida los equipos que usan los médicos, como monitores, prótesis y máquinas de los hospitales.", "Ingeniería Biomédica (5 años).", "Muchas máquinas que ves en el hospital fueron diseñadas por ingenieros biomédicos junto con médicos.", ["construir", "ayudar", "ciencia"], "3"], ["robotica", "🔧", "Técnico/a en robótica", "Arma, prueba y repara robots y máquinas automáticas en fábricas y empresas.", "Carrera técnica de Electrónica o Mecatrónica (3 años) en un instituto.", "Hay robots que ayudan a armar autos y otros que limpian la casa solos.", ["construir", "tecno"], "3"], ["emprendedor", "💡", "Emprendedor/a", "Tiene una idea para resolver un problema, la convierte en negocio y la hace crecer con un equipo.", "Cualquier carrera sirve; ayuda estudiar Administración o Ingeniería. ¡Se puede empezar desde pequeño!", "Muchas empresas grandes empezaron en una casa o un garaje con una sola idea.", ["liderar", "crear"], "4"], ["industrial", "🏭", "Ingeniero/a industrial", "Mejora la forma de hacer las cosas: que una fábrica o un servicio sea más rápido, ordenado y gaste menos.", "Ingeniería Industrial (5 años).", "Un ingeniero industrial puede calcular la mejor forma de organizar una cocina para que la comida salga más rápido.", ["logica", "liderar"], "4"], ["administrador", "📋", "Administrador/a", "Organiza a las personas, el dinero y las tareas de una empresa para que todo funcione bien.", "Administración de Empresas (5 años) o una carrera técnica en Administración (3 años).", "Hasta un albergue, un hospital o un equipo de fútbol necesitan alguien que los administre.", ["liderar", "ayudar"], "4"], ["publicista", "📣", "Publicista", "Crea campañas y anuncios para que la gente conozca un producto o una buena causa.", "Publicidad o Comunicación (5 años).", "La campaña de libros de este proyecto usó ideas de publicidad para que más personas donaran.", ["crear", "liderar"], "4"], ["enfermero", "💉", "Enfermero/a", "Cuida a los pacientes todos los días, los acompaña, les da sus medicinas y está atento a cómo se sienten.", "Enfermería (5 años) o Técnico en Enfermería (3 años).", "Las enfermeras y enfermeros son quienes más tiempo pasan con los pacientes en el hospital.", ["ayudar", "ciencia"], ""], ["biologo", "🔬", "Biólogo/a", "Estudia los seres vivos: plantas, animales y microbios. Algunos investigan para encontrar nuevas medicinas.", "Biología (5 años).", "En una gota de agua de río puede haber miles de seres vivos que solo se ven con microscopio.", ["ciencia", "naturaleza"], ""], ["agronomo", "🌱", "Ingeniero/a agrónomo", "Ayuda a que los cultivos crezcan sanos y den más alimentos, cuidando la tierra y el agua.", "Agronomía (5 años) o una carrera técnica agropecuaria (3 años).", "El Perú tiene más de 3,000 variedades de papa. ¡Los agrónomos ayudan a conservarlas!", ["naturaleza", "ciencia", "construir"], ""]], "talleres": [["1", "Juegos sin pantalla", "Arte y Matemática", ["videojuegos", "grafico", "docente"]], ["2", "Lógica y algoritmos desenchufados", "Tecnología y Matemática", ["programador", "sistemas", "datos"]], ["3", "Robótica conceptual", "Ciencia, Ingeniería y Arte", ["mecatronico", "biomedico", "robotica"]], ["4", "Aprende a Empezar", "Ingeniería, Matemática y Arte", ["emprendedor", "industrial", "administrador", "publicista"]]], "intereses": {"crear": "Crear y dibujar", "logica": "Resolver acertijos y números", "construir": "Construir y armar cosas", "ayudar": "Ayudar y cuidar a las personas", "tecno": "La tecnología", "liderar": "Organizar y liderar", "ciencia": "Descubrir cómo funcionan las cosas", "naturaleza": "La naturaleza, plantas y animales"}, "test": [["En tu tiempo libre prefieres…", [["🖍️ Dibujar o pintar", "crear"], ["🧩 Armar rompecabezas", "logica"], ["🧱 Construir con bloques o cartón", "construir"], ["🤝 Conversar y ayudar a otros", "ayudar"]]], ["En el taller, lo que más te gustó fue…", [["🎲 Inventar las reglas del juego", "crear"], ["🤖 Dar órdenes al «robot»", "logica"], ["📦 Armar el robot de cartón", "construir"], ["💡 Crear una idea de negocio", "liderar"]]], ["Si tuvieras un superpoder, sería…", [["🔬 Ver cosas diminutas", "ciencia"], ["🌿 Hablar con plantas y animales", "naturaleza"], ["📱 Entender cualquier aparato", "tecno"], ["❤️ Curar a las personas", "ayudar"]]], ["En un trabajo en grupo, tú…", [["📣 Organizo al equipo", "liderar"], ["🎨 Hago el afiche bonito", "crear"], ["🧮 Hago las cuentas", "logica"], ["🔧 Armo las piezas", "construir"]]], ["¿Qué video verías primero?", [["🚀 Cómo funciona un cohete", "ciencia"], ["🎮 Cómo se hace un videojuego", "tecno"], ["🐢 Animales de la Amazonía", "naturaleza"], ["🧑‍🍳 Cómo empezar un negocio de postres", "liderar"]]], ["¿Qué regalo te gustaría más?", [["🖌️ Una caja de colores", "crear"], ["🔭 Un microscopio o una lupa", "ciencia"], ["🪴 Semillas para sembrar", "naturaleza"], ["🔌 Un kit de robótica", "construir"]]], ["¿Cuál de estas frases va más contigo?", [["«Me gusta que todo esté en orden»", "logica"], ["«Me gusta que todos estén bien»", "ayudar"], ["«Me gusta probar aparatos nuevos»", "tecno"], ["«Me gusta inventar cosas nuevas»", "crear"]]], ["Cuando sea grande quiero…", [["🏥 Cuidar a las personas", "ayudar"], ["🏗️ Construir cosas grandes", "construir"], ["🌎 Cuidar el planeta", "naturaleza"], ["👩‍💼 Tener mi propio proyecto", "liderar"]]]], "trivia": [["¿Qué parte de un robot funciona como nuestros ojos?", ["La batería", "La cámara (sensor)", "Las ruedas"], 1], ["Si al «robot» le das una orden equivocada, ¿qué hace un programador?", ["Se rinde", "Busca el error y lo corrige", "Apaga todo"], 1], ["¿Cuántas variedades de papa hay en el Perú, más o menos?", ["10", "300", "Más de 3,000"], 2], ["¿Qué letra de STEAM significa Arte?", ["S", "A", "M"], 1], ["¿Qué profesional cuida los equipos del hospital?", ["Ingeniero/a biomédico", "Publicista", "Agrónomo/a"], 0], ["Un dado tiene 6 caras. ¿Cuánto suman todas?", ["18", "21", "24"], 1], ["¿Quién crea campañas para que la gente done libros?", ["Publicista", "Biólogo/a", "Técnico/a en robótica"], 0], ["¿Qué necesita una planta para crecer?", ["Solo oscuridad", "Agua, luz y tierra", "Solo agua salada"], 1]], "rec_n": [["Khan Academy en español", "https://es.khanacademy.org", "Matemática y ciencias con videos y ejercicios, gratis."], ["Code.org – La Hora del Código", "https://code.org", "Aprende a programar con juegos de bloques."], ["Scratch", "https://scratch.mit.edu", "Crea tus propios juegos y animaciones."], ["Simulaciones PhET", "https://phet.colorado.edu/es/", "Experimentos de ciencia y matemática en el celular."], ["PerúEduca", "https://www.perueduca.pe", "Recursos educativos del Ministerio de Educación."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros y materiales gratis de la Biblioteca Nacional del Perú."]], "rec_a": [["GCFGlobal en español", "https://edu.gcfglobal.org/es/", "Cursos gratis y sencillos para aprender a usar el celular, WhatsApp e internet."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros, revistas y fotos antiguas del Perú, gratis."], ["Khan Academy en español", "https://es.khanacademy.org", "Para aprender o repasar matemática a su ritmo."]], "celular": [["📹", "Hacer una videollamada por WhatsApp", ["Abra WhatsApp (el ícono verde con un teléfono).", "Toque el nombre de su familiar en la lista de chats.", "Arriba a la derecha toque el ícono de la cámara 📹.", "Espere a que conteste. Para colgar, toque el botón rojo."]], ["🎙️", "Enviar un mensaje de voz", ["Abra el chat de la persona.", "Mantenga apretado el micrófono 🎙️ (abajo a la derecha) mientras habla.", "Suelte el dedo cuando termine: el audio se envía solo.", "Si se equivocó, deslice el dedo a la izquierda antes de soltar para cancelar."]], ["🔠", "Agrandar la letra del celular", ["Abra «Ajustes» o «Configuración» (el ícono de engranaje ⚙️).", "Busque «Pantalla» y luego «Tamaño de fuente» o «Tamaño del texto».", "Mueva la barra hacia la derecha hasta que lea cómodo.", "Pida ayuda al tutor si no encuentra la opción: cada celular es un poco distinto."]], ["📷", "Ver y enviar fotos", ["Abra la «Galería» o «Fotos».", "Toque la foto que quiere enviar.", "Toque «Compartir» y elija WhatsApp.", "Elija a la persona y toque el botón verde de enviar ➤."]], ["🛡️", "Cuidarse de estafas", ["Nunca comparta códigos que le lleguen por mensaje (aunque digan que es del banco o de un familiar).", "Si alguien le pide dinero por mensaje, llame primero a su familiar para confirmar.", "No abra enlaces de números que no conoce.", "Ante cualquier duda, pregunte al tutor o a un familiar."]]], "refranes": [["Al que madruga…", ["…Dios lo ayuda.", "…le da sueño.", "…se le enfría el café."], 0], ["Más vale tarde…", ["…que temprano.", "…que nunca.", "…que mañana."], 1], ["Camarón que se duerme…", ["…se lo lleva la corriente.", "…despierta tarde.", "…sueña bonito."], 0], ["En casa de herrero…", ["…martillo de oro.", "…cuchillo de palo.", "…mucho ruido."], 1], ["Dime con quién andas…", ["…y te diré quién eres.", "…y te diré a dónde vas.", "…y te invito un café."], 0], ["No hay mal…", ["…que dure cien años.", "…que por bien no venga.", "…sin remedio."], 1], ["Poco a poco…", ["…se hace tarde.", "…se llena la olla.", "…se llega lejos."], 2], ["Agua que no has de beber…", ["…déjala correr.", "…guárdala bien.", "…dásela al vecino."], 0]], "oficios": [["🌾", "Agricultor/a", "¿Qué sembraba? ¿En qué mes se siembra y se cosecha? ¿Qué secreto tiene para que la planta crezca bien?", "Ingeniero/a agrónomo, biólogo/a"], ["🧶", "Tejedor/a", "¿Quién le enseñó a tejer? ¿Qué dibujos o colores usa? ¿Cuánto demora una prenda?", "Diseñador/a gráfico, diseñador/a de modas"], ["🪚", "Carpintero/a o albañil", "¿Qué fue lo más difícil que construyó? ¿Cómo mide sin equivocarse?", "Ingeniero/a civil, ingeniero/a mecatrónico"], ["🍲", "Cocinero/a", "¿Cuál es su plato especial? ¿Cómo se calculan las cantidades para muchas personas?", "Chef, ingeniero/a de alimentos, emprendedor/a"], ["🐑", "Pastor/a o criador/a de animales", "¿Cómo sabe si un animal está sano? ¿Qué animales cuidaba?", "Veterinario/a, zootecnista, biólogo/a"], ["🛒", "Comerciante", "¿Qué vendía? ¿Cómo hacía las cuentas y atraía a sus clientes?", "Administrador/a, emprendedor/a, publicista"], ["🎻", "Músico/a o danzante", "¿Qué música o danza es típica de su pueblo? ¿Cómo la aprendió?", "Músico/a, docente de arte, productor/a cultural"], ["🧑‍🏫", "Otro oficio", "Cuéntenos cuál fue su trabajo y qué fue lo que más le gustó de él.", "Lo buscamos juntos en el catálogo"]], "juntos": [["👵👦", "Mi oficio, mi historia", "Un adulto mayor cuenta su oficio con la ficha de preguntas. Los niños buscan en el catálogo qué profesión de hoy se parece. 20 minutos."], ["🃏", "Memoria por parejas", "Un niño y un adulto mayor juegan juntos el juego de memoria: el niño toca, el adulto recuerda dónde estaba cada carta."], ["📖", "Lectura compartida", "Con los libros donados de la campaña, un niño lee en voz alta y el adulto mayor cuenta si conoce una historia parecida de su pueblo."], ["📹", "El nieto profesor", "Un niño le enseña a un adulto mayor a hacer una videollamada o enviar un audio con la guía del celular. ¡El niño es el docente!"]], "tutor": ["Use el kit en sesiones cortas de 15 a 20 minutos, siempre con un tutor del albergue presente.", "Limpie el celular o la computadora con alcohol antes y después de cada uso, y pida lavado de manos (protocolo de salud del proyecto).", "Todas las actividades se pueden hacer sentados o desde la cama.", "El kit no guarda nombres, fotos ni respuestas: al cerrarlo, todo se borra.", "Los juegos y el catálogo funcionan sin internet. Solo los «recursos gratuitos» necesitan internet.", "Si un niño o un adulto mayor está cansado, se detiene la actividad. No es una evaluación, es para disfrutar."]};
-const $ = id => document.getElementById(id);
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const strip = s => String(s).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu, '').replace(/\s+/g, ' ').trim();
+const ico = (n, cls = 'i') => `<svg class="${cls}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
-function toast(t){ const el = $('toast'); el.textContent = t; el.style.display = 'block'; clearTimeout(toast.h); toast.h = setTimeout(() => el.style.display = 'none', 2200); }
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch(e){} } };
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('on'), 2400); }
 
-// ---------- voz (lectura en voz alta)
+/* datos */
+const PICON = {videojuegos:'gamepad', grafico:'palette', docente:'grad', programador:'code', sistemas:'monitor', datos:'chart', mecatronico:'cpu', biomedico:'pulse', robotica:'wrench', emprendedor:'bulb', industrial:'factory', administrador:'clip', publicista:'mega', enfermero:'care', biologo:'micro', agronomo:'sprout'};
+const KW = {videojuegos:'juegos videojuegos computadora', grafico:'dibujo dibujar arte diseño colores', docente:'enseñar colegio profesor maestra', programador:'computadora apps código programar', sistemas:'computadora tecnología', datos:'números matemática estadística', mecatronico:'robots robot máquinas', biomedico:'salud hospital medicina máquinas', robotica:'robots robot máquinas reparar', emprendedor:'negocio empresa ideas', industrial:'fábrica organizar', administrador:'empresa organizar', publicista:'comunicación redes anuncios', enfermero:'salud hospital medicina cuidar', biologo:'ciencia animales plantas laboratorio', agronomo:'plantas campo cultivos naturaleza'};
+const P = D.perfiles.map(p => ({id:p[0], name:p[2], what:p[3], study:p[4], fact:p[5], tags:p[6], t:p[7], kw:KW[p[0]] || '', icon:PICON[p[0]] || 'brief'}));
+const byId = Object.fromEntries(P.map(p => [p.id, p]));
+const firstSentence = s => (s.match(/^[^.]*\./) || [s])[0];
+const TALL = D.talleres.map(t => ({n:t[0], name:t[1], areas:t[2], ids:t[3]}));
+
+/* preferencias */
+const root = document.documentElement;
+let userScale = store.get('aj-scale');
+if (userScale !== null) root.dataset.scale = userScale;
+$('#bt-scale').onclick = () => { const n = ((+root.dataset.scale || 0) + 1) % 3; root.dataset.scale = n; userScale = String(n); store.set('aj-scale', n); toast(['Letra normal', 'Letra grande', 'Letra muy grande'][n]); };
+$('#bt-theme').onclick = () => { const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; root.dataset.theme = dark ? 'light' : 'dark'; store.set('aj-theme', root.dataset.theme); };
+if (store.get('aj-theme')) root.dataset.theme = store.get('aj-theme');
+
 const VOZ = 'speechSynthesis' in window;
-let voice = null;
-function pickVoice(){ if (!VOZ) return; const vs = speechSynthesis.getVoices(); voice = vs.find(v => /es[-_](PE|419|MX|US)/i.test(v.lang)) || vs.find(v => /^es/i.test(v.lang)) || null; }
+let voice = null, speakingBtn = null;
+function pickVoice(){ const vs = speechSynthesis.getVoices(); voice = vs.find(v => /es[-_](PE|419|MX|US|CO|AR)/i.test(v.lang)) || vs.find(v => /^es/i.test(v.lang)) || null; }
 if (VOZ){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
-function say(t){
-  if (!VOZ) return;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, ''));
-  u.lang = voice ? voice.lang : 'es-ES'; if (voice) u.voice = voice;
-  u.rate = document.body.classList.contains('grande') ? 0.85 : 0.95;
+function stopVoice(){ if (VOZ) speechSynthesis.cancel(); if (speakingBtn) speakingBtn.classList.remove('on'); speakingBtn = null; }
+function say(t, btn){
+  if (!VOZ || document.body.classList.contains('nosay')) return;
+  const again = btn && btn === speakingBtn; stopVoice(); if (again) return;
+  const u = new SpeechSynthesisUtterance(strip(t)); u.lang = voice ? voice.lang : 'es-ES'; if (voice) u.voice = voice;
+  u.rate = (+root.dataset.scale || 0) > 0 ? .88 : .96;
+  if (btn){ speakingBtn = btn; btn.classList.add('on'); u.onend = u.onerror = () => { btn.classList.remove('on'); if (speakingBtn === btn) speakingBtn = null; }; }
   speechSynthesis.speak(u);
 }
-const sayBtn = t => `<button class="say" data-say="${esc(t)}" aria-label="Escuchar">🔊</button>`;
-document.addEventListener('click', e => { const b = e.target.closest('.say'); if (b){ e.stopPropagation(); say(b.dataset.say); } });
-function setVoice(on){ document.body.classList.toggle('nosay', !on); $('bt-voice').setAttribute('aria-pressed', on); $('bt-voice').textContent = on ? '🔊 Voz' : '🔇 Voz'; store.set('aj-voz', on ? '1' : '0'); if (!on && VOZ) speechSynthesis.cancel(); }
-if (!VOZ){ $('bt-voice').style.display = 'none'; document.body.classList.add('nosay'); } else setVoice(store.get('aj-voz') !== '0');
-$('bt-voice').onclick = () => setVoice(document.body.classList.contains('nosay'));
+const sayBtn = t => `<button class="say" data-say="${esc(strip(t))}">${ico('vol')}Escuchar</button>`;
+document.addEventListener('click', e => { const b = e.target.closest('.say'); if (b){ e.preventDefault(); e.stopPropagation(); say(b.dataset.say, b); } }, true);
+function setVoice(on){ document.body.classList.toggle('nosay', !on); const b = $('#bt-voice'); b.setAttribute('aria-pressed', on); b.innerHTML = ico(on ? 'vol' : 'voloff'); store.set('aj-voz', on ? '1' : '0'); if (!on) stopVoice(); }
+if (!VOZ){ $('#bt-voice').hidden = true; document.body.classList.add('nosay'); } else setVoice(store.get('aj-voz') !== '0');
+$('#bt-voice').onclick = () => { const on = document.body.classList.contains('nosay'); setVoice(on); toast(on ? 'Lectura en voz alta activada' : 'Lectura en voz alta desactivada'); };
 
-// ---------- letra y tema
-function setBig(on){ document.body.classList.toggle('grande', on); $('bt-size').setAttribute('aria-pressed', on); $('bt-size').textContent = on ? '🔠 Letra normal' : '🔠 Letra grande'; }
-$('bt-size').onclick = () => { const on = !document.body.classList.contains('grande'); setBig(on); store.set('aj-big', on ? '1' : '0'); };
-setBig(store.get('aj-big') === '1');
-$('bt-theme').onclick = () => { const r = document.documentElement; const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; r.dataset.theme = dark ? 'light' : 'dark'; store.set('aj-theme', r.dataset.theme); };
-if (store.get('aj-theme')) document.documentElement.dataset.theme = store.get('aj-theme');
+/* navegación */
+const VIEWS = [
+  {id:'home', label:'Inicio', icon:'home'},
+  {id:'ninos', label:'Niños', icon:'smile', cls:'c-kids', title:'Niños y adolescentes', desc:'Conoce 16 profesiones, descubre qué te gusta y pon a prueba tu lógica con juegos.'},
+  {id:'mayores', label:'Mayores', icon:'heart', cls:'c-adult', title:'Adultos mayores', desc:'Guía paso a paso del celular, memoria, refranes y cálculo, con letra grande.'},
+  {id:'juntos', label:'Juntos', icon:'users', cls:'c-shared', title:'Actividades compartidas', desc:'Propuestas para que niños y adultos mayores aprendan unos de otros.'},
+  {id:'tutor', label:'Tutor', icon:'clip', cls:'c-tutor', title:'Para el tutor', desc:'Temporizador de sesión, uso seguro e instalación sin internet.'},
+];
+$('.bottomnav').innerHTML = VIEWS.map(v => `<button data-go="${v.id}">${ico(v.icon)}<span>${v.label}</span></button>`).join('');
+$('.topnav').innerHTML = VIEWS.map(v => `<button data-go="${v.id}">${v.label}</button>`).join('');
+$('#aud').innerHTML = VIEWS.slice(1).map(v => `<button class="audcard ${v.cls}" data-go="${v.id}"><span class="ic">${ico(v.icon)}</span><h3>${v.title}</h3><p>${v.desc}</p><span class="go">Entrar ${ico('chev')}</span></button>`).join('');
+$('#stats').innerHTML = `<span class="stat"><b>${P.length}</b>profesiones</span><span class="stat"><b>7</b>juegos y actividades</span><span class="stat"><b>${ico('wifi')}</b>funciona sin conexión</span>`;
+document.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) go(b.dataset.go, b.dataset.tab); });
 
-// ---------- navegación con el botón «atrás» del celular
-const SECS = ['home','ninos','mayores','juntos','tutor'];
-function show(id){
-  if (!SECS.includes(id)) id = 'home';
-  document.querySelectorAll('.sec').forEach(s => s.classList.toggle('on', s.id === id));
-  if (id === 'mayores' && store.get('aj-big') === null) setBig(true);
-  if (VOZ) speechSynthesis.cancel();
-  window.scrollTo(0, 0);
+function go(view, tab){ const h = '#' + view + (tab ? '/' + tab : ''); if (location.hash !== h) location.hash = h; else route(); }
+function route(){
+  let [view, tab] = location.hash.slice(1).split('/');
+  if (!VIEWS.some(v => v.id === view)) view = 'home';
+  stopVoice();
+  $$('.view').forEach(s => s.classList.toggle('on', s.id === 'v-' + view));
+  $$('.bottomnav [data-go], .topnav [data-go]').forEach(b => b.dataset.go === view ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current'));
+  if (userScale === null) root.dataset.scale = view === 'mayores' ? 1 : 0;
+  const tl = $(`#v-${view} .tabs`);
+  if (tl){
+    const tabs = [...tl.querySelectorAll('[role=tab]')];
+    const cur = tabs.find(t => t.dataset.tab === tab) || tabs[0];
+    tabs.forEach(t => { const on = t === cur; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+    $$(`#v-${view} .pane`).forEach(p => p.hidden = p.dataset.pane !== cur.dataset.tab);
+    tl.scrollLeft = cur.offsetLeft - 8;
+  }
+  window.scrollTo({top:0});
 }
-function go(id){ if (location.hash.slice(1) === id) show(id); else location.hash = id; }
-addEventListener('hashchange', () => show(location.hash.slice(1)));
-show(location.hash.slice(1));
-document.querySelectorAll('.tabs').forEach(tb => tb.addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  tb.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
-  tb.parentElement.querySelectorAll('.pane').forEach(p => p.hidden = p.id !== b.dataset.t);
-  if (VOZ) speechSynthesis.cancel();
-}));
+$$('.tabs').forEach(tl => {
+  tl.addEventListener('click', e => { const t = e.target.closest('[role=tab]'); if (t){ history.replaceState(null, '', '#' + tl.dataset.view + '/' + t.dataset.tab); route(); } });
+  tl.addEventListener('keydown', e => {
+    if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+    const tabs = [...tl.querySelectorAll('[role=tab]')]; const i = tabs.indexOf(document.activeElement);
+    const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.click(); n.focus();
+  });
+});
+addEventListener('hashchange', route);
 
-// ---------- catálogo con buscador
-const byId = Object.fromEntries(D.perfiles.map(p => [p[0], p]));
+/* catálogo */
 const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-function profCard(p){
-  const t = p[7] ? `<span class="tag">Taller ${p[7]}</span>` : '';
-  const txt = `${p[2]}. Qué hace: ${p[3]} Qué estudiar: ${p[4]} ¿Sabías que? ${p[5]}`;
-  return `<div class="card prof"><div class="top"><span class="e">${p[1]}</span>${sayBtn(txt)}</div><h3>${esc(p[2])}</h3>
-  <p><span class="lab">¿Qué hace?</span> ${esc(p[3])}</p><p><span class="lab">¿Qué estudiar?</span> ${esc(p[4])}</p>
-  <p><span class="lab">¿Sabías que…?</span> ${esc(p[5])}</p><div>${t}</div></div>`;
-}
-let catF = 'todos';
+let filt = 'todos';
+const pcard = p => `<button class="pcard a${p.t || 0}" data-prof="${p.id}"><span class="ptile">${ico(p.icon)}</span><span><h4>${esc(p.name)}</h4><p>${esc(firstSentence(p.what))}</p><span class="meta"><span class="tag">${p.t ? 'Taller ' + p.t : 'Más profesiones'}</span></span></span></button>`;
 function renderCat(){
-  $('filtro').querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.f === catF));
-  const q = norm($('buscar').value.trim());
-  let list = catF === 'todos' ? D.perfiles : D.perfiles.filter(p => p[7] === catF);
-  if (q) list = list.filter(p => norm(p.slice(2, 6).join(' ') + ' ' + p[6].map(t => D.intereses[t]).join(' ')).includes(q));
-  $('catalogo').innerHTML = list.map(profCard).join('') || '<p>No encontramos esa profesión. Prueba con otra palabra.</p>';
-  $('cat-count').textContent = `${list.length} ${list.length === 1 ? 'profesión' : 'profesiones'}`;
+  $$('#chips .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === filt));
+  const raw = $('#q').value.trim(), q = norm(raw);
+  let list = filt === 'todos' ? P : P.filter(p => (p.t || '0') === filt);
+  if (q) list = list.filter(p => norm([p.name, p.what, p.study, p.fact, p.kw, ...p.tags.map(t => D.intereses[t])].join(' ')).includes(q));
+  $('#cat').innerHTML = list.map(pcard).join('') || `<div class="empty">No encontramos resultados para «${esc(raw)}». Prueba con otra palabra.</div>`;
+  $('#count').textContent = `${list.length} ${list.length === 1 ? 'profesión' : 'profesiones'}`;
 }
-$('filtro').innerHTML = `<button data-f="todos">Todas</button>` + D.talleres.map(t => `<button data-f="${t[0]}">Taller ${t[0]}</button>`).join('');
-$('filtro').onclick = e => { const b = e.target.closest('button'); if (b){ catF = b.dataset.f; renderCat(); } };
-$('buscar').oninput = renderCat;
+$('#chips').innerHTML = `<button class="chip" data-f="todos">Todas</button>` + TALL.map(t => `<button class="chip" data-f="${t.n}" title="${esc(t.name)}">Taller ${t.n}</button>`).join('') + `<button class="chip" data-f="0">Otras</button>`;
+$('#chips').onclick = e => { const c = e.target.closest('.chip'); if (c){ filt = c.dataset.f; renderCat(); } };
+$('#q').oninput = renderCat;
 renderCat();
 
-// ---------- test ¿Qué me gusta?
-let tI = 0, tS = {}, tH = [];
+const dlg = $('#dlg');
+function openProf(id){
+  const p = byId[id]; const t = TALL.find(x => x.n === p.t);
+  $('#dlg-c').innerHTML = `<div class="dlg-h a${p.t || 0}"><span class="ptile">${ico(p.icon)}</span><div><h3 id="dlg-t">${esc(p.name)}</h3><span class="tag">${t ? 'Taller ' + t.n + ' · ' + esc(t.name) : 'Más profesiones'}</span></div></div>
+    <dl class="dlg-b"><div><dt>Qué hace</dt><dd>${esc(p.what)}</dd></div><div><dt>Qué estudiar</dt><dd>${esc(p.study)}</dd></div><div><dt>Dato curioso</dt><dd>${esc(p.fact)}</dd></div></dl>
+    <div class="dlg-f">${sayBtn(`${p.name}. Qué hace: ${p.what} Qué estudiar: ${p.study} Dato curioso: ${p.fact}`)}<button class="btn primary sm" id="dlg-x">Cerrar</button></div>`;
+  $('#dlg-x').onclick = () => dlg.close();
+  dlg.showModal();
+}
+dlg.addEventListener('close', stopVoice);
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+document.addEventListener('click', e => { const b = e.target.closest('[data-prof]'); if (b) openProf(b.dataset.prof); });
+
+/* test de intereses */
+let tI = 0, tH = [];
 function renderTest(){
-  if (tI >= D.test.length) {
-    const top = Object.entries(tS).sort((a,b) => b[1]-a[1]).slice(0,2).map(x => x[0]);
-    const res = D.perfiles.map(p => [p, p[6].filter(t => top.includes(t)).length]).filter(x => x[1] > 0).sort((a,b) => b[1]-a[1]).slice(0,4).map(x => x[0]);
-    const frase = `Te gusta mucho: ${top.map(t => D.intereses[t]).join(' y ')}.`;
-    $('test').innerHTML = `<div class="qhead"><h3>🎉 ¡Listo!</h3>${sayBtn(frase + ' Estas profesiones podrían gustarte: ' + res.map(p => p[2]).join(', '))}</div>
-      <p>Te gusta mucho: <b>${top.map(t => esc(D.intereses[t])).join('</b> y <b>')}</b>.</p>
-      <p>Estas profesiones podrían gustarte:</p><div class="grid">${res.map(profCard).join('')}</div>
-      <p class="note">No hay respuestas buenas ni malas. Puedes cambiar de idea las veces que quieras. Tus respuestas no se guardan.</p>
-      <button onclick="tI=0;tS={};tH=[];renderTest()">🔄 Hacerlo otra vez</button>`;
+  const el = $('#test');
+  if (tI >= D.test.length){
+    const sc = {}; tH.forEach(t => sc[t] = (sc[t] || 0) + 1);
+    const top = Object.entries(sc).sort((a, b) => b[1] - a[1]); const max = top[0][1];
+    const keys = top.slice(0, 2).map(x => x[0]);
+    const recs = P.map(p => [p, p.tags.filter(t => keys.includes(t)).length]).filter(x => x[1]).sort((a, b) => b[1] - a[1]).slice(0, 4).map(x => x[0]);
+    el.innerHTML = `<div class="result"><div class="qtitle"><div><h3>Tu resultado</h3><p class="sub">Lo que más elegiste en tus respuestas.</p></div>${sayBtn('Lo que más te gusta es ' + keys.map(k => D.intereses[k]).join(' y ') + '. Estas profesiones podrían interesarte: ' + recs.map(p => p.name).join(', '))}</div>
+      <div>${top.slice(0, 3).map(([k, v]) => `<div class="ibar"><span>${esc(D.intereses[k])}</span><span class="t"><i style="width:${v / max * 100}%"></i></span><b>${v}</b></div>`).join('')}</div>
+      <div><p class="sub" style="margin:0 0 10px">Profesiones que podrían interesarte. Tócalas para ver más.</p><div class="grid">${recs.map(pcard).join('')}</div></div>
+      <p class="sub">No hay respuestas buenas ni malas, y puedes repetirlo cuando quieras. Tus respuestas no se guardan.</p>
+      <div class="qnav"><button class="btn" id="t-again">${ico('refresh')}Volver a empezar</button><button class="btn primary" data-go="ninos" data-tab="profesiones">Ver todas las profesiones</button></div></div>`;
+    $('#t-again').onclick = () => { tI = 0; tH = []; renderTest(); };
     return;
   }
   const [q, ops] = D.test[tI];
-  $('test').innerHTML = `<div class="note">Pregunta ${tI+1} de ${D.test.length}</div><div class="bar"><i style="width:${tI/D.test.length*100}%"></i></div>
-    <div class="qhead"><h3>${esc(q)}</h3>${sayBtn(q + ' ' + ops.map(o => o[0]).join('. '))}</div>
-    <div class="opts">${ops.map(o => `<button onclick="tPick('${o[1]}')">${esc(o[0])}</button>`).join('')}</div>
-    ${tI ? '<div class="row"><button onclick="tBack()">← Pregunta anterior</button></div>' : ''}`;
+  el.innerHTML = `<div class="qtop"><span>Pregunta ${tI + 1} de ${D.test.length}</span><span>Test de intereses</span></div><div class="progress"><i style="width:${tI / D.test.length * 100}%"></i></div>
+    <div class="qtitle"><h3>${esc(q)}</h3>${sayBtn(q + ' ' + ops.map(o => strip(o[0])).join('. '))}</div>
+    <div class="opts two">${ops.map((o, i) => `<button class="opt" data-v="${o[1]}"><span class="k">${'ABCD'[i]}</span>${esc(strip(o[0]))}</button>`).join('')}</div>
+    <div class="qnav">${tI ? `<button class="btn ghost" id="t-back">${ico('back')}Anterior</button>` : '<span></span>'}</div>`;
+  el.querySelectorAll('.opt').forEach(b => b.onclick = () => { tH[tI] = b.dataset.v; tH.length = tI + 1; tI++; stopVoice(); renderTest(); });
+  if (tI) $('#t-back').onclick = () => { tI--; renderTest(); };
 }
-function tPick(t){ tS[t] = (tS[t]||0) + 1; tH.push(t); tI++; renderTest(); }
-function tBack(){ const t = tH.pop(); if (t){ tS[t]--; tI--; renderTest(); } }
 renderTest();
 
-// ---------- quiz genérico (trivia, refranes, cuentas)
-function quiz(el, makeData, fin){
-  let i = 0, ok = 0; const order = makeData();
-  function next(){
-    if (i >= order.length){
-      $(el).innerHTML = `<h3>🏆 ¡Muy bien!</h3><p>Acertó ${ok} de ${order.length}. ${esc(fin)}</p><button id="${el}-r">🔄 Jugar otra vez</button>`;
-      $(el+'-r').onclick = () => quiz(el, makeData, fin); return;
+/* cuestionario reutilizable */
+function quiz(sel, make, endText){
+  const el = $(sel); let i = 0, ok = 0; const items = make();
+  function draw(){
+    if (i >= items.length){
+      const msg = ok >= items.length * .75 ? 'Muy buen resultado' : ok >= items.length / 2 ? 'Buen trabajo' : 'Sigue practicando';
+      el.innerHTML = `<div class="result"><div class="score"><span class="n">${ok}/${items.length}</span><div><h3>${msg}</h3><p class="sub">${esc(endText)}</p></div></div><div><button class="btn primary" id="${el.id}-r">${ico('refresh')}Jugar otra vez</button></div></div>`;
+      $(`#${el.id}-r`).onclick = () => quiz(sel, make, endText); return;
     }
-    const [q, ops, c] = order[i];
-    $(el).innerHTML = `<div class="note">${i+1} de ${order.length} · Aciertos: ${ok}</div><div class="bar"><i style="width:${i/order.length*100}%"></i></div>
-      <div class="qhead"><h3>${esc(q)}</h3>${sayBtn(q + ' ' + ops.join('. '))}</div>
-      <div class="opts">${ops.map((o,k) => `<button data-k="${k}">${esc(o)}</button>`).join('')}</div>
-      <div class="msg" aria-live="polite"></div><div class="row"><button class="sig" hidden>Siguiente →</button></div>`;
-    const box = $(el);
-    box.querySelector('.opts').onclick = e => {
-      const b = e.target.closest('button'); if (!b || b.disabled) return;
-      const k = +b.dataset.k, bs = box.querySelectorAll('.opts button');
-      bs.forEach(x => x.disabled = true); bs[c].classList.add('ok');
-      if (k === c){ ok++; box.querySelector('.msg').textContent = '✅ ¡Correcto!'; }
-      else { b.classList.add('no'); box.querySelector('.msg').textContent = '💡 Casi. La respuesta correcta está en verde.'; }
-      const s = box.querySelector('.sig'); s.hidden = false; s.focus();
-      s.onclick = () => { i++; next(); };
-    };
+    const [q, ops, c] = items[i];
+    el.innerHTML = `<div class="qtop"><span>Pregunta ${i + 1} de ${items.length}</span><span>Aciertos: ${ok}</span></div><div class="progress"><i style="width:${i / items.length * 100}%"></i></div>
+      <div class="qtitle"><h3>${esc(q)}</h3>${sayBtn(q + ' ' + ops.join('. '))}</div>
+      <div class="opts">${ops.map((o, k) => `<button class="opt" data-k="${k}"><span class="k">${'ABCD'[k]}</span>${esc(o)}</button>`).join('')}</div>
+      <div class="fb" aria-live="polite"></div><div class="qnav"><span></span><button class="btn primary" id="${el.id}-n" hidden>Siguiente ${ico('chev')}</button></div>`;
+    el.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      const k = +b.dataset.k, all = el.querySelectorAll('.opt'); all.forEach(x => x.disabled = true); all[c].classList.add('ok');
+      const right = k === c; if (right) ok++; else b.classList.add('no');
+      el.querySelector('.fb').innerHTML = `<div class="feedback ${right ? 'ok' : 'no'}">${ico(right ? 'check' : 'x')}${right ? 'Correcto.' : 'No es esa. La respuesta correcta está marcada en verde.'}</div>`;
+      const n = $(`#${el.id}-n`); n.hidden = false; n.focus(); n.onclick = () => { i++; stopVoice(); draw(); };
+    });
   }
-  next();
+  draw();
 }
-const shufOpts = ([q, ops, c]) => { const idx = shuffle(ops.map((_, k) => k)); return [q, idx.map(k => ops[k]), idx.indexOf(c)]; };
-quiz('trivia', () => shuffle(D.trivia).map(shufOpts), 'Cada respuesta te acerca a la ciencia y la tecnología.');
-quiz('refranes', () => shuffle(D.refranes).map(shufOpts), '¿Conoce otro refrán de su tierra? Cuénteselo a los niños.');
-
-// cuentas del mercado (dinero de juego, cálculo mental)
-const PROD = [['papa', 'un kilo de papa', 3], ['arroz', 'un kilo de arroz', 4], ['pan', 'seis panes', 2], ['leche', 'una leche', 5], ['huevos', 'diez huevos', 6], ['azucar', 'un kilo de azúcar', 4], ['fruta', 'un kilo de mandarinas', 3], ['queso', 'un queso fresco', 7]];
+const mix = ([q, ops, c]) => { const ix = shuffle(ops.map((_, k) => k)); return [q, ix.map(k => ops[k]), ix.indexOf(c)]; };
+quiz('#trivia', () => shuffle(D.trivia).map(mix), 'Cada pregunta conecta con lo que vimos en los talleres.');
+quiz('#refranes', () => shuffle(D.refranes).map(mix), '¿Conoce otro refrán de su tierra? Compártalo con los niños.');
+const PROD = [['un kilo de papa', 3], ['un kilo de arroz', 4], ['seis panes', 2], ['una lata de leche', 5], ['diez huevos', 6], ['un kilo de azúcar', 4], ['un kilo de mandarinas', 3], ['un queso fresco', 7]];
 function cuentas(){
-  const out = [];
-  for (let n = 0; n < 8; n++){
+  return Array.from({length:8}, (_, n) => {
     const [a, b] = shuffle(PROD).slice(0, 2); let q, r;
-    if (n % 2 === 0){ q = `Compra ${a[1]} a S/ ${a[2]} y ${b[1]} a S/ ${b[2]}. ¿Cuánto paga en total?`; r = a[2] + b[2]; }
-    else { const t = a[2] + b[2]; const pago = t <= 10 ? 10 : 20; q = `Su compra cuesta S/ ${t} y paga con S/ ${pago}. ¿Cuánto le dan de vuelto?`; r = pago - t; }
-    const ops = shuffle([r, r + 1, Math.max(0, r - 1) === r ? r + 2 : r - 1]);
-    out.push([q, ops.map(x => 'S/ ' + x), ops.indexOf(r)]);
-  }
-  return out;
+    if (n % 2 === 0){ q = `Compra ${a[0]} a S/ ${a[1]} y ${b[0]} a S/ ${b[1]}. ¿Cuánto paga en total?`; r = a[1] + b[1]; }
+    else { const t = a[1] + b[1], pago = t <= 10 ? 10 : 20; q = `La compra cuesta S/ ${t} y paga con un billete de S/ ${pago}. ¿Cuánto recibe de vuelto?`; r = pago - t; }
+    const ops = shuffle([r, r + 1, r > 0 ? r - 1 : r + 2]);
+    return [q, ops.map(x => 'S/ ' + x), ops.indexOf(r)];
+  });
 }
-quiz('cuentas', cuentas, 'Las cuentas mantienen la mente activa. ¡Es dinero de juego!');
+quiz('#cuentas', cuentas, 'Calcular de memoria mantiene la mente activa. Los precios son de práctica.');
 
-// ---------- robot
+/* robot */
 const LV = [
   {s:[0,0], g:[0,3], r:[]},
   {s:[0,0], g:[3,2], r:[[1,0],[1,1]]},
@@ -378,105 +705,119 @@ const LV = [
   {s:[2,0], g:[2,4], r:[[1,2],[2,2],[3,2]]},
   {s:[4,4], g:[0,0], r:[[3,1],[3,2],[3,3],[1,1],[1,2],[1,3],[1,4]]},
 ];
-let lv = 0, prog = [], running = false, done = new Set();
-const MV = {'↑':[-1,0],'↓':[1,0],'←':[0,-1],'→':[0,1]};
-function rbLevels(){ $('rb-levels').innerHTML = LV.map((_, i) => `<button class="${i === lv ? 'on' : ''}" onclick="rbGo(${i})">${done.has(i) ? '⭐' : ''}Nivel ${i+1}</button>`).join(''); }
-function rbGo(i){ if (running) return; lv = i; prog = []; $('rb-msg').textContent = ''; rbLevels(); rbDraw(LV[lv].s); }
-function rbDraw(pos, trail = [], cur = -1){
+const MV = {U:[-1,0,'up'], D:[1,0,'dn'], L:[0,-1,'lf'], R:[0,1,'rt']};
+let lv = 0, prog = [], running = false; const done = new Set();
+function rbLevels(){ $('#levels').innerHTML = LV.map((_, i) => `<button class="lvl${done.has(i) ? ' done' : ''}" aria-current="${i === lv}" data-lv="${i}" aria-label="Nivel ${i + 1}${done.has(i) ? ', superado' : ''}">${i + 1}</button>`).join(''); }
+function rbDraw(pos = LV[lv].s, trail = [], cur = -1, crash = null){
   const L = LV[lv]; let h = '';
   for (let y = 0; y < 5; y++) for (let x = 0; x < 5; x++){
-    let c = '';
-    if (L.r.some(o => o[0]===y && o[1]===x)) c = '🪨';
-    if (L.g[0]===y && L.g[1]===x) c = '⭐';
-    if (pos[0]===y && pos[1]===x) c = '🤖';
-    const tr = trail.some(o => o[0]===y && o[1]===x) ? ' path' : '';
-    h += `<div class="cell${tr}">${c}</div>`;
+    const is = a => a[0] === y && a[1] === x;
+    let c = 'cell', inner = '';
+    if (L.r.some(is)) c += ' rock';
+    if (trail.some(is)) c += ' trail';
+    if (is(L.g)){ c += ' goal'; inner = ico('star'); }
+    if (is(pos)){ c += ' bot'; inner = ico('bot'); }
+    if (crash && is(crash)) c += ' crash';
+    h += `<div class="${c}">${inner}</div>`;
   }
-  $('rb-board').innerHTML = h;
-  $('rb-prog').innerHTML = prog.map((p, i) => `<span class="${i === cur ? 'cur' : ''}">${p}</span>`).join('') || '<span class="note" style="background:none">Toca las flechas para armar el programa</span>';
+  $('#board').innerHTML = h;
+  $('#prog').innerHTML = prog.length ? prog.map((m, i) => `<span class="stepc${i === cur ? ' cur' : ''}">${ico(MV[m][2])}</span>`).join('') : '<span class="ph">Toca las flechas para agregar movimientos.</span>';
 }
-function rbAdd(a){ if (running) return; if (prog.length < 16){ prog.push(a); rbDraw(LV[lv].s); $('rb-msg').textContent = ''; } else toast('Máximo 16 órdenes'); }
-function rbUndo(){ if (running) return; prog.pop(); rbDraw(LV[lv].s); }
-function rbReset(){ if (running) return; prog = []; $('rb-msg').textContent = ''; rbDraw(LV[lv].s); }
-function rbRun(){
-  if (running || !prog.length) return;
-  running = true; $('rb-run').disabled = true;
+function rbStatus(t, k = ''){ const s = $('#rb-status'); s.textContent = t; s.className = 'status ' + k; }
+function rbSet(i){ if (running) return; lv = i; prog = []; rbStatus(''); rbLevels(); rbDraw(); }
+$('#levels').onclick = e => { const b = e.target.closest('[data-lv]'); if (b) rbSet(+b.dataset.lv); };
+$$('.pad [data-mv]').forEach(b => b.onclick = () => { if (running) return; if (prog.length >= 16) return toast('Máximo 16 movimientos'); prog.push(b.dataset.mv); rbStatus(''); rbDraw(); });
+$('#rb-undo').onclick = () => { if (!running){ prog.pop(); rbDraw(); } };
+$('#rb-clear').onclick = () => { if (!running){ prog = []; rbStatus(''); rbDraw(); } };
+$('#rb-run').onclick = () => {
+  if (running) return; if (!prog.length) return rbStatus('Primero agrega movimientos.', 'no');
+  running = true; $('#rb-run').disabled = true;
   const L = LV[lv]; let p = L.s.slice(), k = 0; const trail = [p.slice()];
-  const end = m => { $('rb-msg').textContent = m; running = false; $('rb-run').disabled = false; };
-  const step = () => {
+  const end = (t, cls) => { rbStatus(t, cls); running = false; $('#rb-run').disabled = false; };
+  (function step(){
     if (k >= prog.length){
-      if (p[0]===L.g[0] && p[1]===L.g[1]){
+      if (p[0] === L.g[0] && p[1] === L.g[1]){
         done.add(lv); rbLevels();
-        if (lv < LV.length-1){ end(`🎉 ¡Lo lograste con ${prog.length} órdenes! Pasas al nivel ${lv+2}.`); setTimeout(() => rbGo(lv+1), 1800); }
-        else end('🏆 ¡Terminaste todos los niveles! Así trabaja un programador.');
-      } else end('🔍 El robot no llegó a la estrella. Busca el error en tu programa y corrígelo.');
+        if (lv < LV.length - 1){ end(`Nivel superado con ${prog.length} movimientos.`, 'ok'); setTimeout(() => rbSet(lv + 1), 1600); }
+        else end('Completaste los 5 niveles. Así trabaja un programador: paso a paso y corrigiendo errores.', 'ok');
+      } else end('El robot no llegó a la estrella. Revisa tu programa y corrige el paso que falla.', 'no');
       return;
     }
-    const m = MV[prog[k]], n = [p[0]+m[0], p[1]+m[1]];
-    if (n[0]<0||n[0]>4||n[1]<0||n[1]>4||L.r.some(o => o[0]===n[0]&&o[1]===n[1])){ rbDraw(p, trail, k); end(`💥 ¡Choque en la orden ${k+1}! Busca el error y corrígelo.`); return; }
-    p = n; trail.push(p.slice()); rbDraw(p, trail, k); k++; setTimeout(step, 450);
-  };
-  rbDraw(p, trail); setTimeout(step, 300);
-}
-rbLevels(); rbDraw(LV[0].s);
+    const m = MV[prog[k]], n = [p[0] + m[0], p[1] + m[1]];
+    const inside = n[0] >= 0 && n[0] < 5 && n[1] >= 0 && n[1] < 5;
+    if (!inside || L.r.some(o => o[0] === n[0] && o[1] === n[1])){ rbDraw(p, trail, k, inside ? n : null); return end(`El movimiento ${k + 1} ${inside ? 'choca con una roca' : 'sale del tablero'}. Cámbialo y vuelve a intentarlo.`, 'no'); }
+    p = n; trail.push(p.slice()); rbDraw(p, trail, k); k++; setTimeout(step, 420);
+  })();
+};
+rbLevels(); rbDraw();
 
-// ---------- memoria
-const MEMK = ['videojuegos','programador','mecatronico','biomedico','enfermero','agronomo','grafico','biologo'];
-const MEMA = [['🌽','Choclo'],['🥔','Papa'],['🦙','Llama'],['🌶️','Ají'],['🐟','Pescado'],['🌻','Girasol']];
-const MEMLV = { k: [['Fácil', 6], ['Normal', 8]], a: [['Fácil', 3], ['Normal', 6]] };
-const memSel = { k: 6, a: 6 };
-function memInit(t){
-  const pairs = memSel[t];
-  $('mem-'+t+'-lv').innerHTML = MEMLV[t].map(([n, v]) => `<button class="${v === pairs ? 'on' : ''}" onclick="memSel.${t}=${v};memInit('${t}')">${n} (${v} parejas)</button>`).join('') + `<button onclick="memInit('${t}')">🔄 Otra vez</button>`;
-  const base = (t === 'k' ? shuffle(MEMK).map(id => [byId[id][1], byId[id][2]]) : shuffle(MEMA)).slice(0, pairs);
-  const cards = shuffle(base.concat(base)); let open = [], found = 0, tries = 0;
-  const el = $('mem-'+t), msg = $('mem-'+t+'-msg');
-  el.classList.toggle('c3', t === 'a');
-  el.innerHTML = cards.map((c,i) => `<button data-i="${i}" aria-label="Carta ${i+1}">?</button>`).join(''); msg.textContent = 'Intentos: 0';
-  el.onclick = e => {
-    const b = e.target.closest('button'); if (!b || b.classList.contains('up') || b.classList.contains('done') || open.length === 2) return;
-    const c = cards[+b.dataset.i]; b.textContent = c[0]; b.classList.add('up'); open.push(b);
-    if (open.length === 2){
+/* memoria */
+const MK = ['videojuegos','programador','mecatronico','biomedico','enfermero','agronomo','grafico','biologo'];
+const MA = ['Papa','Choclo','Llama','Ají','Quinua','Cuy','Maíz morado','Lúcuma'];
+function memory(key, o){
+  const st = {pairs: o.levels[0][1]};
+  function init(){
+    $(`#${key}-ctl`).innerHTML = o.levels.map(([n, v]) => `<button class="chip" aria-pressed="${v === st.pairs}" data-p="${v}">${n} · ${v} parejas</button>`).join('') + `<button class="btn sm ghost" data-r>${ico('refresh')}Repartir de nuevo</button>`;
+    $(`#${key}-ctl`).onclick = e => { const c = e.target.closest('[data-p]'); if (c){ st.pairs = +c.dataset.p; init(); } else if (e.target.closest('[data-r]')) init(); };
+    const base = shuffle(o.items).slice(0, st.pairs);
+    const cards = shuffle(base.concat(base)); let open = [], found = 0, tries = 0;
+    const el = $('#' + key);
+    el.style.setProperty('--c', o.color);
+    const back = i => `${ico('grid', 'i back')}`;
+    el.innerHTML = cards.map((c, i) => `<button class="mcard" data-i="${i}" aria-label="Carta ${i + 1}, boca abajo">${back()}</button>`).join('');
+    const stat = () => $(`#${key}-stat`).innerHTML = `<span>Parejas: ${found} de ${base.length}</span><span>Intentos: ${tries}</span>`;
+    stat();
+    el.onclick = e => {
+      const b = e.target.closest('.mcard'); if (!b || b.classList.contains('up') || b.classList.contains('done') || open.length === 2) return;
+      const c = cards[+b.dataset.i]; b.innerHTML = o.face(c); b.classList.add('up'); b.setAttribute('aria-label', o.label(c)); open.push(b);
+      if (open.length < 2) return;
       tries++;
       const [x, y] = open;
-      if (cards[+x.dataset.i][0] === cards[+y.dataset.i][0]){
-        x.classList.add('done'); y.classList.add('done'); open = []; found++;
-        msg.textContent = (t === 'k' ? '✅ ¡Pareja! ' : '✅ ¡Muy bien! ') + c[1] + ` · Intentos: ${tries}`;
-        if (found === base.length){ msg.textContent = `🏆 ¡Encontró todas las parejas en ${tries} intentos!`; say(t === 'k' ? '¡Muy bien! Encontraste todas las parejas.' : '¡Muy bien! Encontró todas las parejas.'); }
-      } else { msg.textContent = `Intentos: ${tries}`; setTimeout(() => { open.forEach(z => { z.textContent = '?'; z.classList.remove('up'); }); open = []; }, t === 'k' ? 900 : 1600); }
-    }
-  };
+      if (cards[+x.dataset.i] === cards[+y.dataset.i]){
+        x.classList.replace('up', 'done'); y.classList.replace('up', 'done'); open = []; found++; stat();
+        if (found === base.length){ toast(`Completado en ${tries} intentos`); say(o.win); }
+      } else { stat(); setTimeout(() => { open.forEach(z => { z.classList.remove('up'); z.innerHTML = back(); z.setAttribute('aria-label', 'Carta boca abajo'); }); open = []; }, o.delay); }
+    };
+  }
+  init();
 }
-memInit('k'); memInit('a');
+memory('mk', {items:MK, levels:[['Fácil', 6], ['Normal', 8]], color:'var(--kids)', delay:900, face: id => `${ico(byId[id].icon, 'i face')}<span>${esc(byId[id].name)}</span>`, label: id => byId[id].name, win:'Muy bien, encontraste todas las parejas.'});
+memory('ma', {items:MA, levels:[['Fácil', 3], ['Normal', 6]], color:'var(--adult)', delay:1600, face: w => `<span>${esc(w)}</span>`, label: w => w, win:'Muy bien, encontró todas las parejas.'});
 
-// ---------- listas
-const linkCard = r => `<div class="card"><div class="qhead"><h3>${esc(r[0])}</h3>${sayBtn(r[0] + '. ' + r[2])}</div><p>${esc(r[2])}</p><a href="${r[1]}" target="_blank" rel="noopener">Abrir ↗</a></div>`;
-$('rec-n').innerHTML = D.rec_n.map(linkCard).join('');
-$('rec-a').innerHTML = D.rec_a.map(linkCard).join('');
-$('celular').innerHTML = D.celular.map(c => `<div class="card"><div class="qhead"><h3>${c[0]} ${esc(c[1])}</h3>${sayBtn(c[1] + '. ' + c[2].map((s,i) => `Paso ${i+1}: ${s}`).join(' '))}</div><ol class="steps">${c[2].map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>`).join('');
-$('oficios').innerHTML = D.oficios.map(o => `<div class="card"><div class="qhead"><h3>${o[0]} ${esc(o[1])}</h3>${sayBtn(o[1] + '. ' + o[2])}</div><p>${esc(o[2])}</p><p class="note">Profesiones de hoy que se parecen: <b>${esc(o[3])}</b></p></div>`).join('');
-$('juntos-g').innerHTML = D.juntos.map(j => `<div class="card"><div class="qhead"><h3>${j[0]} ${esc(j[1])}</h3>${sayBtn(j[1] + '. ' + j[2])}</div><p>${esc(j[2])}</p></div>`).join('');
-$('tutor-l').innerHTML = D.tutor.map(t => `<li>${esc(t)}</li>`).join('');
-$('talleres').innerHTML = D.talleres.map(t => `<div class="card"><h3>Taller ${t[0]}: ${esc(t[1])}</h3><p class="note">${esc(t[2])}</p><p>${t[3].map(id => byId[id][1] + ' ' + esc(byId[id][2])).join('<br>')}</p></div>`).join('');
+/* listas */
+const CELI = ['video','mic','text','image','shield'];
+$('#cel').innerHTML = D.celular.map((c, i) => `<details class="acc"${i === 0 ? ' open' : ''}><summary><span class="ibox">${ico(CELI[i] || 'phone')}</span>${esc(c[1])}${ico('chev', 'i chev')}</summary><div class="body"><ol class="steps">${c[2].map(s => `<li>${esc(strip(s))}</li>`).join('')}</ol><div class="row" style="margin-top:14px">${sayBtn(c[1] + '. ' + c[2].map((s, k) => `Paso ${k + 1}. ${s}`).join(' '))}</div></div></details>`).join('');
+const OFII = ['sprout','yarn','hammer','food','paw','store','music','brief'];
+$('#ofi').innerHTML = D.oficios.map((o, i) => `<article class="card"><div class="hd"><span class="ibox">${ico(OFII[i] || 'brief')}</span><h4>${esc(o[1])}</h4></div><p>${esc(o[2])}</p><p class="foot">Se parece a: <b>${esc(o[3])}</b></p><div class="end">${sayBtn(o[1] + '. ' + o[2])}</div></article>`).join('');
+const JUNI = ['users','grid','book','phone'];
+$('#jun').innerHTML = D.juntos.map((j, i) => `<article class="card"><div class="hd"><span class="ibox">${ico(JUNI[i] || 'users')}</span><h4>${esc(j[1])}</h4></div><p>${esc(j[2])}</p><div class="end">${sayBtn(j[1] + '. ' + j[2])}</div></article>`).join('');
+const rec = r => `<article class="card"><div class="hd"><span class="ibox">${ico('globe')}</span><h4>${esc(r[0])}</h4></div><p>${esc(r[2])}</p><a class="link end" href="${r[1]}" target="_blank" rel="noopener">Abrir página ${ico('ext')}</a></article>`;
+$('#rec-n').innerHTML = D.rec_n.map(rec).join('');
+$('#rec-a').innerHTML = D.rec_a.map(rec).join('');
+$('#safe').innerHTML = D.tutor.map(t => `<li>${ico('check')}<span>${esc(t)}</span></li>`).join('');
+$('#map').innerHTML = `<thead><tr><th>Taller</th><th>Áreas STEAM</th><th>Profesiones</th></tr></thead><tbody>${TALL.map(t => `<tr><td><b>${t.n}. ${esc(t.name)}</b></td><td>${esc(t.areas)}</td><td>${t.ids.map(id => esc(byId[id].name)).join(', ')}</td></tr>`).join('')}</tbody>`;
 
-// ---------- temporizador de sesión
-let tmEnd = 0, tmH = null;
-const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
-function beep(){ try { const ac = new (window.AudioContext || window.webkitAudioContext)(); [0, .35, .7].forEach(d => { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = 660; g.gain.value = .15; o.connect(g); g.connect(ac.destination); o.start(ac.currentTime + d); o.stop(ac.currentTime + d + .2); }); } catch(e){} }
+/* temporizador */
+let tmEnd = 0, tmTot = 0, tmH = null; const CIRC = 553;
+const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+function beep(){ try { const ac = new (window.AudioContext || window.webkitAudioContext)(); [0, .4, .8].forEach(d => { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = 660; g.gain.value = .12; o.connect(g); g.connect(ac.destination); o.start(ac.currentTime + d); o.stop(ac.currentTime + d + .22); }); } catch(e){} }
 function tmTick(){
-  const s = Math.max(0, Math.round((tmEnd - Date.now()) / 1000)); $('tm').textContent = fmt(s);
-  if (s === 0){ clearInterval(tmH); tmH = null; $('tm').classList.add('end'); $('tm').textContent = '⏰ ¡Hora de descansar!'; beep(); say('Terminó el tiempo. Es hora de descansar.'); toast('⏰ Terminó la sesión'); }
+  const s = Math.max(0, Math.round((tmEnd - Date.now()) / 1000));
+  $('#tm').textContent = fmt(s); $('#ring-fg').style.strokeDashoffset = CIRC * (1 - s / tmTot);
+  if (s === 0){ clearInterval(tmH); tmH = null; $('#ring').classList.add('end'); $('#tm-l').textContent = 'Tiempo cumplido'; beep(); say('La sesión terminó. Es momento de descansar.'); toast('La sesión terminó'); }
 }
-function tmStart(m){ tmEnd = Date.now() + m * 60000; $('tm').classList.remove('end'); clearInterval(tmH); tmH = setInterval(tmTick, 500); tmTick(); }
-function tmStop(){ clearInterval(tmH); tmH = null; $('tm').classList.remove('end'); $('tm').textContent = '20:00'; }
+$$('[data-tm]').forEach(b => b.onclick = () => { tmTot = +b.dataset.tm * 60; tmEnd = Date.now() + tmTot * 1000; $('#ring').classList.remove('end'); $('#tm-l').textContent = 'Sesión en curso'; clearInterval(tmH); tmH = setInterval(tmTick, 500); tmTick(); });
+$('#tm-stop').onclick = () => { clearInterval(tmH); tmH = null; $('#ring').classList.remove('end'); $('#tm').textContent = '20:00'; $('#tm-l').textContent = 'Listo para empezar'; $('#ring-fg').style.strokeDashoffset = 0; };
 
-// ---------- instalación y uso sin internet
+/* instalación y modo sin conexión */
 let deferred = null;
-addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; $('bt-install').style.display = 'inline-block'; });
-$('bt-install').onclick = async () => { if (!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; $('bt-install').style.display = 'none'; };
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; $('#bt-install').hidden = false; });
+$('#bt-install').onclick = async () => { if (!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; $('#bt-install').hidden = true; };
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')){
-  navigator.serviceWorker.register('sw.js').then(() => { $('sw-state').textContent = '✔ Este dispositivo ya puede abrir el kit sin internet.'; }).catch(() => {});
-} else $('sw-state').textContent = location.protocol === 'file:' ? 'Está abierto como archivo: ya funciona sin internet en este equipo.' : '';
+  navigator.serviceWorker.register('sw.js').then(() => $('#sw').textContent = 'Este dispositivo ya guardó el kit para usarlo sin conexión.').catch(() => {});
+} else if (location.protocol === 'file:') $('#sw').textContent = 'Está abierto como archivo, así que ya funciona sin conexión en este equipo.';
+
+route();
 </script>
 </body>
 </html>
