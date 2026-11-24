@@ -49,6 +49,8 @@ a{color:var(--brand)}
 button,input{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:8px}
+[hidden]{display:none!important}
+html,body{overflow-x:clip}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 .appbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
@@ -267,6 +269,71 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
 .toast{position:fixed;left:50%;bottom:calc(var(--navh) + 18px);transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;z-index:40;transition:.25s;max-width:calc(100% - 32px);text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%)}
 @media (min-width:880px){ .toast{bottom:24px} }
+/* palabra del día */
+.word{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--star);border-radius:var(--radius);padding:18px 20px;margin:0 0 26px;box-shadow:var(--shadow)}
+.word .ibox{background:#FDF3DC;color:#A86A00}
+.word .vlabel{display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.word q{display:block;font-size:1.12rem;font-weight:700;margin:4px 0 2px;quotes:"«" "»"}
+.word cite{font-style:normal;color:var(--muted);font-weight:600;font-size:.9rem}
+.word .say{margin-left:auto}
+@media (max-width:560px){ .word{flex-wrap:wrap} .word .say{margin-left:0} }
+
+/* felicitación */
+dialog.win{max-width:520px;text-align:center;overflow:visible}
+.win-in{padding:30px 24px 22px;position:relative}
+.win-badge{width:84px;height:84px;margin:-72px auto 12px;border-radius:50%;background:var(--star);display:grid;place-items:center;box-shadow:0 0 0 8px var(--surface);animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+.win-badge svg{width:44px;height:44px;color:#fff;fill:#fff}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+.win h2{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;color:var(--ink)}
+.win-sub{color:var(--muted);font-weight:600;margin-top:4px}
+.verse{margin:18px 0 0;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.verse .vlabel{display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin-bottom:6px}
+.verse blockquote{margin:0;font-size:1.14rem;font-weight:700;line-height:1.45}
+.verse figcaption{margin-top:8px;color:var(--muted);font-weight:700;font-size:.9rem}
+.win-f{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:18px}
+.win-f .say{min-height:48px;padding:0 16px;font-size:.9rem}
+
+/* biblia */
+.seg{margin-bottom:12px}
+.ord-target{display:flex;flex-wrap:wrap;gap:8px;min-height:64px;padding:12px;border:1.5px dashed var(--line);border-radius:14px;background:var(--surface-2);margin-top:16px;align-items:center}
+.ord-target .w{background:var(--kids);color:#fff;border-radius:10px;padding:8px 12px;font-weight:800}
+.ord-pool{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.ord-pool button{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 16px;min-height:50px;font-weight:800;font-size:1.02rem}
+.ord-pool button:hover{border-color:var(--kids)}
+.ord-pool button.bad{animation:shake .35s;border-color:var(--bad);background:var(--bad-soft)}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.ref{display:inline-block;margin-top:6px;font-weight:700;color:var(--muted);font-size:.86rem}
+.card q{font-weight:700;color:var(--ink);quotes:"«" "»";font-size:1.02rem}
+.tvpanel .hd{display:flex;gap:14px;align-items:flex-start}
+.tvpanel .ibox{background:var(--tutor-soft);color:var(--tutor)}
+.tvpanel .steps li span{overflow-wrap:anywhere}
+.tvpanel .steps li span b{color:var(--ink)}
+
+@media (max-width:600px){ #bt-tv{display:none} .appbar .in{gap:8px} .actions{gap:4px} .iconbtn{width:40px;height:40px} }
+/* modo TV */
+.tvonly{display:none!important}
+html[data-tv] .tvonly{display:grid!important}
+html[data-tv]{font-size:22px} html[data-tv][data-scale="1"]{font-size:25px} html[data-tv][data-scale="2"]{font-size:28px}
+html[data-tv] body{padding-bottom:0}
+html[data-tv] .bottomnav{display:none}
+html[data-tv] .topnav{display:flex}
+html[data-tv] .topnav button{font-size:.95rem;padding:10px 18px}
+html[data-tv] .appbar .in,html[data-tv] main,html[data-tv] footer{max-width:1680px;padding-left:40px;padding-right:40px}
+html[data-tv] .logo small{display:none}
+html[data-tv] :focus-visible,html[data-tv] :focus{outline:5px solid var(--star);outline-offset:4px;border-radius:12px;box-shadow:0 0 0 10px color-mix(in srgb,var(--star) 25%,transparent)}
+html[data-tv] .hero{grid-template-columns:1.3fr .7fr}
+html[data-tv] .hero .art{display:none}
+html[data-tv] .tvqr{place-items:center;gap:12px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;justify-self:center}
+html[data-tv] .tvqr img{width:220px;height:220px;border-radius:12px;background:#fff;padding:8px}
+html[data-tv] .tvqr p{display:grid;gap:2px;font-size:.8rem}
+html[data-tv] .tvqr span{color:var(--muted)}
+html[data-tv] .board{max-width:520px}
+html[data-tv] .robot{grid-template-columns:520px 1fr}
+html[data-tv] .mem{max-width:900px} html[data-tv] .mem.c3{max-width:780px}
+html[data-tv] .qwrap{max-width:1100px}
+html[data-tv] .opts{grid-template-columns:1fr 1fr}
+html[data-tv] dialog{max-width:860px}
+html[data-tv] .toast{bottom:30px}
 @media print{ .appbar,.bottomnav,.tabs,.say,footer{display:none!important} .view{display:block!important} }
 </style>
 </head>
@@ -333,6 +400,10 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
     <symbol id="i-video" viewBox="0 0 24 24"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol>
     <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
     <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 22h8M12 18v4M8 2l4 3 4-3"/></symbol>
+    <symbol id="i-bible" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M12 6v7M9.5 8.5h5"/></symbol>
+    <symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
     <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 20h.01"/></symbol>
   </defs>
 </svg>
@@ -348,6 +419,8 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
       <button class="iconbtn" id="bt-scale" title="Tamaño de letra" aria-label="Cambiar tamaño de letra"><svg class="i"><use href="#i-text"/></svg></button>
       <button class="iconbtn" id="bt-voice" title="Lectura en voz alta" aria-label="Lectura en voz alta" aria-pressed="true"><svg class="i"><use href="#i-vol"/></svg></button>
       <button class="iconbtn" id="bt-theme" title="Modo claro u oscuro" aria-label="Cambiar entre modo claro y oscuro"><svg class="i"><use href="#i-moon"/></svg></button>
+      <button class="iconbtn" id="bt-tv" title="Modo TV: para proyectar en el televisor" aria-label="Modo TV para proyectar en el televisor" aria-pressed="false"><svg class="i"><use href="#i-tv"/></svg></button>
+      <button class="iconbtn tvonly" id="bt-full" title="Pantalla completa" aria-label="Pantalla completa"><svg class="i"><use href="#i-full"/></svg></button>
       <button class="iconbtn" id="bt-install" title="Instalar en este dispositivo" aria-label="Instalar en este dispositivo" hidden><svg class="i"><use href="#i-down"/></svg></button>
     </div>
   </div>
@@ -359,13 +432,14 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
       <div>
         <span class="eyebrow">Albergue Mi Nuevo Hogar Jesús y Josué</span>
         <h1 id="h-home">Aprender y jugar, <em>a cualquier edad</em></h1>
-        <p class="lead">Profesiones para descubrir, juegos de lógica y memoria, y una guía sencilla para usar el celular. Hecho para los niños, adolescentes y adultos mayores del albergue.</p>
+        <p class="lead">Profesiones para descubrir, juegos de lógica y memoria, textos bíblicos para animarnos y una guía sencilla para usar el celular. Hecho para los niños, adolescentes y adultos mayores del albergue.</p>
         <div class="cta">
           <button class="btn primary" data-go="ninos"><svg class="i"><use href="#i-smile"/></svg>Niños y adolescentes</button>
           <button class="btn" data-go="mayores"><svg class="i"><use href="#i-heart"/></svg>Adultos mayores</button>
         </div>
         <div class="stats" id="stats"></div>
       </div>
+      <div class="tvqr tvonly"><img id="qr" alt="Código QR del kit digital" width="220" height="220"><p><b>Escanea para abrirlo en tu celular</b><span>gabriel-1806.github.io/kit-aprende-jugando</span></p></div>
       <svg class="art" viewBox="0 0 400 320" role="img" aria-label="Ilustración de bloques de juego">
         <rect x="20" y="150" width="120" height="120" rx="26" fill="var(--kids-soft)"/>
         <rect x="150" y="60" width="120" height="120" rx="26" fill="var(--adult-soft)"/>
@@ -381,18 +455,20 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
         </g>
       </svg>
     </div>
+    <div class="word" id="word"></div>
     <div class="sectitle"><h2>¿Quién lo va a usar?</h2><p>Elige un espacio. Cada uno tiene sus propias actividades.</p></div>
     <div class="aud" id="aud"></div>
   </section>
 
   <section class="view c-kids" id="v-ninos" aria-labelledby="h-ninos">
-    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-smile"/></svg></span><div><h2 id="h-ninos">Niños y adolescentes</h2><p>Descubre profesiones y pon a prueba tu lógica.</p></div></div>
+    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-smile"/></svg></span><div><h2 id="h-ninos">Niños y adolescentes</h2><p>Descubre profesiones, pon a prueba tu lógica y aprende con la Biblia.</p></div></div>
     <div class="tabs" role="tablist" data-view="ninos">
       <button role="tab" data-tab="profesiones"><svg class="i"><use href="#i-book"/></svg>Profesiones</button>
       <button role="tab" data-tab="test"><svg class="i"><use href="#i-compass"/></svg>¿Qué me gusta?</button>
       <button role="tab" data-tab="robot"><svg class="i"><use href="#i-bot"/></svg>Programa al robot</button>
       <button role="tab" data-tab="memoria"><svg class="i"><use href="#i-grid"/></svg>Memoria</button>
       <button role="tab" data-tab="trivia"><svg class="i"><use href="#i-help"/></svg>Trivia STEAM</button>
+      <button role="tab" data-tab="biblia"><svg class="i"><use href="#i-bible"/></svg>Biblia</button>
       <button role="tab" data-tab="recursos"><svg class="i"><use href="#i-globe"/></svg>Sigue aprendiendo</button>
     </div>
     <div class="pane" data-pane="profesiones">
@@ -443,6 +519,11 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
       </div>
     </div>
     <div class="pane" data-pane="trivia" hidden><div class="panel qwrap" id="trivia"></div></div>
+    <div class="pane" data-pane="biblia" hidden>
+      <div class="chips seg" id="bn-seg" role="group" aria-label="Actividad"><button class="chip" data-m="ordena" aria-pressed="true">Ordena el versículo</button><button class="chip" data-m="historias" aria-pressed="false">Historias de la Biblia</button></div>
+      <div class="panel qwrap" data-m="ordena" id="ordena"></div>
+      <div class="panel qwrap" data-m="historias" id="historias" hidden></div>
+    </div>
     <div class="pane" data-pane="recursos" hidden>
       <p class="sub" style="margin:0 0 12px">Páginas gratuitas para seguir practicando. Necesitan internet; úsalas con el tutor.</p>
       <div class="grid" id="rec-n"></div>
@@ -450,10 +531,11 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
   </section>
 
   <section class="view c-adult" id="v-mayores" aria-labelledby="h-mayores">
-    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-heart"/></svg></span><div><h2 id="h-mayores">Adultos mayores</h2><p>Letra grande, pasos claros y juegos para mantener la mente activa.</p></div></div>
+    <div class="vhead"><span class="ic"><svg class="i"><use href="#i-heart"/></svg></span><div><h2 id="h-mayores">Adultos mayores</h2><p>Letra grande, pasos claros, citas bíblicas y juegos para mantener la mente activa.</p></div></div>
     <div class="tabs" role="tablist" data-view="mayores">
       <button role="tab" data-tab="celular"><svg class="i"><use href="#i-phone"/></svg>Guía del celular</button>
       <button role="tab" data-tab="memoria"><svg class="i"><use href="#i-grid"/></svg>Memoria</button>
+      <button role="tab" data-tab="biblia"><svg class="i"><use href="#i-bible"/></svg>Citas bíblicas</button>
       <button role="tab" data-tab="refranes"><svg class="i"><use href="#i-msg"/></svg>Refranes</button>
       <button role="tab" data-tab="cuentas"><svg class="i"><use href="#i-calc"/></svg>Cuentas del mercado</button>
       <button role="tab" data-tab="oficio"><svg class="i"><use href="#i-brief"/></svg>Mi oficio</button>
@@ -467,6 +549,11 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
         <div class="mem c3 words" id="ma"></div>
         <div class="mstat" id="ma-stat" aria-live="polite"></div>
       </div>
+    </div>
+    <div class="pane" data-pane="biblia" hidden>
+      <div class="panel qwrap" id="citas"></div>
+      <div class="sectitle" style="margin-top:22px"><h2>Para leer y conversar</h2><p>Lea el texto en voz alta (o toque «Escuchar») y converse con la pregunta.</p></div>
+      <div class="grid" id="leer"></div>
     </div>
     <div class="pane" data-pane="refranes" hidden><div class="panel qwrap" id="refranes"></div></div>
     <div class="pane" data-pane="cuentas" hidden><div class="panel qwrap" id="cuentas"></div></div>
@@ -504,6 +591,15 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
         <p class="sub" id="sw" style="margin-top:12px"></p>
       </div>
     </div>
+    <div class="panel tvpanel">
+      <div class="hd"><span class="ibox"><svg class="i"><use href="#i-tv"/></svg></span><div><h3>Proyectar en el televisor</h3><p class="sub">Para que todo el grupo vea la actividad en la sala. El modo TV agranda la letra y deja manejar el kit con las flechas del control remoto.</p></div></div>
+      <ol class="steps" style="margin-top:14px">
+        <li><span><b>Con una laptop y cable HDMI:</b> conecte la laptop al televisor, abra el kit y toque el botón <b>TV</b> de arriba. Luego use «Pantalla completa».</span></li>
+        <li><span><b>Smart TV con navegador:</b> abra el navegador del televisor y escriba <b>gabriel-1806.github.io/kit-aprende-jugando/?tv</b> (con «?tv» al final se abre directo en modo TV). Muévase con las flechas y confirme con OK.</span></li>
+        <li><span><b>Desde el celular (Android):</b> active «Transmitir pantalla», «Smart View» o «Duplicar pantalla» en los ajustes rápidos y elija el televisor. Ponga el celular en horizontal.</span></li>
+      </ol>
+      <div class="row" style="margin-top:14px"><button class="btn primary" id="tv-on"><svg class="i"><use href="#i-tv"/></svg>Activar modo TV</button><span class="sub" id="tv-st"></span></div>
+    </div>
     <div class="panel"><h3>Uso seguro</h3><ul class="checks" id="safe"></ul></div>
     <div class="panel"><h3>Relación con los talleres</h3><p class="sub">Cada taller del proyecto se conecta con profesiones del catálogo.</p><div style="overflow-x:auto;margin-top:10px"><table class="map" id="map"></table></div></div>
   </section>
@@ -512,10 +608,17 @@ footer{max-width:1120px;margin:0 auto;padding:8px 16px 32px;color:var(--muted);f
 <footer><span>Aprende Jugando · Gestión de Proyectos 2026-2 · Universidad de Lima</span><span>ODS 4 · Educación de calidad</span></footer>
 <nav class="bottomnav" aria-label="Secciones"></nav>
 <dialog id="dlg" aria-labelledby="dlg-t"><div id="dlg-c"></div></dialog>
+<dialog id="win" class="win" aria-labelledby="win-t"><div class="win-in">
+  <div class="win-badge"><svg class="i"><use href="#i-star"/></svg></div>
+  <h2 id="win-t">¡Lo has hecho bien!</h2>
+  <p class="win-sub" id="win-sub"></p>
+  <figure class="verse"><span class="vlabel">Una palabra de parte de Dios para ti</span><blockquote id="win-v"></blockquote><figcaption id="win-c"></figcaption></figure>
+  <div class="win-f"><button class="btn" id="win-new"><svg class="i"><use href="#i-refresh"/></svg>Otro texto</button><button class="say" id="win-say"><svg class="i"><use href="#i-vol"/></svg>Escuchar</button><button class="btn primary" id="win-ok">Continuar</button></div>
+</div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const D = {"perfiles": [["videojuegos", "🎮", "Diseñador/a de videojuegos", "Inventa juegos: piensa la historia, los personajes, las reglas y cómo se gana. Prueba el juego muchas veces hasta que sea divertido.", "Diseño de videojuegos, Ingeniería de Software o Diseño Digital (4 a 5 años). También hay cursos técnicos cortos.", "Antes de programar un videojuego, muchos equipos lo prueban en papel, ¡como el juego de mesa que hicimos en el taller!", ["crear", "tecno"], "1"], ["grafico", "🎨", "Diseñador/a gráfico", "Crea afiches, logos, portadas de libros y dibujos para que un mensaje se entienda con imágenes y colores.", "Diseño Gráfico o Comunicación Visual (carrera técnica de 3 años o universitaria de 5 años).", "Las señales de tránsito y los íconos del celular los dibujó un diseñador para que todos los entiendan sin leer.", ["crear"], "1"], ["docente", "📚", "Docente", "Enseña a niños, jóvenes o adultos. Prepara clases, juegos y actividades para que todos aprendan.", "Educación (5 años) en una universidad o un instituto pedagógico. Se elige el nivel: inicial, primaria o secundaria.", "Los mejores profesores usan juegos para enseñar. ¡Aprender jugando funciona!", ["ayudar", "crear"], "1"], ["programador", "💻", "Programador/a", "Escribe instrucciones (código) para que las computadoras y los celulares hagan cosas: apps, páginas web y juegos.", "Computación e Informática (técnica, 3 años) o Ingeniería de Software (5 años).", "Un programa es como la lista de órdenes que le dimos al «robot» en el taller 2: si hay un error, se busca y se corrige.", ["logica", "tecno"], "2"], ["sistemas", "🖥️", "Ingeniero/a de sistemas", "Diseña sistemas para que una empresa, un hospital o un colegio trabaje mejor con tecnología.", "Ingeniería de Sistemas (5 años).", "El sistema que organiza las citas de un hospital lo diseñó un ingeniero de sistemas.", ["logica", "tecno", "liderar"], "2"], ["datos", "📊", "Analista de datos", "Ordena muchos números y los convierte en gráficos para descubrir cosas y ayudar a tomar decisiones.", "Estadística, Ingeniería de Sistemas o Economía (5 años).", "Gracias a los datos, las apps de música adivinan qué canción te puede gustar.", ["logica"], "2"], ["mecatronico", "🤖", "Ingeniero/a mecatrónico", "Junta mecánica, electrónica y computación para construir máquinas inteligentes, como brazos robóticos.", "Ingeniería Mecatrónica (5 años).", "Los robots usan sensores como nosotros usamos los sentidos: cámaras como ojos y micrófonos como oídos.", ["construir", "tecno"], "3"], ["biomedico", "🩺", "Ingeniero/a biomédico", "Crea y cuida los equipos que usan los médicos, como monitores, prótesis y máquinas de los hospitales.", "Ingeniería Biomédica (5 años).", "Muchas máquinas que ves en el hospital fueron diseñadas por ingenieros biomédicos junto con médicos.", ["construir", "ayudar", "ciencia"], "3"], ["robotica", "🔧", "Técnico/a en robótica", "Arma, prueba y repara robots y máquinas automáticas en fábricas y empresas.", "Carrera técnica de Electrónica o Mecatrónica (3 años) en un instituto.", "Hay robots que ayudan a armar autos y otros que limpian la casa solos.", ["construir", "tecno"], "3"], ["emprendedor", "💡", "Emprendedor/a", "Tiene una idea para resolver un problema, la convierte en negocio y la hace crecer con un equipo.", "Cualquier carrera sirve; ayuda estudiar Administración o Ingeniería. ¡Se puede empezar desde pequeño!", "Muchas empresas grandes empezaron en una casa o un garaje con una sola idea.", ["liderar", "crear"], "4"], ["industrial", "🏭", "Ingeniero/a industrial", "Mejora la forma de hacer las cosas: que una fábrica o un servicio sea más rápido, ordenado y gaste menos.", "Ingeniería Industrial (5 años).", "Un ingeniero industrial puede calcular la mejor forma de organizar una cocina para que la comida salga más rápido.", ["logica", "liderar"], "4"], ["administrador", "📋", "Administrador/a", "Organiza a las personas, el dinero y las tareas de una empresa para que todo funcione bien.", "Administración de Empresas (5 años) o una carrera técnica en Administración (3 años).", "Hasta un albergue, un hospital o un equipo de fútbol necesitan alguien que los administre.", ["liderar", "ayudar"], "4"], ["publicista", "📣", "Publicista", "Crea campañas y anuncios para que la gente conozca un producto o una buena causa.", "Publicidad o Comunicación (5 años).", "La campaña de libros de este proyecto usó ideas de publicidad para que más personas donaran.", ["crear", "liderar"], "4"], ["enfermero", "💉", "Enfermero/a", "Cuida a los pacientes todos los días, los acompaña, les da sus medicinas y está atento a cómo se sienten.", "Enfermería (5 años) o Técnico en Enfermería (3 años).", "Las enfermeras y enfermeros son quienes más tiempo pasan con los pacientes en el hospital.", ["ayudar", "ciencia"], ""], ["biologo", "🔬", "Biólogo/a", "Estudia los seres vivos: plantas, animales y microbios. Algunos investigan para encontrar nuevas medicinas.", "Biología (5 años).", "En una gota de agua de río puede haber miles de seres vivos que solo se ven con microscopio.", ["ciencia", "naturaleza"], ""], ["agronomo", "🌱", "Ingeniero/a agrónomo", "Ayuda a que los cultivos crezcan sanos y den más alimentos, cuidando la tierra y el agua.", "Agronomía (5 años) o una carrera técnica agropecuaria (3 años).", "El Perú tiene más de 3,000 variedades de papa. ¡Los agrónomos ayudan a conservarlas!", ["naturaleza", "ciencia", "construir"], ""]], "talleres": [["1", "Juegos sin pantalla", "Arte y Matemática", ["videojuegos", "grafico", "docente"]], ["2", "Lógica y algoritmos desenchufados", "Tecnología y Matemática", ["programador", "sistemas", "datos"]], ["3", "Robótica conceptual", "Ciencia, Ingeniería y Arte", ["mecatronico", "biomedico", "robotica"]], ["4", "Aprende a Empezar", "Ingeniería, Matemática y Arte", ["emprendedor", "industrial", "administrador", "publicista"]]], "intereses": {"crear": "Crear y dibujar", "logica": "Resolver acertijos y números", "construir": "Construir y armar cosas", "ayudar": "Ayudar y cuidar a las personas", "tecno": "La tecnología", "liderar": "Organizar y liderar", "ciencia": "Descubrir cómo funcionan las cosas", "naturaleza": "La naturaleza, plantas y animales"}, "test": [["En tu tiempo libre prefieres…", [["🖍️ Dibujar o pintar", "crear"], ["🧩 Armar rompecabezas", "logica"], ["🧱 Construir con bloques o cartón", "construir"], ["🤝 Conversar y ayudar a otros", "ayudar"]]], ["En el taller, lo que más te gustó fue…", [["🎲 Inventar las reglas del juego", "crear"], ["🤖 Dar órdenes al «robot»", "logica"], ["📦 Armar el robot de cartón", "construir"], ["💡 Crear una idea de negocio", "liderar"]]], ["Si tuvieras un superpoder, sería…", [["🔬 Ver cosas diminutas", "ciencia"], ["🌿 Hablar con plantas y animales", "naturaleza"], ["📱 Entender cualquier aparato", "tecno"], ["❤️ Curar a las personas", "ayudar"]]], ["En un trabajo en grupo, tú…", [["📣 Organizo al equipo", "liderar"], ["🎨 Hago el afiche bonito", "crear"], ["🧮 Hago las cuentas", "logica"], ["🔧 Armo las piezas", "construir"]]], ["¿Qué video verías primero?", [["🚀 Cómo funciona un cohete", "ciencia"], ["🎮 Cómo se hace un videojuego", "tecno"], ["🐢 Animales de la Amazonía", "naturaleza"], ["🧑‍🍳 Cómo empezar un negocio de postres", "liderar"]]], ["¿Qué regalo te gustaría más?", [["🖌️ Una caja de colores", "crear"], ["🔭 Un microscopio o una lupa", "ciencia"], ["🪴 Semillas para sembrar", "naturaleza"], ["🔌 Un kit de robótica", "construir"]]], ["¿Cuál de estas frases va más contigo?", [["«Me gusta que todo esté en orden»", "logica"], ["«Me gusta que todos estén bien»", "ayudar"], ["«Me gusta probar aparatos nuevos»", "tecno"], ["«Me gusta inventar cosas nuevas»", "crear"]]], ["Cuando sea grande quiero…", [["🏥 Cuidar a las personas", "ayudar"], ["🏗️ Construir cosas grandes", "construir"], ["🌎 Cuidar el planeta", "naturaleza"], ["👩‍💼 Tener mi propio proyecto", "liderar"]]]], "trivia": [["¿Qué parte de un robot funciona como nuestros ojos?", ["La batería", "La cámara (sensor)", "Las ruedas"], 1], ["Si al «robot» le das una orden equivocada, ¿qué hace un programador?", ["Se rinde", "Busca el error y lo corrige", "Apaga todo"], 1], ["¿Cuántas variedades de papa hay en el Perú, más o menos?", ["10", "300", "Más de 3,000"], 2], ["¿Qué letra de STEAM significa Arte?", ["S", "A", "M"], 1], ["¿Qué profesional cuida los equipos del hospital?", ["Ingeniero/a biomédico", "Publicista", "Agrónomo/a"], 0], ["Un dado tiene 6 caras. ¿Cuánto suman todas?", ["18", "21", "24"], 1], ["¿Quién crea campañas para que la gente done libros?", ["Publicista", "Biólogo/a", "Técnico/a en robótica"], 0], ["¿Qué necesita una planta para crecer?", ["Solo oscuridad", "Agua, luz y tierra", "Solo agua salada"], 1]], "rec_n": [["Khan Academy en español", "https://es.khanacademy.org", "Matemática y ciencias con videos y ejercicios, gratis."], ["Code.org – La Hora del Código", "https://code.org", "Aprende a programar con juegos de bloques."], ["Scratch", "https://scratch.mit.edu", "Crea tus propios juegos y animaciones."], ["Simulaciones PhET", "https://phet.colorado.edu/es/", "Experimentos de ciencia y matemática en el celular."], ["PerúEduca", "https://www.perueduca.pe", "Recursos educativos del Ministerio de Educación."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros y materiales gratis de la Biblioteca Nacional del Perú."]], "rec_a": [["GCFGlobal en español", "https://edu.gcfglobal.org/es/", "Cursos gratis y sencillos para aprender a usar el celular, WhatsApp e internet."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros, revistas y fotos antiguas del Perú, gratis."], ["Khan Academy en español", "https://es.khanacademy.org", "Para aprender o repasar matemática a su ritmo."]], "celular": [["📹", "Hacer una videollamada por WhatsApp", ["Abra WhatsApp (el ícono verde con un teléfono).", "Toque el nombre de su familiar en la lista de chats.", "Arriba a la derecha toque el ícono de la cámara 📹.", "Espere a que conteste. Para colgar, toque el botón rojo."]], ["🎙️", "Enviar un mensaje de voz", ["Abra el chat de la persona.", "Mantenga apretado el micrófono 🎙️ (abajo a la derecha) mientras habla.", "Suelte el dedo cuando termine: el audio se envía solo.", "Si se equivocó, deslice el dedo a la izquierda antes de soltar para cancelar."]], ["🔠", "Agrandar la letra del celular", ["Abra «Ajustes» o «Configuración» (el ícono de engranaje ⚙️).", "Busque «Pantalla» y luego «Tamaño de fuente» o «Tamaño del texto».", "Mueva la barra hacia la derecha hasta que lea cómodo.", "Pida ayuda al tutor si no encuentra la opción: cada celular es un poco distinto."]], ["📷", "Ver y enviar fotos", ["Abra la «Galería» o «Fotos».", "Toque la foto que quiere enviar.", "Toque «Compartir» y elija WhatsApp.", "Elija a la persona y toque el botón verde de enviar ➤."]], ["🛡️", "Cuidarse de estafas", ["Nunca comparta códigos que le lleguen por mensaje (aunque digan que es del banco o de un familiar).", "Si alguien le pide dinero por mensaje, llame primero a su familiar para confirmar.", "No abra enlaces de números que no conoce.", "Ante cualquier duda, pregunte al tutor o a un familiar."]]], "refranes": [["Al que madruga…", ["…Dios lo ayuda.", "…le da sueño.", "…se le enfría el café."], 0], ["Más vale tarde…", ["…que temprano.", "…que nunca.", "…que mañana."], 1], ["Camarón que se duerme…", ["…se lo lleva la corriente.", "…despierta tarde.", "…sueña bonito."], 0], ["En casa de herrero…", ["…martillo de oro.", "…cuchillo de palo.", "…mucho ruido."], 1], ["Dime con quién andas…", ["…y te diré quién eres.", "…y te diré a dónde vas.", "…y te invito un café."], 0], ["No hay mal…", ["…que dure cien años.", "…que por bien no venga.", "…sin remedio."], 1], ["Poco a poco…", ["…se hace tarde.", "…se llena la olla.", "…se llega lejos."], 2], ["Agua que no has de beber…", ["…déjala correr.", "…guárdala bien.", "…dásela al vecino."], 0]], "oficios": [["🌾", "Agricultor/a", "¿Qué sembraba? ¿En qué mes se siembra y se cosecha? ¿Qué secreto tiene para que la planta crezca bien?", "Ingeniero/a agrónomo, biólogo/a"], ["🧶", "Tejedor/a", "¿Quién le enseñó a tejer? ¿Qué dibujos o colores usa? ¿Cuánto demora una prenda?", "Diseñador/a gráfico, diseñador/a de modas"], ["🪚", "Carpintero/a o albañil", "¿Qué fue lo más difícil que construyó? ¿Cómo mide sin equivocarse?", "Ingeniero/a civil, ingeniero/a mecatrónico"], ["🍲", "Cocinero/a", "¿Cuál es su plato especial? ¿Cómo se calculan las cantidades para muchas personas?", "Chef, ingeniero/a de alimentos, emprendedor/a"], ["🐑", "Pastor/a o criador/a de animales", "¿Cómo sabe si un animal está sano? ¿Qué animales cuidaba?", "Veterinario/a, zootecnista, biólogo/a"], ["🛒", "Comerciante", "¿Qué vendía? ¿Cómo hacía las cuentas y atraía a sus clientes?", "Administrador/a, emprendedor/a, publicista"], ["🎻", "Músico/a o danzante", "¿Qué música o danza es típica de su pueblo? ¿Cómo la aprendió?", "Músico/a, docente de arte, productor/a cultural"], ["🧑‍🏫", "Otro oficio", "Cuéntenos cuál fue su trabajo y qué fue lo que más le gustó de él.", "Lo buscamos juntos en el catálogo"]], "juntos": [["👵👦", "Mi oficio, mi historia", "Un adulto mayor cuenta su oficio con la ficha de preguntas. Los niños buscan en el catálogo qué profesión de hoy se parece. 20 minutos."], ["🃏", "Memoria por parejas", "Un niño y un adulto mayor juegan juntos el juego de memoria: el niño toca, el adulto recuerda dónde estaba cada carta."], ["📖", "Lectura compartida", "Con los libros donados de la campaña, un niño lee en voz alta y el adulto mayor cuenta si conoce una historia parecida de su pueblo."], ["📹", "El nieto profesor", "Un niño le enseña a un adulto mayor a hacer una videollamada o enviar un audio con la guía del celular. ¡El niño es el docente!"]], "tutor": ["Use el kit en sesiones cortas de 15 a 20 minutos, siempre con un tutor del albergue presente.", "Limpie el celular o la computadora con alcohol antes y después de cada uso, y pida lavado de manos (protocolo de salud del proyecto).", "Todas las actividades se pueden hacer sentados o desde la cama.", "El kit no guarda nombres, fotos ni respuestas: al cerrarlo, todo se borra.", "Los juegos y el catálogo funcionan sin internet. Solo los «recursos gratuitos» necesitan internet.", "Si un niño o un adulto mayor está cansado, se detiene la actividad. No es una evaluación, es para disfrutar."]};
+const D = {"perfiles": [["videojuegos", "🎮", "Diseñador/a de videojuegos", "Inventa juegos: piensa la historia, los personajes, las reglas y cómo se gana. Prueba el juego muchas veces hasta que sea divertido.", "Diseño de videojuegos, Ingeniería de Software o Diseño Digital (4 a 5 años). También hay cursos técnicos cortos.", "Antes de programar un videojuego, muchos equipos lo prueban en papel, ¡como el juego de mesa que hicimos en el taller!", ["crear", "tecno"], "1"], ["grafico", "🎨", "Diseñador/a gráfico", "Crea afiches, logos, portadas de libros y dibujos para que un mensaje se entienda con imágenes y colores.", "Diseño Gráfico o Comunicación Visual (carrera técnica de 3 años o universitaria de 5 años).", "Las señales de tránsito y los íconos del celular los dibujó un diseñador para que todos los entiendan sin leer.", ["crear"], "1"], ["docente", "📚", "Docente", "Enseña a niños, jóvenes o adultos. Prepara clases, juegos y actividades para que todos aprendan.", "Educación (5 años) en una universidad o un instituto pedagógico. Se elige el nivel: inicial, primaria o secundaria.", "Los mejores profesores usan juegos para enseñar. ¡Aprender jugando funciona!", ["ayudar", "crear"], "1"], ["programador", "💻", "Programador/a", "Escribe instrucciones (código) para que las computadoras y los celulares hagan cosas: apps, páginas web y juegos.", "Computación e Informática (técnica, 3 años) o Ingeniería de Software (5 años).", "Un programa es como la lista de órdenes que le dimos al «robot» en el taller 2: si hay un error, se busca y se corrige.", ["logica", "tecno"], "2"], ["sistemas", "🖥️", "Ingeniero/a de sistemas", "Diseña sistemas para que una empresa, un hospital o un colegio trabaje mejor con tecnología.", "Ingeniería de Sistemas (5 años).", "El sistema que organiza las citas de un hospital lo diseñó un ingeniero de sistemas.", ["logica", "tecno", "liderar"], "2"], ["datos", "📊", "Analista de datos", "Ordena muchos números y los convierte en gráficos para descubrir cosas y ayudar a tomar decisiones.", "Estadística, Ingeniería de Sistemas o Economía (5 años).", "Gracias a los datos, las apps de música adivinan qué canción te puede gustar.", ["logica"], "2"], ["mecatronico", "🤖", "Ingeniero/a mecatrónico", "Junta mecánica, electrónica y computación para construir máquinas inteligentes, como brazos robóticos.", "Ingeniería Mecatrónica (5 años).", "Los robots usan sensores como nosotros usamos los sentidos: cámaras como ojos y micrófonos como oídos.", ["construir", "tecno"], "3"], ["biomedico", "🩺", "Ingeniero/a biomédico", "Crea y cuida los equipos que usan los médicos, como monitores, prótesis y máquinas de los hospitales.", "Ingeniería Biomédica (5 años).", "Muchas máquinas que ves en el hospital fueron diseñadas por ingenieros biomédicos junto con médicos.", ["construir", "ayudar", "ciencia"], "3"], ["robotica", "🔧", "Técnico/a en robótica", "Arma, prueba y repara robots y máquinas automáticas en fábricas y empresas.", "Carrera técnica de Electrónica o Mecatrónica (3 años) en un instituto.", "Hay robots que ayudan a armar autos y otros que limpian la casa solos.", ["construir", "tecno"], "3"], ["emprendedor", "💡", "Emprendedor/a", "Tiene una idea para resolver un problema, la convierte en negocio y la hace crecer con un equipo.", "Cualquier carrera sirve; ayuda estudiar Administración o Ingeniería. ¡Se puede empezar desde pequeño!", "Muchas empresas grandes empezaron en una casa o un garaje con una sola idea.", ["liderar", "crear"], "4"], ["industrial", "🏭", "Ingeniero/a industrial", "Mejora la forma de hacer las cosas: que una fábrica o un servicio sea más rápido, ordenado y gaste menos.", "Ingeniería Industrial (5 años).", "Un ingeniero industrial puede calcular la mejor forma de organizar una cocina para que la comida salga más rápido.", ["logica", "liderar"], "4"], ["administrador", "📋", "Administrador/a", "Organiza a las personas, el dinero y las tareas de una empresa para que todo funcione bien.", "Administración de Empresas (5 años) o una carrera técnica en Administración (3 años).", "Hasta un albergue, un hospital o un equipo de fútbol necesitan alguien que los administre.", ["liderar", "ayudar"], "4"], ["publicista", "📣", "Publicista", "Crea campañas y anuncios para que la gente conozca un producto o una buena causa.", "Publicidad o Comunicación (5 años).", "La campaña de libros de este proyecto usó ideas de publicidad para que más personas donaran.", ["crear", "liderar"], "4"], ["enfermero", "💉", "Enfermero/a", "Cuida a los pacientes todos los días, los acompaña, les da sus medicinas y está atento a cómo se sienten.", "Enfermería (5 años) o Técnico en Enfermería (3 años).", "Las enfermeras y enfermeros son quienes más tiempo pasan con los pacientes en el hospital.", ["ayudar", "ciencia"], ""], ["biologo", "🔬", "Biólogo/a", "Estudia los seres vivos: plantas, animales y microbios. Algunos investigan para encontrar nuevas medicinas.", "Biología (5 años).", "En una gota de agua de río puede haber miles de seres vivos que solo se ven con microscopio.", ["ciencia", "naturaleza"], ""], ["agronomo", "🌱", "Ingeniero/a agrónomo", "Ayuda a que los cultivos crezcan sanos y den más alimentos, cuidando la tierra y el agua.", "Agronomía (5 años) o una carrera técnica agropecuaria (3 años).", "El Perú tiene más de 3,000 variedades de papa. ¡Los agrónomos ayudan a conservarlas!", ["naturaleza", "ciencia", "construir"], ""]], "talleres": [["1", "Juegos sin pantalla", "Arte y Matemática", ["videojuegos", "grafico", "docente"]], ["2", "Lógica y algoritmos desenchufados", "Tecnología y Matemática", ["programador", "sistemas", "datos"]], ["3", "Robótica conceptual", "Ciencia, Ingeniería y Arte", ["mecatronico", "biomedico", "robotica"]], ["4", "Aprende a Empezar", "Ingeniería, Matemática y Arte", ["emprendedor", "industrial", "administrador", "publicista"]]], "intereses": {"crear": "Crear y dibujar", "logica": "Resolver acertijos y números", "construir": "Construir y armar cosas", "ayudar": "Ayudar y cuidar a las personas", "tecno": "La tecnología", "liderar": "Organizar y liderar", "ciencia": "Descubrir cómo funcionan las cosas", "naturaleza": "La naturaleza, plantas y animales"}, "test": [["En tu tiempo libre prefieres…", [["🖍️ Dibujar o pintar", "crear"], ["🧩 Armar rompecabezas", "logica"], ["🧱 Construir con bloques o cartón", "construir"], ["🤝 Conversar y ayudar a otros", "ayudar"]]], ["En el taller, lo que más te gustó fue…", [["🎲 Inventar las reglas del juego", "crear"], ["🤖 Dar órdenes al «robot»", "logica"], ["📦 Armar el robot de cartón", "construir"], ["💡 Crear una idea de negocio", "liderar"]]], ["Si tuvieras un superpoder, sería…", [["🔬 Ver cosas diminutas", "ciencia"], ["🌿 Hablar con plantas y animales", "naturaleza"], ["📱 Entender cualquier aparato", "tecno"], ["❤️ Curar a las personas", "ayudar"]]], ["En un trabajo en grupo, tú…", [["📣 Organizo al equipo", "liderar"], ["🎨 Hago el afiche bonito", "crear"], ["🧮 Hago las cuentas", "logica"], ["🔧 Armo las piezas", "construir"]]], ["¿Qué video verías primero?", [["🚀 Cómo funciona un cohete", "ciencia"], ["🎮 Cómo se hace un videojuego", "tecno"], ["🐢 Animales de la Amazonía", "naturaleza"], ["🧑‍🍳 Cómo empezar un negocio de postres", "liderar"]]], ["¿Qué regalo te gustaría más?", [["🖌️ Una caja de colores", "crear"], ["🔭 Un microscopio o una lupa", "ciencia"], ["🪴 Semillas para sembrar", "naturaleza"], ["🔌 Un kit de robótica", "construir"]]], ["¿Cuál de estas frases va más contigo?", [["«Me gusta que todo esté en orden»", "logica"], ["«Me gusta que todos estén bien»", "ayudar"], ["«Me gusta probar aparatos nuevos»", "tecno"], ["«Me gusta inventar cosas nuevas»", "crear"]]], ["Cuando sea grande quiero…", [["🏥 Cuidar a las personas", "ayudar"], ["🏗️ Construir cosas grandes", "construir"], ["🌎 Cuidar el planeta", "naturaleza"], ["👩‍💼 Tener mi propio proyecto", "liderar"]]]], "trivia": [["¿Qué parte de un robot funciona como nuestros ojos?", ["La batería", "La cámara (sensor)", "Las ruedas"], 1], ["Si al «robot» le das una orden equivocada, ¿qué hace un programador?", ["Se rinde", "Busca el error y lo corrige", "Apaga todo"], 1], ["¿Cuántas variedades de papa hay en el Perú, más o menos?", ["10", "300", "Más de 3,000"], 2], ["¿Qué letra de STEAM significa Arte?", ["S", "A", "M"], 1], ["¿Qué profesional cuida los equipos del hospital?", ["Ingeniero/a biomédico", "Publicista", "Agrónomo/a"], 0], ["Un dado tiene 6 caras. ¿Cuánto suman todas?", ["18", "21", "24"], 1], ["¿Quién crea campañas para que la gente done libros?", ["Publicista", "Biólogo/a", "Técnico/a en robótica"], 0], ["¿Qué necesita una planta para crecer?", ["Solo oscuridad", "Agua, luz y tierra", "Solo agua salada"], 1]], "rec_n": [["Khan Academy en español", "https://es.khanacademy.org", "Matemática y ciencias con videos y ejercicios, gratis."], ["Code.org – La Hora del Código", "https://code.org", "Aprende a programar con juegos de bloques."], ["Scratch", "https://scratch.mit.edu", "Crea tus propios juegos y animaciones."], ["Simulaciones PhET", "https://phet.colorado.edu/es/", "Experimentos de ciencia y matemática en el celular."], ["PerúEduca", "https://www.perueduca.pe", "Recursos educativos del Ministerio de Educación."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros y materiales gratis de la Biblioteca Nacional del Perú."]], "rec_a": [["GCFGlobal en español", "https://edu.gcfglobal.org/es/", "Cursos gratis y sencillos para aprender a usar el celular, WhatsApp e internet."], ["Biblioteca Digital BNP", "https://bibliotecadigital.bnp.gob.pe", "Libros, revistas y fotos antiguas del Perú, gratis."], ["Khan Academy en español", "https://es.khanacademy.org", "Para aprender o repasar matemática a su ritmo."]], "celular": [["📹", "Hacer una videollamada por WhatsApp", ["Abra WhatsApp (el ícono verde con un teléfono).", "Toque el nombre de su familiar en la lista de chats.", "Arriba a la derecha toque el ícono de la cámara 📹.", "Espere a que conteste. Para colgar, toque el botón rojo."]], ["🎙️", "Enviar un mensaje de voz", ["Abra el chat de la persona.", "Mantenga apretado el micrófono 🎙️ (abajo a la derecha) mientras habla.", "Suelte el dedo cuando termine: el audio se envía solo.", "Si se equivocó, deslice el dedo a la izquierda antes de soltar para cancelar."]], ["🔠", "Agrandar la letra del celular", ["Abra «Ajustes» o «Configuración» (el ícono de engranaje ⚙️).", "Busque «Pantalla» y luego «Tamaño de fuente» o «Tamaño del texto».", "Mueva la barra hacia la derecha hasta que lea cómodo.", "Pida ayuda al tutor si no encuentra la opción: cada celular es un poco distinto."]], ["📷", "Ver y enviar fotos", ["Abra la «Galería» o «Fotos».", "Toque la foto que quiere enviar.", "Toque «Compartir» y elija WhatsApp.", "Elija a la persona y toque el botón verde de enviar ➤."]], ["🛡️", "Cuidarse de estafas", ["Nunca comparta códigos que le lleguen por mensaje (aunque digan que es del banco o de un familiar).", "Si alguien le pide dinero por mensaje, llame primero a su familiar para confirmar.", "No abra enlaces de números que no conoce.", "Ante cualquier duda, pregunte al tutor o a un familiar."]]], "refranes": [["Al que madruga…", ["…Dios lo ayuda.", "…le da sueño.", "…se le enfría el café."], 0], ["Más vale tarde…", ["…que temprano.", "…que nunca.", "…que mañana."], 1], ["Camarón que se duerme…", ["…se lo lleva la corriente.", "…despierta tarde.", "…sueña bonito."], 0], ["En casa de herrero…", ["…martillo de oro.", "…cuchillo de palo.", "…mucho ruido."], 1], ["Dime con quién andas…", ["…y te diré quién eres.", "…y te diré a dónde vas.", "…y te invito un café."], 0], ["No hay mal…", ["…que dure cien años.", "…que por bien no venga.", "…sin remedio."], 1], ["Poco a poco…", ["…se hace tarde.", "…se llena la olla.", "…se llega lejos."], 2], ["Agua que no has de beber…", ["…déjala correr.", "…guárdala bien.", "…dásela al vecino."], 0]], "oficios": [["🌾", "Agricultor/a", "¿Qué sembraba? ¿En qué mes se siembra y se cosecha? ¿Qué secreto tiene para que la planta crezca bien?", "Ingeniero/a agrónomo, biólogo/a"], ["🧶", "Tejedor/a", "¿Quién le enseñó a tejer? ¿Qué dibujos o colores usa? ¿Cuánto demora una prenda?", "Diseñador/a gráfico, diseñador/a de modas"], ["🪚", "Carpintero/a o albañil", "¿Qué fue lo más difícil que construyó? ¿Cómo mide sin equivocarse?", "Ingeniero/a civil, ingeniero/a mecatrónico"], ["🍲", "Cocinero/a", "¿Cuál es su plato especial? ¿Cómo se calculan las cantidades para muchas personas?", "Chef, ingeniero/a de alimentos, emprendedor/a"], ["🐑", "Pastor/a o criador/a de animales", "¿Cómo sabe si un animal está sano? ¿Qué animales cuidaba?", "Veterinario/a, zootecnista, biólogo/a"], ["🛒", "Comerciante", "¿Qué vendía? ¿Cómo hacía las cuentas y atraía a sus clientes?", "Administrador/a, emprendedor/a, publicista"], ["🎻", "Músico/a o danzante", "¿Qué música o danza es típica de su pueblo? ¿Cómo la aprendió?", "Músico/a, docente de arte, productor/a cultural"], ["🧑‍🏫", "Otro oficio", "Cuéntenos cuál fue su trabajo y qué fue lo que más le gustó de él.", "Lo buscamos juntos en el catálogo"]], "juntos": [["👵👦", "Mi oficio, mi historia", "Un adulto mayor cuenta su oficio con la ficha de preguntas. Los niños buscan en el catálogo qué profesión de hoy se parece. 20 minutos."], ["🃏", "Memoria por parejas", "Un niño y un adulto mayor juegan juntos el juego de memoria: el niño toca, el adulto recuerda dónde estaba cada carta."], ["📖", "Lectura compartida", "Con los libros donados de la campaña, un niño lee en voz alta y el adulto mayor cuenta si conoce una historia parecida de su pueblo."], ["📹", "El nieto profesor", "Un niño le enseña a un adulto mayor a hacer una videollamada o enviar un audio con la guía del celular. ¡El niño es el docente!"], ["📖", "La Palabra en dos voces", "El adulto mayor lee en voz alta un texto bíblico de su sección y el niño lo arma en «Ordena el versículo». Al final, cada uno dice con sus palabras qué entendió. 15 minutos."], ["🙏", "Historias que nos contaron", "Los niños juegan «Historias de la Biblia» y, en cada pregunta, el adulto mayor cuenta cómo se la contaron a él de niño. Se puede proyectar en el televisor de la sala para todo el grupo."]], "tutor": ["Use el kit en sesiones cortas de 15 a 20 minutos, siempre con un tutor del albergue presente.", "Limpie el celular o la computadora con alcohol antes y después de cada uso, y pida lavado de manos (protocolo de salud del proyecto).", "Todas las actividades se pueden hacer sentados o desde la cama.", "El kit no guarda nombres, fotos ni respuestas: al cerrarlo, todo se borra.", "Los juegos y el catálogo funcionan sin internet. Solo los «recursos gratuitos» necesitan internet.", "Si un niño o un adulto mayor está cansado, se detiene la actividad. No es una evaluación, es para disfrutar."], "versos": [["Todo lo puedo en Cristo que me fortalece.", "Filipenses 4:13"], ["Esfuérzate y sé valiente; no temas ni desmayes, porque el Señor tu Dios estará contigo dondequiera que vayas.", "Josué 1:9"], ["El Señor es mi pastor; nada me faltará.", "Salmo 23:1"], ["No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo.", "Isaías 41:10"], ["Dejen que los niños vengan a mí, y no se lo impidan.", "Marcos 10:14"], ["Aun en la vejez darán fruto; estarán vigorosos y llenos de vida.", "Salmo 92:14"], ["Hasta la vejez yo seré el mismo, y hasta las canas los sostendré yo.", "Isaías 46:4"], ["Encomienda al Señor tu camino, confía en él, y él hará.", "Salmo 37:5"], ["El gozo del Señor es nuestra fuerza.", "Nehemías 8:10"], ["Los que esperan en el Señor tendrán nuevas fuerzas; levantarán alas como las águilas.", "Isaías 40:31"], ["Lámpara es a mis pies tu palabra, y lumbrera a mi camino.", "Salmo 119:105"], ["Corona de honra es la vejez.", "Proverbios 16:31"], ["Echen toda su ansiedad sobre él, porque él tiene cuidado de ustedes.", "1 Pedro 5:7"], ["Este es el día que hizo el Señor; nos gozaremos y alegraremos en él.", "Salmo 118:24"], ["Ámense unos a otros, como yo los he amado.", "Juan 15:12"], ["Vengan a mí todos los que están cansados y cargados, y yo les daré descanso.", "Mateo 11:28"], ["Confía en el Señor con todo tu corazón.", "Proverbios 3:5"], ["El Señor te bendiga y te guarde.", "Números 6:24"], ["Que nadie te menosprecie por ser joven; sé ejemplo para los demás.", "1 Timoteo 4:12"], ["Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones.", "Salmo 46:1"], ["Jesús crecía en sabiduría, en estatura y en gracia para con Dios y con la gente.", "Lucas 2:52"], ["Yo sé los planes que tengo para ustedes: planes de bien y no de mal, para darles un futuro y una esperanza.", "Jeremías 29:11"], ["Sobre todas las cosas, guarda tu corazón, porque de él mana la vida.", "Proverbios 4:23"], ["Mi ayuda viene del Señor, que hizo los cielos y la tierra.", "Salmo 121:2"]], "biblia_n": [["¿Quién construyó un arca para salvar a su familia y a los animales del diluvio?", ["Noé", "Moisés", "Abraham"], 0, "Génesis 6 – 9"], ["¿Qué apareció en el cielo después del diluvio como señal de la promesa de Dios?", ["Una estrella", "El arcoíris", "La luna llena"], 1, "Génesis 9:13"], ["¿Con qué venció el joven David al gigante Goliat?", ["Con una espada", "Con un arco y flechas", "Con una honda y una piedra"], 2, "1 Samuel 17"], ["¿Qué animal se tragó a Jonás cuando huía de Dios?", ["Un gran pez", "Un león", "Un cocodrilo"], 0, "Jonás 1:17"], ["¿Quién guió al pueblo de Israel para cruzar el mar Rojo?", ["Pedro", "Moisés", "Noé"], 1, "Éxodo 14"], ["¿Qué pasó cuando echaron a Daniel al foso de los leones?", ["Escapó corriendo", "Los leones se durmieron de hambre", "Dios cerró la boca de los leones"], 2, "Daniel 6"], ["¿En qué pueblo nació Jesús?", ["Belén", "Nazaret", "Jerusalén"], 0, "Lucas 2"], ["¿Cuántos panes y peces usó Jesús para dar de comer a una multitud?", ["Dos panes y cinco peces", "Cinco panes y dos peces", "Diez panes y diez peces"], 1, "Juan 6:9"], ["¿Cuántos apóstoles eligió Jesús?", ["7", "40", "12"], 2, "Lucas 6:13"], ["En la historia que contó Jesús, ¿quién ayudó al hombre herido en el camino?", ["El buen samaritano", "Un soldado romano", "Un rey"], 0, "Lucas 10"]], "ordena": [["Todo lo puedo en Cristo que me fortalece", "Filipenses 4:13"], ["Dejen que los niños vengan a mí", "Marcos 10:14"], ["El Señor es mi pastor, nada me faltará", "Salmo 23:1"], ["Esfuérzate y sé valiente, no temas", "Josué 1:9"], ["Honra a tu padre y a tu madre", "Éxodo 20:12"], ["Sean amables unos con otros", "Efesios 4:32"], ["Lámpara es a mis pies tu palabra", "Salmo 119:105"], ["Confía en el Señor con todo tu corazón", "Proverbios 3:5"]], "citas_m": [["El Señor es mi pastor…", ["…nada me faltará.", "…y mi casa.", "…todos los días."], 0, "Salmo 23:1"], ["Vengan a mí todos los que están cansados y cargados…", ["…y les daré trabajo.", "…y yo les daré descanso.", "…y caminen conmigo."], 1, "Mateo 11:28"], ["Lámpara es a mis pies tu palabra…", ["…y pan en mi mesa.", "…y fuerza en mis manos.", "…y lumbrera a mi camino."], 2, "Salmo 119:105"], ["Porque de tal manera amó Dios al mundo…", ["…que ha dado a su Hijo unigénito.", "…que hizo los mares.", "…que envió la lluvia."], 0, "Juan 3:16"], ["Yo soy el camino…", ["…y la puerta.", "…y la verdad, y la vida.", "…y el pan del cielo."], 1, "Juan 14:6"], ["Pidan, y se les dará…", ["…esperen, y verán.", "…trabajen, y comerán.", "…busquen, y hallarán; llamen, y se les abrirá."], 2, "Mateo 7:7"], ["Honra a tu padre y a tu madre…", ["…para que tus días se alarguen en la tierra.", "…y a tus hermanos.", "…cada domingo."], 0, "Éxodo 20:12"], ["Todo tiene su tiempo…", ["…y todo pasa rápido.", "…y todo lo que se quiere debajo del cielo tiene su hora.", "…y cada día su afán."], 1, "Eclesiastés 3:1"], ["El amor es paciente…", ["…y nunca se cansa.", "…y siempre gana.", "…es bondadoso."], 2, "1 Corintios 13:4"], ["Bienaventurados los de limpio corazón…", ["…porque ellos verán a Dios.", "…porque serán ricos.", "…porque tendrán paz."], 0, "Mateo 5:8"]], "leer_m": [["El Señor es mi pastor; nada me faltará. En lugares de delicados pastos me hará descansar; junto a aguas de reposo me pastoreará.", "Salmo 23:1-2", "¿Quién le enseñó este salmo? ¿Lo rezaba en su familia?"], ["Corona de honra es la vejez, que se halla en el camino de justicia.", "Proverbios 16:31", "¿Qué consejo de vida le gustaría dejarles a los niños del albergue?"], ["Hasta la vejez yo seré el mismo, y hasta las canas los sostendré yo.", "Isaías 46:4", "Cuente un momento en que sintió que Dios lo cuidaba."], ["Este es el día que hizo el Señor; nos gozaremos y alegraremos en él.", "Salmo 118:24", "¿Por qué cosa de hoy quiere dar gracias?"]]};
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -524,6 +627,26 @@ const ico = (n, cls = 'i') => `<svg class="${cls}" aria-hidden="true"><use href=
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch(e){} } };
 function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('on'), 2400); }
+
+/* felicitación con texto bíblico al azar (pedido del encargado del albergue) */
+const VS = D.versos; let lastV = -1, winAfter = null;
+function pickVerse(){ let k; do { k = Math.floor(Math.random() * VS.length); } while (VS.length > 1 && k === lastV); lastV = k; return VS[k]; }
+function showVerse(speak){
+  const [t, c] = pickVerse(); $('#win-v').textContent = '«' + t + '»'; $('#win-c').textContent = c;
+  $('#win-say').dataset.say = `Lo has hecho bien. ${$('#win-sub').textContent}. Una palabra de parte de Dios para ti: ${t} ${c}.`;
+  if (speak) say($('#win-say').dataset.say, $('#win-say'));
+}
+function celebrate(sub, after){
+  const w = $('#win'); if (w.open) w.close();
+  $('#win-sub').textContent = sub || 'Terminaste la actividad';
+  winAfter = after || null;
+  showVerse(false); w.showModal(); $('#win-ok').focus();
+  setTimeout(() => say($('#win-say').dataset.say, $('#win-say')), 350);
+}
+$('#win-new').onclick = () => showVerse(true);
+$('#win-ok').onclick = () => $('#win').close();
+$('#win').addEventListener('close', () => { stopVoice(); const f = winAfter; winAfter = null; if (f) f(); });
+$('#win').addEventListener('click', e => { if (e.target === $('#win')) $('#win').close(); });
 
 /* datos */
 const PICON = {videojuegos:'gamepad', grafico:'palette', docente:'grad', programador:'code', sistemas:'monitor', datos:'chart', mecatronico:'cpu', biomedico:'pulse', robotica:'wrench', emprendedor:'bulb', industrial:'factory', administrador:'clip', publicista:'mega', enfermero:'care', biologo:'micro', agronomo:'sprout'};
@@ -563,15 +686,17 @@ $('#bt-voice').onclick = () => { const on = document.body.classList.contains('no
 /* navegación */
 const VIEWS = [
   {id:'home', label:'Inicio', icon:'home'},
-  {id:'ninos', label:'Niños', icon:'smile', cls:'c-kids', title:'Niños y adolescentes', desc:'Conoce 16 profesiones, descubre qué te gusta y pon a prueba tu lógica con juegos.'},
-  {id:'mayores', label:'Mayores', icon:'heart', cls:'c-adult', title:'Adultos mayores', desc:'Guía paso a paso del celular, memoria, refranes y cálculo, con letra grande.'},
+  {id:'ninos', label:'Niños', icon:'smile', cls:'c-kids', title:'Niños y adolescentes', desc:'Conoce 16 profesiones, pon a prueba tu lógica y juega con historias y versículos de la Biblia.'},
+  {id:'mayores', label:'Mayores', icon:'heart', cls:'c-adult', title:'Adultos mayores', desc:'Guía del celular, memoria, citas bíblicas, refranes y cálculo, con letra grande.'},
   {id:'juntos', label:'Juntos', icon:'users', cls:'c-shared', title:'Actividades compartidas', desc:'Propuestas para que niños y adultos mayores aprendan unos de otros.'},
   {id:'tutor', label:'Tutor', icon:'clip', cls:'c-tutor', title:'Para el tutor', desc:'Temporizador de sesión, uso seguro e instalación sin internet.'},
 ];
 $('.bottomnav').innerHTML = VIEWS.map(v => `<button data-go="${v.id}">${ico(v.icon)}<span>${v.label}</span></button>`).join('');
 $('.topnav').innerHTML = VIEWS.map(v => `<button data-go="${v.id}">${v.label}</button>`).join('');
 $('#aud').innerHTML = VIEWS.slice(1).map(v => `<button class="audcard ${v.cls}" data-go="${v.id}"><span class="ic">${ico(v.icon)}</span><h3>${v.title}</h3><p>${v.desc}</p><span class="go">Entrar ${ico('chev')}</span></button>`).join('');
-$('#stats').innerHTML = `<span class="stat"><b>${P.length}</b>profesiones</span><span class="stat"><b>7</b>juegos y actividades</span><span class="stat"><b>${ico('wifi')}</b>funciona sin conexión</span>`;
+{ const d = new Date(), k = (d.getFullYear() * 400 + d.getMonth() * 31 + d.getDate()) % VS.length, [t, c] = VS[k];
+  $('#word').innerHTML = `<span class="ibox">${ico('sun')}</span><div><span class="vlabel">Palabra del día</span><q>${esc(t)}</q><cite>${esc(c)}</cite></div>${sayBtn('Palabra del día. ' + t + ' ' + c)}`; }
+$('#stats').innerHTML = `<span class="stat"><b>${P.length}</b>profesiones</span><span class="stat"><b>10</b>juegos y actividades</span><span class="stat"><b>${ico('wifi')}</b>funciona sin conexión</span>`;
 document.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) go(b.dataset.go, b.dataset.tab); });
 
 function go(view, tab){ const h = '#' + view + (tab ? '/' + tab : ''); if (location.hash !== h) location.hash = h; else route(); }
@@ -596,7 +721,7 @@ $$('.tabs').forEach(tl => {
   tl.addEventListener('click', e => { const t = e.target.closest('[role=tab]'); if (t){ history.replaceState(null, '', '#' + tl.dataset.view + '/' + t.dataset.tab); route(); } });
   tl.addEventListener('keydown', e => {
     if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
-    const tabs = [...tl.querySelectorAll('[role=tab]')]; const i = tabs.indexOf(document.activeElement);
+    e.preventDefault(); const tabs = [...tl.querySelectorAll('[role=tab]')]; const i = tabs.indexOf(document.activeElement);
     const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.click(); n.focus();
   });
 });
@@ -647,7 +772,7 @@ function renderTest(){
       <p class="sub">No hay respuestas buenas ni malas, y puedes repetirlo cuando quieras. Tus respuestas no se guardan.</p>
       <div class="qnav"><button class="btn" id="t-again">${ico('refresh')}Volver a empezar</button><button class="btn primary" data-go="ninos" data-tab="profesiones">Ver todas las profesiones</button></div></div>`;
     $('#t-again').onclick = () => { tI = 0; tH = []; renderTest(); };
-    return;
+    celebrate('Terminaste el test de intereses'); return;
   }
   const [q, ops] = D.test[tI];
   el.innerHTML = `<div class="qtop"><span>Pregunta ${tI + 1} de ${D.test.length}</span><span>Test de intereses</span></div><div class="progress"><i style="width:${tI / D.test.length * 100}%"></i></div>
@@ -660,15 +785,16 @@ function renderTest(){
 renderTest();
 
 /* cuestionario reutilizable */
-function quiz(sel, make, endText){
+function quiz(sel, make, endText, done){
   const el = $(sel); let i = 0, ok = 0; const items = make();
   function draw(){
     if (i >= items.length){
       const msg = ok >= items.length * .75 ? 'Muy buen resultado' : ok >= items.length / 2 ? 'Buen trabajo' : 'Sigue practicando';
       el.innerHTML = `<div class="result"><div class="score"><span class="n">${ok}/${items.length}</span><div><h3>${msg}</h3><p class="sub">${esc(endText)}</p></div></div><div><button class="btn primary" id="${el.id}-r">${ico('refresh')}Jugar otra vez</button></div></div>`;
-      $(`#${el.id}-r`).onclick = () => quiz(sel, make, endText); return;
+      $(`#${el.id}-r`).onclick = () => quiz(sel, make, endText, done);
+      celebrate(`${ok} de ${items.length} respuestas correctas`); return;
     }
-    const [q, ops, c] = items[i];
+    const [q, ops, c, note] = items[i];
     el.innerHTML = `<div class="qtop"><span>Pregunta ${i + 1} de ${items.length}</span><span>Aciertos: ${ok}</span></div><div class="progress"><i style="width:${i / items.length * 100}%"></i></div>
       <div class="qtitle"><h3>${esc(q)}</h3>${sayBtn(q + ' ' + ops.join('. '))}</div>
       <div class="opts">${ops.map((o, k) => `<button class="opt" data-k="${k}"><span class="k">${'ABCD'[k]}</span>${esc(o)}</button>`).join('')}</div>
@@ -676,13 +802,13 @@ function quiz(sel, make, endText){
     el.querySelectorAll('.opt').forEach(b => b.onclick = () => {
       const k = +b.dataset.k, all = el.querySelectorAll('.opt'); all.forEach(x => x.disabled = true); all[c].classList.add('ok');
       const right = k === c; if (right) ok++; else b.classList.add('no');
-      el.querySelector('.fb').innerHTML = `<div class="feedback ${right ? 'ok' : 'no'}">${ico(right ? 'check' : 'x')}${right ? 'Correcto.' : 'No es esa. La respuesta correcta está marcada en verde.'}</div>`;
+      el.querySelector('.fb').innerHTML = `<div class="feedback ${right ? 'ok' : 'no'}">${ico(right ? 'check' : 'x')}<span>${right ? 'Correcto.' : 'No es esa. La respuesta correcta está marcada en verde.'}${note ? ` <span class="ref">(${esc(note)})</span>` : ''}</span></div>`;
       const n = $(`#${el.id}-n`); n.hidden = false; n.focus(); n.onclick = () => { i++; stopVoice(); draw(); };
     });
   }
   draw();
 }
-const mix = ([q, ops, c]) => { const ix = shuffle(ops.map((_, k) => k)); return [q, ix.map(k => ops[k]), ix.indexOf(c)]; };
+const mix = ([q, ops, c, note]) => { const ix = shuffle(ops.map((_, k) => k)); return [q, ix.map(k => ops[k]), ix.indexOf(c), note]; };
 quiz('#trivia', () => shuffle(D.trivia).map(mix), 'Cada pregunta conecta con lo que vimos en los talleres.');
 quiz('#refranes', () => shuffle(D.refranes).map(mix), '¿Conoce otro refrán de su tierra? Compártalo con los niños.');
 const PROD = [['un kilo de papa', 3], ['un kilo de arroz', 4], ['seis panes', 2], ['una lata de leche', 5], ['diez huevos', 6], ['un kilo de azúcar', 4], ['un kilo de mandarinas', 3], ['un queso fresco', 7]];
@@ -696,6 +822,42 @@ function cuentas(){
   });
 }
 quiz('#cuentas', cuentas, 'Calcular de memoria mantiene la mente activa. Los precios son de práctica.');
+
+/* biblia */
+quiz('#historias', () => shuffle(D.biblia_n).slice(0, 8).map(mix), 'Pregúntale a un adulto mayor del albergue si conoce otra historia de la Biblia.');
+quiz('#citas', () => shuffle(D.citas_m).slice(0, 8).map(mix), 'Muchas de estas citas las aprendimos de memoria de niños. Compártalas con los más pequeños.');
+$('#leer').innerHTML = D.leer_m.map(([t, c, qq]) => `<article class="card"><div class="hd"><span class="ibox">${ico('bible')}</span><h4>${esc(c)}</h4></div><q>${esc(t)}</q><p class="foot">Para conversar: <b>${esc(qq)}</b></p><div class="end">${sayBtn(t + ' ' + c + '. ' + qq)}</div></article>`).join('');
+$('#bn-seg').onclick = e => { const b = e.target.closest('[data-m]'); if (!b) return; $$('#bn-seg [data-m]').forEach(x => x.setAttribute('aria-pressed', x === b)); $$('#v-ninos [data-pane=biblia] .panel').forEach(p => p.hidden = p.dataset.m !== b.dataset.m); };
+function ordena(){
+  const el = $('#ordena'), set = shuffle(D.ordena).slice(0, 4); let i = 0;
+  function draw(){
+    const [t, c] = set[i], words = t.split(' '); let n = 0;
+    el.innerHTML = `<div class="qtop"><span>Versículo ${i + 1} de ${set.length}</span><span>${esc(c)}</span></div><div class="progress"><i style="width:${i / set.length * 100}%"></i></div>
+      <div class="qtitle"><h3>Toca las palabras en orden para armar el versículo</h3>${sayBtn(t + '. ' + c)}</div>
+      <div class="ord-target" aria-live="polite"><span class="ph">Empieza por: «${esc(words[0])}»</span></div>
+      <div class="ord-pool">${shuffle(words.map((w, k) => [w, k])).map(([w, k]) => `<button data-k="${k}">${esc(w)}</button>`).join('')}</div>
+      <div class="fb" aria-live="polite"></div><div class="qnav"><span></span><button class="btn primary" id="ord-n" hidden>${i < set.length - 1 ? 'Siguiente versículo' : 'Terminar'} ${ico('chev')}</button></div>`;
+    const tg = el.querySelector('.ord-target');
+    el.querySelector('.ord-pool').onclick = e => {
+      const b = e.target.closest('button'); if (!b) return;
+      if (words[+b.dataset.k] !== words[n]){ b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad'); el.querySelector('.fb').innerHTML = `<div class="feedback no">${ico('x')}Esa palabra va después. ¿Cuál sigue?</div>`; return; }
+      if (!n) tg.innerHTML = ''; tg.insertAdjacentHTML('beforeend', `<span class="w">${esc(words[n])}</span>`); b.remove(); n++;
+      el.querySelector('.fb').innerHTML = '';
+      if (n === words.length){
+        el.querySelector('.fb').innerHTML = `<div class="feedback ok">${ico('check')}<span>¡Muy bien! <span class="ref">${esc(c)}</span></span></div>`;
+        const nx = $('#ord-n'); nx.hidden = false; nx.focus();
+        nx.onclick = () => { i++; stopVoice(); if (i < set.length) draw(); else end(); };
+      } else { const nb = el.querySelector('.ord-pool button'); if (document.documentElement.dataset.tv && nb) nb.focus(); }
+    };
+  }
+  function end(){
+    el.innerHTML = `<div class="result"><div class="score"><span class="n">${set.length}/${set.length}</span><div><h3>Armaste todos los versículos</h3><p class="sub">Elige uno y apréndelo de memoria esta semana.</p></div></div><div><button class="btn primary" id="ord-r">${ico('refresh')}Jugar otra vez</button></div></div>`;
+    $('#ord-r').onclick = ordena;
+    celebrate(`Armaste ${set.length} versículos`);
+  }
+  draw();
+}
+ordena();
 
 /* robot */
 const LV = [
@@ -739,7 +901,7 @@ $('#rb-run').onclick = () => {
       if (p[0] === L.g[0] && p[1] === L.g[1]){
         done.add(lv); rbLevels();
         if (lv < LV.length - 1){ end(`Nivel superado con ${prog.length} movimientos.`, 'ok'); setTimeout(() => rbSet(lv + 1), 1600); }
-        else end('Completaste los 5 niveles. Así trabaja un programador: paso a paso y corrigiendo errores.', 'ok');
+        else { end('Completaste los 5 niveles. Así trabaja un programador: paso a paso y corrigiendo errores.', 'ok'); celebrate('Completaste los 5 niveles del robot'); }
       } else end('El robot no llegó a la estrella. Revisa tu programa y corrige el paso que falla.', 'no');
       return;
     }
@@ -775,7 +937,7 @@ function memory(key, o){
       const [x, y] = open;
       if (cards[+x.dataset.i] === cards[+y.dataset.i]){
         x.classList.replace('up', 'done'); y.classList.replace('up', 'done'); open = []; found++; stat();
-        if (found === base.length){ toast(`Completado en ${tries} intentos`); say(o.win); }
+        if (found === base.length) setTimeout(() => celebrate(`Encontraste las ${base.length} parejas en ${tries} intentos`), 500);
       } else { stat(); setTimeout(() => { open.forEach(z => { z.classList.remove('up'); z.innerHTML = back(); z.setAttribute('aria-label', 'Carta boca abajo'); }); open = []; }, o.delay); }
     };
   }
@@ -789,7 +951,7 @@ const CELI = ['video','mic','text','image','shield'];
 $('#cel').innerHTML = D.celular.map((c, i) => `<details class="acc"${i === 0 ? ' open' : ''}><summary><span class="ibox">${ico(CELI[i] || 'phone')}</span>${esc(c[1])}${ico('chev', 'i chev')}</summary><div class="body"><ol class="steps">${c[2].map(s => `<li>${esc(strip(s))}</li>`).join('')}</ol><div class="row" style="margin-top:14px">${sayBtn(c[1] + '. ' + c[2].map((s, k) => `Paso ${k + 1}. ${s}`).join(' '))}</div></div></details>`).join('');
 const OFII = ['sprout','yarn','hammer','food','paw','store','music','brief'];
 $('#ofi').innerHTML = D.oficios.map((o, i) => `<article class="card"><div class="hd"><span class="ibox">${ico(OFII[i] || 'brief')}</span><h4>${esc(o[1])}</h4></div><p>${esc(o[2])}</p><p class="foot">Se parece a: <b>${esc(o[3])}</b></p><div class="end">${sayBtn(o[1] + '. ' + o[2])}</div></article>`).join('');
-const JUNI = ['users','grid','book','phone'];
+const JUNI = ['users','grid','book','phone','bible','tv'];
 $('#jun').innerHTML = D.juntos.map((j, i) => `<article class="card"><div class="hd"><span class="ibox">${ico(JUNI[i] || 'users')}</span><h4>${esc(j[1])}</h4></div><p>${esc(j[2])}</p><div class="end">${sayBtn(j[1] + '. ' + j[2])}</div></article>`).join('');
 const rec = r => `<article class="card"><div class="hd"><span class="ibox">${ico('globe')}</span><h4>${esc(r[0])}</h4></div><p>${esc(r[2])}</p><a class="link end" href="${r[1]}" target="_blank" rel="noopener">Abrir página ${ico('ext')}</a></article>`;
 $('#rec-n').innerHTML = D.rec_n.map(rec).join('');
@@ -804,10 +966,54 @@ function beep(){ try { const ac = new (window.AudioContext || window.webkitAudio
 function tmTick(){
   const s = Math.max(0, Math.round((tmEnd - Date.now()) / 1000));
   $('#tm').textContent = fmt(s); $('#ring-fg').style.strokeDashoffset = CIRC * (1 - s / tmTot);
-  if (s === 0){ clearInterval(tmH); tmH = null; $('#ring').classList.add('end'); $('#tm-l').textContent = 'Tiempo cumplido'; beep(); say('La sesión terminó. Es momento de descansar.'); toast('La sesión terminó'); }
+  if (s === 0){ clearInterval(tmH); tmH = null; $('#ring').classList.add('end'); $('#tm-l').textContent = 'Tiempo cumplido'; beep(); toast('La sesión terminó'); celebrate('La sesión terminó. Es momento de descansar.'); }
 }
 $$('[data-tm]').forEach(b => b.onclick = () => { tmTot = +b.dataset.tm * 60; tmEnd = Date.now() + tmTot * 1000; $('#ring').classList.remove('end'); $('#tm-l').textContent = 'Sesión en curso'; clearInterval(tmH); tmH = setInterval(tmTick, 500); tmTick(); });
 $('#tm-stop').onclick = () => { clearInterval(tmH); tmH = null; $('#ring').classList.remove('end'); $('#tm').textContent = '20:00'; $('#tm-l').textContent = 'Listo para empezar'; $('#ring-fg').style.strokeDashoffset = 0; };
+
+/* modo TV (pedido del encargado: proyectar el kit en el televisor de la sala) */
+const isTVua = /SMART-TV|SmartTV|Tizen|Web0S|webOS|NetCast|BRAVIA|Android TV|GoogleTV|AFT[A-Z]|CrKey|HbbTV|Roku|\bTV\b/i.test(navigator.userAgent);
+function setTV(on, quiet){
+  if (on) root.dataset.tv = '1'; else delete root.dataset.tv;
+  $('#bt-tv').setAttribute('aria-pressed', on); store.set('aj-tv', on ? '1' : '0');
+  $('#tv-on').innerHTML = ico('tv') + (on ? 'Salir del modo TV' : 'Activar modo TV');
+  $('#tv-st').textContent = on ? 'Modo TV activo. Use las flechas y OK del control.' : '';
+  if (!quiet){ toast(on ? 'Modo TV activado' : 'Modo TV desactivado'); if (on) setTimeout(() => ($('.topnav [aria-current]') || $('.topnav button')).focus(), 50); }
+}
+$('#bt-tv').onclick = () => setTV(!root.dataset.tv);
+$('#tv-on').onclick = () => setTV(!root.dataset.tv);
+$('#bt-full').onclick = () => { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch(e){} };
+const tvParam = new URLSearchParams(location.search).has('tv');
+setTV(tvParam || (store.get('aj-tv') ? store.get('aj-tv') === '1' : isTVua), true);
+$('#qr').src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbgAAAG4AQAAAAAfsc8eAAAk5ElEQVR42u2cf3Ac53nfv7tYBrel4wOPmUJxZd5SeDCymoSnNJ7+cOjcglSIe8XOQFbSSdrIgdum00xjXWhFrWQnzS1B1qLGju/4kjP8ozMC0sKedqZT5a9A9sTFRXUdw5PELNoZ1wXinlTYJZKIXV0uIgAt9ts/3nf39gBItttpZzoj/HXEYPm573ffn8/zvK9D/G/9uHjnuXeee+e5d577Dj9knH/sYjwFUE4AAA5JJkCdOw4jYCwfisrkWIQ3byMCIqD5x92F938VEX/mB4AIeBIAfwBvfiT9V0/+JyD6q581fxfxZ/9PePv3mf8FP/dnPX70JPDJhz9n/g0An4smQ/7+z30rhPPRr9ov9smH/3/S9/+U5wLeLZLkvqCiAofL+kfHqWRxrwG8MuGIdpx3dSCLTKDqJMntwLSXcZJk4rCLcTJC5SKB8o5DbrUTwNPhMUZ1kmiRJHuG54aG3oYvHaCi7r4E0aEjQLIEre5vrp9FpQdAugAALzK8ScPzMp6aynjb5QTwJTrBaJGkY75nr0aCHDxn9AVcVw+SyxrHqWRxT5G98r7oEJWf5HKVZMPqK5NH8fT5XN+LhuccxevPmuc6XJNbpG7gOEXP7U6TvXKiVYCKoq6SFPPcVtvwrJ+u5blDfZmfDqN5kljN/QTZn8t50w+S+jGMUT5b250me9VEP96BPz3KW3wL3oMjfroqOJI3uJUCKO8HXP9QYBsX/2Ntr4EW4zE2VmPvuvnjRj0G0NquWV6qRM8lJXY9f5okkwa/VN5xVYuvT9Gt98Njxgy33leiW5m+WdOYF7g2ETnZV27vBmhxcJxBPa7MGPOD1RhAK/NzMtVKFpOA3VCuZ02gtuNLi/EV+vVBdMLwSvWBVjJsL0ZfietedIwkkxK75b3QabF/kkE9rvyk0XfO6jPtOulAiQ75Htw9q88CAD6BUpSuTQHpw9iK3DO/A/gB8OXIVaJxz/SjTF/EtUp4giSTgC/XdgO02D/OsB7704YX1HN9LpB2oUSHuIZ7d9cGAODcwff1uKWB9D6sw3tm03SeV+Eq0UhMP+rP5X5KNEOSyQO5n1eI1Viuj/qZtZfcT4j5nhHXazuebjE+zka9j2Om82R+jraXEjm4fIxRleSw9YHdMsmoGo/lftaMn5cyP5G0z6Jiho1s9NDwAwCV0G3kfvYO+Mn+Iydy3uRhXsHPQnspkbFzjMuLJIejh3B9juTy4uAG3aPaS7JADjozb6fP+jnaXvACkDx9O9f32GF9d45qL/slsj/z3fi51SY90156wbf5HiD92tv7ueIqh0iiS8X2EpGDqydzXvmt/Ry2l+en55ISGZ9wvoOfN9VfbhXaS2D85E4DrV6ZZBcB0GIMO4+xhzEGq7Ez0l4av9AJ8QIA5wtipg1ffkErmPYPRwBPN3Ancs/LQqG9uDhW3i+R3Akut3o1kl1MZLzVnHeuHk/gfXn/u43PyKcCvgeAe6cNvwegovpKAE8rieA2AF86+HLkfUz+NpIlwLQXF2gnEcmdhXOZvgacg7ygHk/AK7SXC/rRCNcA4IUvw1sC4MtLetboi3J9r8J9v/6bo+2lliyQ3PNPW54jGW/ET8AZGV86H8ELANJn/pv1c2oz44VFP5VcGRlfPOunPN/qVUl2oQ/zztVjIGgdmI8esC2qYuY1M/PsTz8EjKdocXCDpdXiesLrmBb887YFn+nmi1ov4sbXH9EhFJBcwn0RADMEF3gly/NrQ14t0Y9MYDJFi/2LdOtHrV8+YbpQZbKX8/wemn/QVzE0kL6EU1G+fjHtBQDwAu52Adz9e2H+3D048ssXVkI0Aa+DO+a5vL2YHlPiWo3kcqmcf8+tFxNUoCdT1WI8xnNHrl8yPy8X9JUTHT6CWasv89P0I/fhUT//Za/gJ5prv6+7UED6Uuan95Ej/UR7yKvuS+Qa3uBG0c/C+mXBjgh6+D23ywmkoyZT3WI8xmB1ZP1idzwBu+Udx4xAqMfjKVq9uUTzd81v+xdZMn85USY9wOu4KxvNla/fgR84YkY8idwQCl4XzSfHzW/Tl/CB8Y3mykbzt77f6DN7K/+BUd5kitYrtUTz5YM8u752LyjRSp75pkFVQoO6BI3xHpp4d+Q2IFH6En5QtBKtKqHhOQAA0TnvZKbvldq+sFvbcRhVBzey9Xxo+0O7okSrzabRJ5H3NCRyH4PCWI+b+As9R1AJk0swOFmz/cGL3orXayea3Xamz+CcwL6/sKJEK4Brtd1p6vn+ecpqfzZVra1aAn7F/DYeoxKtRDc8O9+aGajAGyPqcTlFq9fel+z95fqcwLbPM2uilTzRzF6d14GC9yw0ShE3UQ7cBiTK9U1tmfY5/OmWbScAu+UdoPVqCM0vtXccHvwZ2U/7ge0E1+AH0ArpeqOJJHLkqP30IV4teYDd8h7Q2obb4Prcd+IZg/ye801UwlQJ7qlTX8Ddrts4hPOK/7jbNYMKK7jbdVYceCv+KfhB+tLbxwusviU04QeszGJfnrmDe73vUl85qbBb3oXTugNZ+C705X424QdUU9iVJ17A3e53yasmYv3cQsXnWu279DN2No2fUaLPPIN7vSP8BEnaTbRpJKjGECAffFEnU7R65QRA2fxtxlOiQ2j4gSNawZEPi84H+woAKHgRtJLI/u1RvPkBJgq8cNXwagmA2ihPK+mYoUyJ7ib6/VoFGe8rkVnd9RzRqmf+9mh9fTtmWeeO1GfamdpoftHqa678xVSaKxu/lPEuPGP0LUGvbHzK/u1b82rfu5+pVqLzSUm+Bz+B4aTkWF71u/BTiV7KeLOh8TM+7Ked00gTaXEBoLwDsy+2oxxCwIyqBT9tjANwBJXlP/38RnPl2440X4PbALzIEVRUV5orb7hh0U87Z2c87wCvtuMwQgCYWWqE5xv/3AZEPuqubPKXXLURwesAlZ7bgOin9MpG5F2CXtn41QJvLuNdNvpqQ157x2GEzoi+rP953UxfWZ1Soh/tOaIBtwGUlhxBpfEx0Y/Dfaz4/ki+kuu7Ch8A2jnPzLduA8DqId54L+O9V56pPK4eWMp5744cQeXC50Vfi9wQ6iEVHM2TECgN/Xy5tuMwcgR4oB6XLc8+F1WZAPXY66C1Xd4XdqPxVLc46AD12LtOMr4x3P3kz+l5JlrV+6GnW71a4nBdbqUgY08rEw9hf4xk/ODocxmvEqK11U467GI8bbTYDwETD2F8kWR/fHQclAiO6NBrriskEZ6GLx18AUjXlURe8zYA9yUAaWd03C3ytmv7AbsYTzstDiLAxEMMb3CAVwkBreCeWRPc63ELFRXgKSDRSkw8BN5LAJK34PmBc4Q+f5rk61NH6Mt4k1ttJEt4Cr508HkgXRMNd3ITAO8ASMOjeQuh19pqW32WtxovKJKDKyT7k6PvYXmR+6Jbg1JlptUrJyWuya3UaTH2RdcHJYdkPEUynj3w/kwY1g62yQJJpp1Wzw+AevwcGcEtgV0fzqg+JR3ItQjZVgIAnob3zJZWcJeAijr1cYE/WWmM6gPGiAfsYJtcI8l0ptWTDlCPx8kIJQG7XuSM6tPqQar8e7okmU60tuEqWR3cIpf1OWiuhxV1hL4TlrcfkGR6dZSnwW4lPErfr9jBnXcAAL8B74mnlIIbAhV1X1Pg312TI/QF7RE/w1av0gDq8SQZwVVgVwVH8NTW0oifX4J35vOiQ/dhoKJOrSj4K1udI3ih5e2XrJ+veEN9voBd6Rwb9XNZX6RUMj8fsH7emfC0qhs/Q0e4Duf08LmdLMjKGNk6GeUdx2u9UibtEtbs6hd3PBNsd83gZyI7cFW2z9GhM/VBjIWAmU3N7rl0yT2rc31vwcOEhQx5L8/tVAwPJPeUjexwoJWJ7ChZ3FNea7tGcn1uTwm3ayRvl3ch30kfZo7iqe+oT75mQxVGXwTg+7ruivpO+hzPhn4Mr0byd2sZzzvA27S85hedqfeaHbAfONJ8ze8BGO85K5Xv0U/Lk+h783OrfchPkhHKpFlGmf8OGCfNntm0z6r56ElUnDcrKgBEh4Cym89zIWDjZ24I+Pbj2See9yUq9IeDvInJjLcaT5LRvPlY8YMANXLMDGHfCvmz+Co++TBO3gsBfBX/6ANnAezfB/zhh92z+NYLT94H/OGH9ze3nnrsxWffmheM6rts9Z3wOhNov40+07FdJTpyHwPKofn4Y/c/9aOy9Db6OqO8q5aHqx3v7Xg3nxr187324wO/9tT9+u387BT8LJNXrZ/XHgquomb7EaCknZgmJ60exki+nq2MGvVB5JiUFznAZXbmbXvZFQ3UEk1yV5zWlr5IcjCbKtFzpFuPT0+TW+3EIWN9jJerPMxDx/LylWaw2i85ZK+WdMg+TvNaNW/XApT3heTuA15rW26Y76mVLJKlerygyO1y4pGx8vmb9ZzniJ4zvNJpyxvMWt65+iAw+gJygBlereb6OkA50ST3wqtWXzxp9ZVW4+enya0XE498XXx2FnOep1XN8LwJy+tnvKDeh0P2ykmHjJ3TJjBuxqVPN1d60ACc+z8GTzcwzNbgVaTSAbwITwFee8vuSknuwM39LOW8uaGfOEb2qkmHjL3rhmf8DIDavpDcO/eI9TMu+KlnyO1y4pL90Abi8/ndvDSUHLNVymY3gN3SOMleaKJcdm9j9w+bkf48AFf9lzE0vwidtfZvuE347/kRAN56AxK5Dw/ztySpf9rygKjIK0UwWUi+AhPFG8YjAeDuv9ENmLD689LJ4gOi/7pumD6GcRVAzGzm93LeZx/IeWGR54VuzjtOx/KG4+DGN1Vgu+maREN97/3SZ0zWGmPyLGZDNzQBk4x3/SEcz/XVCvomMl4PU3SGflren31dnrW8Zd3LeLL88f4Fy/P0HUzBuzTq59LVaIpZKLQ95EkDOe9K/v6q+XtfmKgcJznQSok2TYeknoYjJkvObZmiqvdnh/Fk7gAT83E0WklQJhktDjom4YNWD9eyqFpvLusP+q903WWtzP5WSccMiahEydNmU6bg6Y8LSpEj2uwVDa9UzTMGRV61Hw55Ar5c2wFar9RM+3TVxoe/6emVjQhuA6JXvgm18asAJErXG4DXgX7NlycqeHfPVRvRdi/nydG8+iByc14F/N2cZ/VtDjNMRX29RF8ATLxXnxGM9xzRGBvy9Hye8Rnx0+ibTNHqoRRZXq+d85pdk/FxG5Bl3bA8idI1AbxLUPD0B7TlZe1zB1BH6xvlgS/PZbxsvJ4faCWr3J2mnlZTVLJIUldjX8j+bKpb29OB5u3ynhLeKQ/H66qJ7JgV3DAUY+pRmALAGG1Kxc3bS/uPhptVeEEe+ukCWtuAUKMD+cy6El25kLcXz8xpltcehpqYAKuG52a8yKnl46dXJanqNF9/X8ziSs9zXxp1MtVKOhcpHV90Qzq5Pv90Qd+rc0We41p9nuW58PL398x/D4f60tvD0BbQPhUZfR8MoE6tib6gz+bvTzoF3vaIn941y5s4ThtYrZSz+S9yCvp6c4nm+tyuaFXlfuDWyVSJfuQKJfK0Eh22M32VRsHPrXJRn9exfmKKkA4AlLL+9+gbX3hvpq/52n7gCPzAVRuXjgOffuqDXUBjZeMfQq18TC5N3P2tP8j0+UE4LEWrmlHNDGJjNBtaU0nEAQBUadaR6ed+6Bu9DtDEm7edyXfXL95GBCy8H/jzwPk7H9ZAxPvNhv/ee3A3/JNLllfyg4mcVzrAEwBwLa8PhJi387v7Nya3nlKiAU83nv9BeFqJCbj60sGmVqIv2N1iKstrpoqJ5E7J69hUC9wA80foc3KeEzj5+uX0hOuLbpB9FXg3q30lWsktklv6Il0lWol9LtYNL1/X7XgzQQS4ZAw/cA7oC0b9dIJj+frl/n9/Z1mrU4CrJrfaoatEP6oCmGTvtmgldoJCome3/nm+z3GDBQAlMobX8d6O14cTeNn33GtcDRazCLA7U+X+9ENys+OQHHTAdSVawQZo1DQ7w/XnxLUqSVkl08bEPBOztCYZe5pdAJBFE2CDw4XFfD244M5nPMerMtGP6Ec6Dsl+CK6JVhINeUsFXmD7EdPOTJUJJjDh3SAZVxqGV5k3ASE4vLaYr88cv5rxvIl57suCckOH5CByuf64Eh0a3utynQtDXiOYz/TNeIbXqKgiz68y0aoe4xiXhut518t5EzNVJvqccpDrqzyuVWCG4IGe4fM5zwmu535enZhnghJETZOMfWE3BOBmvBPD9eeulJD7ecKrcl8uS5Tz1n1RP90x+vrqGJfz9okFlfsZzlSZQHBCruc8B3BNgC3Gh/J9hwmvlBP7sTNvQ2spWj1/iqgPbmWlKfa3w7x9RQXQ5uMgLxNQ8J7pmYxhtsHPUgpZ3WHGmySvVws8uUHUs4K/nGfWBd4lZHWN3iXgf+YhRw1/8xJUVhCQhxXsuvWAvuVDPBtEPqTvsaG+x4A/QkHfE09DoizImutbOoo34mfl/FH6hn6avMxhP8/chkRp92g/y0NeedTPV7wrRD0rCMh5VePns0BFBY6Yj0U/x9+1DAWb3hz6GefrHrOJrscPplC2Z4+ngONmKa8sogqHEew6BNpu2iO3B7VifuGGUNK+0HneLvGUaCXXRTdQUXYdsjfk3UpRMT0tnkwBD15Q5HmGZ+MhyR/gTAjgq29++Nyvnbx7+xI+F01+0D17Em/+wK/98GMY+0XgWyEQYW8BePJboY2H7Nppw/D8gj4P7og+1/DsOoSV2UzfJahJGzp/DEo+rS/YGc3o+4zoBioNuw4p8GZTuAUegGhEXwSHkWv3jVQbGe821O+FgM4yWivf0GrjlwBU1EbzpdJdrTZRuTB7yM/ZFOcsr5wCQMmmEKMs/G/99ACkaiMCAPWG14X+J5NwpPma9yw0VjaeqKw4/wGA6JWNJy+f+ZJegeh/mukrLlZbPQB5cjIrtYuq8RjDet62XAA04UadRR6zebJhS5Tc0NbXrQGODOOtuzBp3SJvlUzdjDfJrDpi2JZJ7og2ySYbWRWtpE6mHRNk5eA5W19nF355XPGwPqde5I0f5rkAUm3SugV9bQC4YLOX7mPISjJG9O0c5nmr+Uh5NM/u44Z+Nl/z9Mrmm1EXUDZ7afz0OlBvwH2UBZ7T6lUzHnsA/HqRVz7az13poBKOEdLeU+S26EZUj+FIi3Gerem5F8lueXcqr1/iDjwdOlOUqLYzRvYAV1b7SpwW+xcp12skudUZI9dqO35e7809FcKX40SlvHua3NIqQD0GOobnGZ53g+yWd0/n9eXcQUUBV6jQ3vHJHuDL6kA3vBb756lMFmQ7GKMtwdge7gOgZIpo1PZmyG3REeox3JkW45OEWy3wTHV8ztPApyhu2fJE1/sqmGhx8BylM2f0jZNrtZ0xcuvFIm+MTtC2+oDVGL5neFafez7XVy7oc6YopdrOsQJvpsX+eUqnbXgnD/sJSOc4sWD8vLkcoR7DmzB+urUCb29mGA/ZgZLIu8JG0La8iqoP9IzX4uAGVVA2fh4n1+d2/GF93XgKVMIAbqm2F6LFvkTsYjydaTEeJ9dMvaItWEnNfsXMm1rdXd+Wz3yil64rIH1Cw5cOvga4Z4F7j4c2Wgw/AJRE9nzOZAooRHCD9i7Q4qASsovx9JEW45PkmqlXPMTzLkHJSmNZX7izRCVA0vwKKirAF02t3z0/zgNcIWBLR4w+R1wAC+U9OC32K+eyvG98nFwPZ4/W9xh0+49OaSUvRKmaAtIzX4YvHTxtJu6767eP1jeewuuUAFyr7QIt9v0g93OKXMMRPA9wQzQaT//67200L30/pfka0slX4cuv4Gs/AfcOcE/9uxHexq9aXjl13fB9ADI/Fxq5n1fexs9n8ZkL698Qre4sUTSQfPKlzE9vCbgnl47280HyMjpjxDl4l/Oilx1HUI2vwQxGxVM7WX3kONlpeDcoJW3OB5Cyyl2BqvYd0XXuilbSTrQSrabJV+dM+7xFXnU743QCVH5yyIPCfCzAquHVDvIG4+RvBu55NlyVpZ9VnXsKUu1DN+rcU6JVeV+0ekiuk9n5jltk5Acn6TagThd4crkaa7ij+o6N6LsZ+WMMHIFf0BeV5geQzqrR92KilTwv14fnZWbJSKKL9MWRKwWeHxziBXCG53MmSQ0ZY4gOThd44TGrb+jnVa2G/X2WjLQzRV887Rfenz8xHzdG/Zwo8Abj5DI6xxmgg8tDPxtBWO27SurcU9Oiy/uilSM3cn2vB0DrjhfB025j2myiUSfJf1Zltlq32cRGoQ6C26Kxd3ZZn23+xBc2zabd9LHjIbLVus2Wfj4Y1kEMIqDVqwAVVWlcL/Iiy8vXITb7ZfdjolVr2y6Wj5HbcoPmpJieN9nL58jPVgc3qN5nz5qZ9wCg1WsASrQ6fRRvnIzm4zHCDYs8raS15SoBAN8EQWTVVmMkmuz/DHm92r9I6VQKdRcDwGm9EsARreTyW/CuVg0vq/PwgESvbGD8j5f/9FITWP51ePrz1s+KKYF3Q+D+0G1AfX0tHfrZB9B6JTDrQOcoXplcqMZjhB/MDXmp2mi+NtarnGkCzeuAL78M9YYNiEKbQfTdodeBPHH1fxysY/nz8zR5LTJGngTIUx9XYb7FjmNyjF42UL35FaygOQ677vLlV8z63Y5k3y9No7qDivp2gRefp2j14AFeIfVheHvHRngSHetis4kyAHh6BRX1TVPqmqd2Vv4r1BtIz0L0F4u8H+Kjf0ueeyt9EXCcqHPnxAF9+Fn8NrD07Ki+pWFqZ2MeEsF9/wF9gzE+EOq3400d6WfSwbf73clnAXg309zPgr6Xod6AExzg9cc54zw0foBXLfDOE3Xu+DZHnJUzxqFdaiML/ZA0dXkYT9HaNhuMvXNQ0i7UxXq3r5mUgspamKm1NsFMhXs9aPhB+mVZ2Vwq1OG+7j1gefNF3vGMt2Wi77vBZdGFujzw7M/bRFcXWVY839tDI1lyBJWQrz632YwKvEGldJS+qVyf2WDsNU6LrhV4+3ffY/WFBX3unVyfyS6kL/39zWavwIvVkX5eOahPJpS0C+9hgIZJqasslEaSgylyTW6lqtUrJ5prtR1cRpa3N36Ke5Sfn8p5i5ZXEj3y3p3ApGh0FkqjLRpcVw+mutUzG8Qd/CZg50042TIfeSUIbAl+YKPhLdpdPakbtu5eCeB9+mnYc7uRq0Qre4RiW7JDVlmUBHe/YONZcLJl92FedIA3SS4vmfbp6Qbgn7qdVVGEJjlhSv6XdXbIyhQ0XgI2f3GpwPPHLO/y2/LGSX2uXdD3jD2zhTKK+nRjVN9jwN0vRwWeZLyri0Weib6P8JajObNuVZuA9+F/ATM43N/6KbXR7O7buuOvA97NdAXIoiTYXP6TAm/i+NG80iivTGqnVvBzYHsa3hV5Wk1nRyj0BwD3Ea0AONMSec8Cd9vDeCR7cwlMxLllxqVqFg+xoRFbCpPV13mm1hZeFxq+NFc27LgbZ5FAiQA8Crhqo/mauz2s54vHSb5SszzH8uay/fsoLxrW83kdU3klqCjRs4CnFSrdLLKqAOA64Gn1ELzlzlvwMMLL9Hk571jOc0MAYz1o+KLVtGlAfjeLrEoE4CzgKnkerj0QnJ9jN8nJAq82wqu0GANBPcaJoZ8PA/CWntTwp703n7wLVzmo9Eb8bBKu2vjIj7vqd0b15TzP8tpZZLXAQz3GzKifpcgRVD4k+izg3WygtJRFVhUAnAE8/ejj8PTtAi9F69VwjIBn+rtT7ARZtbqNcrHop0K63oDosx2gErrnTxU6HbLsuv5QJRq5t2IyRWsbYwQqhjdROpLnhfWcNxZh3z178t4Pf2O/+VX8A+8JfOsnfoTf/GXs3wf8WwCfawLmHgl89F//pY8c5G3hOIETZkU8gSN5EtVH9D0MhX15FqJ/LAYqofv+zpH6NpdH9Y2naN3BFAHMmvHTO5KnMcprQGFXfhGi1W2gErrqvUfxbjY1DvG2zDUR4yM8HuSNvD+v49D58cFvOGZYlr9b3b/fCct7SpzA/m/7DrdFNxszjuM4jjORt089H3sawINkJO2k9HydO8CJPDWgWj1AmVSnVsN7FqJqP4QSXSY1aslCUOeu6KuFFMaWVgiG5/Fs/1tejCsNAM+RkS4ngdviDhDkPN3qAfK8PSDXzu+RiKqDyFXT73uQXEZ735+oc0895BZ429OSv71aztPzcaUBuONkpGtJcK7OHWBiVF/lEYPT5RF9jujwFqlRThZKq9wV/cjiqL4JyxveI6HnY19sf1DlpBTU86XMYT8btfwcZlTth9AKs6TGXHLZrXN3WvQBP21tuVvOecuLsS+AmjQ8CVZHecZPx/gZFNdLJPmfbaRsH9fqpuo1zgpno4p6kDbWVqodOM/1mnSgAFA+AZP9MbtCR1A5s7JpQsRKPtE7eH7M8pKoscrd6RGeb6rnJlPg8PfUs6lukUnFHmLmQCtTqLscmWrE51KtSrUDz3VtJCmJ9CF9YqoRH0yBc+UDz72sxlNleOZQOPtKSO5OU8NUB46nSkoHv+dtGynbR6N+UJ/Zq8W3UnOecuS5L92cNDzl1o/mDcZT3XEPfs+uY/3ExCE/1fRPWd6xQ36uP2L83Jdzh/zM9TU61s8YB6bQMllCOfPT1v2KPk7U49CWbnhmgbGyYVYgWTnifU990baXDURuCJQ3m+chkbuuvn74PiQWyhHLVp9jFqtXtTppeH7G8/SKAdolkN8DLjjf5iYAT/+284Z3Cbj/IxiDesNbkyf4VjxTAmz1ubbOWD9+kai/HkCO0Od1bDmiNDN9X3/oDfcx4F1NjEEivqpewtvzrD7f8BZU5SJRH1xDI8uT9O0oLPaqm602KXrOtpdQVvuzZAfhGGU1Pi1u9tyh91c9yCuTC8qfIup9zwmyvJNnR0Vl8uhm8SEd4+fNv2YWq6dWJu9AIf307PaIqOGMNVL8bkriA4fc9q6QHDhOcd5EYYa0m2MnsOdHlehtAe69awlA8tyBdWuRNzjIixxy6/Jxkv3Tw3M2g+z+pazkP9bZ4ZpFkqIbcp3syRTJ2JsexsEO8voHeC6Okdu4QrIfXh5dtxb1pWJ3bFbfZ/RZ4J5cA5CuXxt9aYd5kwXeCXIrOk9yEJ0eXbfmVgJI7clCw5Pmbzu/AyR6F0ByffCd/BzygJlc3yOnD/pp6r1zP/uzuZ9KTpC9himcvVzwMz8vCmTnU01kpxoDkbW2XwLg3UrzvKgb5udTRSvRYZqXgoau3bGiEqYfF63uvwRVXEce4q3mvDDjyQGedyk/n6pEK4lSJTdNKWjkabUGrwNIlG5qJZ/OUxFH8AYjvKzpDDQAd7ag7+ED+vZFN6Jc33Jkmk7SFK1O3S7oO+hnDLj1Im+SjKp9BcAfL/AaUKZuxvI8rU4NeRqm6aQrotVk+Pa8UoG3WuB5WWrH3DejlSwm2t4/Eblq2t6k0fOz2wnYKyf2yposb1HgVUlG0gHsTRpbUXYbArfayWV7YN3G9fvmZEWiuVYmqeFpHVie6EbGqyUT5sKPLI9QeH9zJCMdAgv2xg/A5frc7mlyu7zvWZ7NWwyeS7WSxX3hepnkMipKshs/LM8ne+UkPKDvCJ7dQVl9e+fJrReTSqbvxaP1+aJ9q6+iJOftI9N3yM8ayUgFgN1BbYXGz9PkVjtpHPBzLlUPqdq+GN4yXCU27vaKdzN/f9XEzXjVo3iXpQPH7qDuTABcn9tT5HZ5Pzjg561UP2/aiz3Hty9ZhrA/S9RjuECVSQkSwcnr5OJxc68R2M3OKYJrNaZKFuOTlNW+CkTPM1lQEK2obZ1cfzZtXNXtRPMr2flNnfPOE/UYPlBlEhzgTaYuUEvAl8s5b32OqVb1eIyqPtCh6Cr3fYkqajo/FzJ4Lu2ILu8Lb7cP6hvcyHiLTAJbbzPCayfgy7VD+sYzfVUmV3Xoy/URfbpRSzS/Un4LfV5kSsb9AMdG/IT79n5WVJWJVoGnZ4a8uVRJp70vuZ8FfVcyXpUJ4IaFOkdTUfUWfp40flZUnfty81pFHRv6WZiPsst3sitPTN09Tua3n2AmP0eUlSM2C5fvZFfWpGsCuOquyeM9AFfdzs8RZeV6unCZ0QGeMrzSalz0szC/Z5fvmE6wvBj7Qg60Y+qJwvpAzxTay3D9Yi9rkow3MPHWG4bnD+tG3fzMNzczfUvczPQlyxpwG/aKl0m4avDW+op+mot6rD5vNffzwHrCDB+JHaSXF2PdIPsNh8uL/YsM6gN9otBeDuirFvTBJWNnesj7Z7k+W46Y6/NjbmZXACX6AuC1N0390tnIbXwaWR3EICvTzHghdH6EggTgdUxBVQUozJvJx8xuPm8v642mMpVmXgSIVvf/Y4EXQZ/RKhjOm/2GvQoiuwIBrsp4NdKcbG31aglKQ56xWbSSjmufu6MCyCr3lHC7TCrRYanT2i7vy4KSW6nO59vOQZ4v0Yg+P/BavXKCYFTfU6YWMbvEZkye2dRW3xIgWk1+673wlqC3RYeH9anMT4gOV0f9NLwIKKwLYhOuaOTtRQNenbuiW2bLowJ0WlvtRIu2G3XTXhp2vZvztAqsvqrhacfeO4I5y3Peud/7nefeee6d5/4vPfe/AI0Yge2Rqm0fAAAAAElFTkSuQmCC';
+/* navegación con las flechas del control remoto */
+const FOC = 'button:not([disabled]),a[href],input,summary,[tabindex="0"]';
+function visibleFocusables(){
+  const scope = $('dialog[open]') || document;
+  return [...scope.querySelectorAll(FOC)].filter(e => { if (e.closest('[hidden]') || e.closest('.bottomnav')) return false; const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden'; });
+}
+document.addEventListener('keydown', e => {
+  if (!root.dataset.tv) return;
+  if ([461, 10009].includes(e.keyCode) || (e.key === 'Backspace' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName))){
+    e.preventDefault(); const d = $('dialog[open]'); if (d) d.close(); else history.back(); return;
+  }
+  const dir = {ArrowUp:[0,-1], ArrowDown:[0,1], ArrowLeft:[-1,0], ArrowRight:[1,0]}[e.key];
+  if (!dir || e.defaultPrevented) return;
+  const a = document.activeElement;
+  if (a && a.tagName === 'INPUT' && dir[0] && a.value) return;
+  const els = visibleFocusables(); if (!els.length) return;
+  if (!a || a === document.body || !els.includes(a)){ e.preventDefault(); els[0].focus(); return; }
+  const r = a.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  let best = null, bd = Infinity;
+  for (const el of els){
+    if (el === a) continue;
+    const q = el.getBoundingClientRect(), x = q.left + q.width / 2, y = q.top + q.height / 2, dx = x - cx, dy = y - cy;
+    const along = dx * dir[0] + dy * dir[1]; if (along <= 4) continue;
+    const across = Math.abs(dx * dir[1] + dy * dir[0]);
+    const d = along + across * 2.2; if (d < bd){ bd = d; best = el; }
+  }
+  if (best){ e.preventDefault(); best.focus(); best.scrollIntoView({block:'nearest', behavior:'smooth'}); }
+});
 
 /* instalación y modo sin conexión */
 let deferred = null;
